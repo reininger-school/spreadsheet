@@ -2,7 +2,7 @@
 Author: Reid Reininger
 Student ID: 11512839
 */
-namespace SpreadsheetEngine
+namespace Cpts321
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace SpreadsheetEngine
     /// <summary>
     /// Does nothing.
     /// </summary>
-    public class Class1
+    public class Cell
     {
     }
 }
