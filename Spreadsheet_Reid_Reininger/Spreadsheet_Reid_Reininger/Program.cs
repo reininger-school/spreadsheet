@@ -1,7 +1,7 @@
-﻿/// <summary>
-/// Author: Reid Reininger
-/// Student ID: 11512839
-/// </summary>
+﻿/*
+Author: Reid Reininger
+Student ID: 11512839
+*/
 namespace Spreadsheet_Reid_Reininger
 {
     using System;
