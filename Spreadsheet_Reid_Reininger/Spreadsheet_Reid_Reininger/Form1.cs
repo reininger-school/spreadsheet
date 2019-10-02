@@ -16,5 +16,15 @@ namespace Spreadsheet_Reid_Reininger
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.dataGridView1.Columns.Clear();
+            //add columns A-Z
+            for (char i = 'A'; i <= 'Z'; i++)
+            {
+                this.dataGridView1.Columns.Add(i.ToString(), i.ToString());
+            }
+        }
     }
 }
