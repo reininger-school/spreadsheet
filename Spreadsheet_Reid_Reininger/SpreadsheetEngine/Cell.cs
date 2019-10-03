@@ -60,5 +60,13 @@ namespace Cpts321
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
             }
         }
+
+        /// <summary>
+        /// Gets valuated value of the cell.
+        /// </summary>
+        protected string Value
+        {
+            get;
+        }
     }
 }
