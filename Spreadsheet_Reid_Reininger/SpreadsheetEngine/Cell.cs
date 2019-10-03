@@ -45,10 +45,10 @@ namespace Cpts321
         /// <summary>
         /// Gets or sets text cell displays.
         /// </summary>
-        protected string Text
+        public string Text
         {
             get => this.Text;
-            set
+            protected set
             {
                 // do nothing if same text
                 if (value == this.Text)
@@ -64,7 +64,7 @@ namespace Cpts321
         /// <summary>
         /// Gets valuated value of the cell.
         /// </summary>
-        protected string Value
+        public string Value
         {
             get;
         }
