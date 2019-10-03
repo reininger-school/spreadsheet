@@ -43,7 +43,7 @@ namespace Cpts321
         public int ColumnIndex { get; }
 
         /// <summary>
-        /// Gets or sets text cell displays.
+        /// Gets or sets text actually typed in cell.
         /// </summary>
         public string Text
         {
@@ -62,11 +62,18 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Gets valuated value of the cell.
+        /// Gets or sets  evaluated value of the cell.
         /// </summary>
         public string Value
         {
-            get;
+            get => this.Value;
+            protected set
+            {
+                if (this.Text[0] != '=')
+                {
+                    this.Value = this.Text;
+                }
+            }
         }
     }
 }

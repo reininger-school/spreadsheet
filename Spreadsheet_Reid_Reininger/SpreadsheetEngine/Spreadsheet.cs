@@ -15,6 +15,9 @@ namespace Cpts321
     /// </summary>
     public class Spreadsheet
     {
+        // Reference to cells
+        private Cell[,] cells;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Spreadsheet"/> class.
         /// </summary>
@@ -22,6 +25,9 @@ namespace Cpts321
         /// <param name="columns">Number of columns.</param>
         public Spreadsheet(int rows, int columns)
         {
+            for (int i = 0; i < rows * columns; i++)
+            {
+            }
         }
     }
 }
