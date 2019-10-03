@@ -15,5 +15,13 @@ namespace Cpts321
     /// </summary>
     public class Spreadsheet
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Spreadsheet"/> class.
+        /// </summary>
+        /// <param name="rows">Number of rows.</param>
+        /// <param name="columns">Number of columns.</param>
+        public Spreadsheet(int rows, int columns)
+        {
+        }
     }
 }
