@@ -23,6 +23,16 @@ namespace Cpts321
         /// <param name="columnIndex">Cell's column index.</param>
         public Cell(int rowIndex, int columnIndex)
         {
+            if (rowIndex < 0)
+            {
+                throw new ArgumentException("rowIndex cannot be less than zero");
+            }
+
+            if (columnIndex < 0)
+            {
+                throw new ArgumentException("columnIndex cannot be less than zero");
+            }
+
             this.RowIndex = rowIndex;
             this.ColumnIndex = columnIndex;
         }
