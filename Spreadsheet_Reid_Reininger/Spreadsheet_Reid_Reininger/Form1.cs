@@ -31,19 +31,15 @@ namespace Spreadsheet_Reid_Reininger
         {
             DataGridViewRow newRow; // ref for adding rows to grid
 
-            // add columns
-            this.dataGridView1.Columns.Clear();
-
             // add columns A-Z
+            this.dataGridView1.Columns.Clear();
             for (char i = 'A'; i <= 'Z'; i++)
             {
                 this.dataGridView1.Columns.Add(i.ToString(), i.ToString());
             }
 
-            // add rows
-            this.dataGridView1.Rows.Clear();
-
             // add rows 1-50
+            this.dataGridView1.Rows.Clear();
             for (int i = 1; i <= 50; i++)
             {
                 newRow = new DataGridViewRow();
