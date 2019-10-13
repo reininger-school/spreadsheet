@@ -9,6 +9,7 @@ namespace CellTests
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Cpts321;
     using NUnit.Framework;
 
     /// <summary>
@@ -17,6 +18,11 @@ namespace CellTests
     [TestFixture]
     public class TestCell
     {
+        /// <summary>
+        /// Cell for testing.
+        /// </summary>
+        private Cell cell = new MockCell(0, 0);
+
         /// <summary>
         /// Test valid input for Cell constructor.
         /// </summary>
@@ -45,6 +51,15 @@ namespace CellTests
         public void TestCellConstructorInvalidInput(int rowIndex, int columnIndex)
         {
             Assert.Throws<ArgumentException>(() => new MockCell(rowIndex, columnIndex));
+        }
+
+        /// <summary>
+        /// Test RowIndex is readonly property.
+        /// </summary>
+        [Test]
+        public void TestRowIndexReadOnly()
+        {
+            Assert.IsTrue(typeof(Cell).GetProperty("RowIndex").CanWrite == false);
         }
     }
 }

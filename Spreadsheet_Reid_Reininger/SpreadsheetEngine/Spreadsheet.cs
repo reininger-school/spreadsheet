@@ -16,7 +16,7 @@ namespace Cpts321
     public class Spreadsheet
     {
         // Reference to cells
-        private Cell[,] cells;
+        // private Cell[,] cells;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Spreadsheet"/> class.
