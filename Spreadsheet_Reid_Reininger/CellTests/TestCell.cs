@@ -54,12 +54,15 @@ namespace CellTests
         }
 
         /// <summary>
-        /// Test RowIndex is readonly property.
+        /// Test properties are readonly.
         /// </summary>
-        [Test]
-        public void TestRowIndexReadOnly()
+        /// <param name = "property">Property being tested.</param>
+        [TestCase("RowIndex")]
+        [TestCase("ColumnIndex")]
+        public void TestReadOnlyProperties(string property)
         {
-            Assert.IsTrue(typeof(Cell).GetProperty("RowIndex").CanWrite == false);
+            Assert.IsTrue(typeof(Cell).GetProperty(property).CanWrite == false, $"Can set {property}");
+            Assert.IsTrue(typeof(Cell).GetProperty("RowIndex").CanRead == true, $"Cannot get {property}");
         }
     }
 }
