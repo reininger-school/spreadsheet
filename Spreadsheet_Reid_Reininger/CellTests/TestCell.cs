@@ -29,6 +29,9 @@ namespace CellTests
         [TestCase(2, 3)] // Normal case
         public void TestCellConstructorValidInput(int rowIndex, int columnIndex)
         {
+            var cell = new MockCell(rowIndex, columnIndex);
+            Assert.AreEqual(cell.RowIndex, rowIndex, "Incorrect row");
+            Assert.AreEqual(cell.ColumnIndex, columnIndex, "Incorrect column");
         }
     }
 }
