@@ -33,5 +33,18 @@ namespace CellTests
             Assert.AreEqual(cell.RowIndex, rowIndex, "Incorrect row");
             Assert.AreEqual(cell.ColumnIndex, columnIndex, "Incorrect column");
         }
+
+        /// <summary>
+        /// Test invalid input for Cell constructor.
+        /// </summary>
+        /// <param name="rowIndex">Cell's row index.</param>
+        /// <param name="columnIndex">Cell's column index.</param>
+        [TestCase(0, -1)]
+        [TestCase(-1, 0)]
+        [TestCase(-1, -1)]
+        public void TestCellConstructorInvalidInput(int rowIndex, int columnIndex)
+        {
+            Assert.Throws<ArgumentException>(() => new MockCell(rowIndex, columnIndex));
+        }
     }
 }
