@@ -17,6 +17,11 @@ namespace Cpts321
     public abstract class Cell : INotifyPropertyChanged
     {
         /// <summary>
+        /// Actual text typed into cell.
+        /// </summary>
+        protected string text;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Cell"/> class.
         /// </summary>
         /// <param name="rowIndex">Cell's row index.</param>
@@ -37,11 +42,6 @@ namespace Cpts321
             this.ColumnIndex = columnIndex;
         }
 
-        private void prints()
-        {
-            Console.WriteLine("Poopy");
-        }
-
         /// <summary>
         /// Fires everytime property changes.
         /// </summary>
@@ -56,8 +56,6 @@ namespace Cpts321
         /// Gets column index cell belongs to.
         /// </summary>
         public int ColumnIndex { get; }
-
-        private string lol = "tatas";
 
         /// <summary>
         /// Gets or sets  evaluated value of the cell.
@@ -74,7 +72,6 @@ namespace Cpts321
             }
         }
 
-        protected string text;
         /// <summary>
         /// Gets or sets text actually typed in cell.
         /// </summary>

@@ -81,13 +81,6 @@ namespace CellTests
         }
 
         /// <summary>
-        /// Fail text when property changes.
-        /// </summary>
-        /// <param name="sender">Object firing event.</param>
-        /// <param name="e">Event args.</param>
-        
-
-        /// <summary>
         /// Test PropertyChanged event is not fired when Text is set to same text.
         /// </summary>
         [Test]
