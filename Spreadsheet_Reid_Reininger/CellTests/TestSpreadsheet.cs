@@ -36,5 +36,18 @@ namespace CellTests
             Assert.AreEqual(cells.GetLength(0), rows, "Incorrect number of rows");
             Assert.AreEqual(cells.GetLength(1), columns, "Incorrect number of columns");
         }
+
+        [TestCase(0, 0)]
+        [TestCase(0, 1)]
+        [TestCase(1, 0)]
+        [TestCase(1, 1)]
+        public void TestInitializeCellRowColumns(int row, int column)
+        {
+            var sheet = new Spreadsheet(2, 2);
+            var fieldInfo = Utility.GetField<Spreadsheet>("cells");
+            Cell[,] cells = (Cell[,])fieldInfo.GetValue(sheet);
+            Assert.AreEqual(cells[row, column].RowIndex, row, "RowIndex is not equal to array index");
+            Assert.AreEqual(cells[row, column].ColumnIndex, column, "ColumnIndex is not equal to arrayr index");
+        }
     }
 }
