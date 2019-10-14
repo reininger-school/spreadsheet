@@ -73,7 +73,7 @@ namespace CellTests
         [TestCase("Text")]
         public void TestProtectedProperties(string property)
         {
-            foreach (var element in typeof(Cell).GetProperty(property).GetAccessors(true))
+            foreach (var element in typeof(Cell).GetProperty(property, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).GetAccessors(true))
             {
                 Assert.IsFalse(element.IsPublic, $"{element.Name} is public");
             }
