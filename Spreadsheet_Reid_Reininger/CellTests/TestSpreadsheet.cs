@@ -37,6 +37,11 @@ namespace CellTests
             Assert.AreEqual(cells.GetLength(1), columns, "Incorrect number of columns");
         }
 
+        /// <summary>
+        /// Test that cell and array indices match.
+        /// </summary>
+        /// <param name="row">Array row.</param>
+        /// <param name="column">Array column.</param>
         [TestCase(0, 0)]
         [TestCase(0, 1)]
         [TestCase(1, 0)]

@@ -9,6 +9,8 @@ namespace Cpts321
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Cpts321;
+    using SpreadsheetEngine;
 
     /// <summary>
     /// Contains all cells.
@@ -26,6 +28,13 @@ namespace Cpts321
         public Spreadsheet(int rows, int columns)
         {
             this.cells = new Cell[rows, columns];
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    this.cells[i, j] = new TextCell(i, j);
+                }
+            }
         }
     }
 }
