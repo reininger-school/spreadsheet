@@ -28,9 +28,13 @@ namespace CellTests
         [TestCase(0, 1)]
         [TestCase(1, 0)]
         [TestCase(1, 1)]
-        public void TestConstructorValidInput(int rows, int columns)
+        public void TestConstructorSizeValidInput(int rows, int columns)
         {
             var sheet = new Spreadsheet(rows, columns);
+            var fieldInfo = Utility.GetField<Spreadsheet>("cells");
+            Cell[,] cells = (Cell[,])fieldInfo.GetValue(sheet);
+            Assert.AreEqual(cells.GetLength(0), rows, "Incorrect number of rows");
+            Assert.AreEqual(cells.GetLength(1), columns, "Incorrect number of columns");
         }
     }
 }
