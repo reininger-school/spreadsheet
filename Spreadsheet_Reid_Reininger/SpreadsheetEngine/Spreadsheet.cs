@@ -17,6 +17,16 @@ namespace Cpts321
     /// </summary>
     public class Spreadsheet
     {
+        /// <summary>
+        /// Types of Cells.
+        /// </summary>
+        public enum CellType {
+            /// <summary>
+            /// Cell with text.
+            /// </summary>
+            Text,
+        }
+
         // Reference to cells
         private Cell[,] cells;
 
@@ -36,5 +46,7 @@ namespace Cpts321
                 }
             }
         }
+
+        public static Cell CreateCell()
     }
 }
