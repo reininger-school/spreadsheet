@@ -85,10 +85,7 @@ namespace CellTests
         /// </summary>
         /// <param name="sender">Object firing event.</param>
         /// <param name="e">Event args.</param>
-        public void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            Assert.Fail("PropertyChanged event fired");
-        }
+        
 
         /// <summary>
         /// Test PropertyChanged event is not fired when Text is set to same text.
@@ -96,6 +93,16 @@ namespace CellTests
         [Test]
         public void TestSetTextSame()
         {
+            const string testString = "Test String";
+            void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                Assert.Fail("PropertyChanged event fired");
+            }
+
+            var textInfo = this.GetProperty<Cell>("Text");
+            textInfo.SetValue(this.cell, testString);
+            this.cell.PropertyChanged += Cell_PropertyChanged;
+            textInfo.SetValue(this.cell, testString);
         }
 
         /// <summary>
