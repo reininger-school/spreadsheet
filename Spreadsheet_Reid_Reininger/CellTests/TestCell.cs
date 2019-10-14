@@ -7,6 +7,7 @@ namespace CellTests
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
     using Cpts321;
@@ -61,8 +62,21 @@ namespace CellTests
         [TestCase("ColumnIndex")]
         public void TestReadOnlyProperties(string property)
         {
-            Assert.IsTrue(typeof(Cell).GetProperty(property).CanWrite == false, $"Can set {property}");
-            Assert.IsTrue(typeof(Cell).GetProperty("RowIndex").CanRead == true, $"Cannot get {property}");
+            Assert.IsFalse(typeof(Cell).GetProperty(property).CanWrite, $"Can set {property}");
+            Assert.IsTrue(typeof(Cell).GetProperty(property).CanRead == true, $"Cannot get {property}");
+        }
+
+        /// <summary>
+        /// Test properties are nonpublic.
+        /// </summary>
+        /// <param name="property">Property to test.</param>
+        [TestCase("Text")]
+        public void TestProtectedProperties(string property)
+        {
+            foreach (var element in typeof(Cell).GetProperty(property).GetAccessors(true))
+            {
+                Assert.IsFalse(element.IsPublic, $"{element.Name} is public");
+            }
         }
     }
 }
