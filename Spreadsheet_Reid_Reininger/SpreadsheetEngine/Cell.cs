@@ -37,6 +37,11 @@ namespace Cpts321
             this.ColumnIndex = columnIndex;
         }
 
+        private void prints()
+        {
+            Console.WriteLine("Poopy");
+        }
+
         /// <summary>
         /// Fires everytime property changes.
         /// </summary>
@@ -51,6 +56,8 @@ namespace Cpts321
         /// Gets column index cell belongs to.
         /// </summary>
         public int ColumnIndex { get; }
+
+        private string lol = "tatas";
 
         /// <summary>
         /// Gets or sets  evaluated value of the cell.
@@ -67,21 +74,22 @@ namespace Cpts321
             }
         }
 
+        protected string text;
         /// <summary>
         /// Gets or sets text actually typed in cell.
         /// </summary>
-        protected string Text
+        public string Text
         {
-            get => this.Text;
+            get => this.text;
             set
             {
                 // do nothing if same text
-                if (value == this.Text)
+                if (value == this.text)
                 {
                     return;
                 }
 
-                this.Text = value;
+                this.text = value;
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
             }
         }

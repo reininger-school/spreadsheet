@@ -6,8 +6,10 @@ namespace CellTests
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
+    using System.Security.Permissions;
     using System.Text;
     using System.Threading.Tasks;
     using Cpts321;
@@ -70,13 +72,74 @@ namespace CellTests
         /// Test properties are nonpublic.
         /// </summary>
         /// <param name="property">Property to test.</param>
-        [TestCase("Text")]
         public void TestProtectedProperties(string property)
         {
             foreach (var element in typeof(Cell).GetProperty(property, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).GetAccessors(true))
             {
                 Assert.IsFalse(element.IsPublic, $"{element.Name} is public");
             }
+        }
+
+        /// <summary>
+        /// Fail text when property changes.
+        /// </summary>
+        /// <param name="sender">Object firing event.</param>
+        /// <param name="e">Event args.</param>
+        public void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Assert.Fail("PropertyChanged event fired");
+        }
+
+        /// <summary>
+        /// Test PropertyChanged event is not fired when Text is set to same text.
+        /// </summary>
+        [Test]
+        public void TestSetTextSame()
+        {
+        }
+
+        /// <summary>
+        /// Returns PropertyInfo of given type and property.
+        /// </summary>
+        /// <typeparam name="T">Class containing property to get.</typeparam>
+        /// <param name="property">Property to be retrieved.</param>
+        /// <returns>Property info.</returns>
+        public PropertyInfo GetProperty<T>(string property)
+        {
+            if (string.IsNullOrWhiteSpace(property))
+            {
+                Assert.Fail("Property cannot be null or whitespace");
+            }
+
+            var propertyInfo = typeof(T).GetProperty(property, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
+            if (propertyInfo == null)
+            {
+                Assert.Fail($"Could not find property {property}");
+            }
+
+            return propertyInfo;
+        }
+
+        /// <summary>
+        /// Return MethodInfo for given method.
+        /// </summary>
+        /// <typeparam name="T">Class containg method.</typeparam>
+        /// <param name="method">Name of method to get MethodInfo for.</param>
+        /// <returns>MethodInfo of method in class T.</returns>
+        public MethodInfo GetMethod<T>(string method)
+        {
+            if (string.IsNullOrWhiteSpace(method))
+            {
+                Assert.Fail("Method cannot be null or whitespace");
+            }
+
+            var methodInfo = typeof(T).GetMethod(method, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
+            if (methodInfo == null)
+            {
+                Assert.Fail($"Could not find method {method}");
+            }
+
+            return methodInfo;
         }
     }
 }
