@@ -32,7 +32,7 @@ namespace Cpts321
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    this.cells[i, j] = new TextCell(i, j);
+                    this.cells[i, j] = CreateCell(CellType.Text, i, j);
                 }
             }
         }
