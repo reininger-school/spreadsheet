@@ -88,6 +88,7 @@ namespace CellTests
         /// </summary>
         /// <param name="property">Property to test.</param>
         [TestCase("Text")]
+        [TestCase("Value")]
         public void TestProtectedSetProperties(string property)
         {
             var methodInfo = this.GetProperty<Cell>("Text");
