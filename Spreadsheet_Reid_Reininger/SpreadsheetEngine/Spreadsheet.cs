@@ -47,6 +47,16 @@ namespace Cpts321
             }
         }
 
-        public static Cell CreateCell()
+        /// <summary>
+        /// Returns a cell of the given type.
+        /// </summary>
+        /// <param name="type">Type of cell to create.</param>
+        /// <param name="row">Cell's row.</param>
+        /// <param name="column">Cell's column.</param>
+        /// <returns>New instance of cell type.</returns>
+        public static Cell CreateCell(CellType type, int row, int column)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

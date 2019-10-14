@@ -12,6 +12,7 @@ namespace CellTests
     using System.Threading.Tasks;
     using Cpts321;
     using NUnit.Framework;
+    using SpreadsheetEngine;
 
     /// <summary>
     /// Test suite for Spreadsheet.
@@ -53,6 +54,18 @@ namespace CellTests
             Cell[,] cells = (Cell[,])fieldInfo.GetValue(sheet);
             Assert.AreEqual(cells[row, column].RowIndex, row, "RowIndex is not equal to array index");
             Assert.AreEqual(cells[row, column].ColumnIndex, column, "ColumnIndex is not equal to arrayr index");
+        }
+
+        /// <summary>
+        /// Test Cell created is of desired type.
+        /// </summary>
+        /// <param name="type">Enum type of cell to create.</param>
+        /// <param name="expected">Expected created cell type</param>
+        [TestCase(Spreadsheet.CellType.Text, typeof(TextCell))]
+        public void TestCreateCell(Spreadsheet.CellType type, Type expected)
+        {
+            Cell cell = Spreadsheet.CreateCell(type, 0, 0);
+            Assert.AreEqual(expected, cell.GetType());
         }
     }
 }
