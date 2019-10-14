@@ -56,5 +56,27 @@
 
             return methodInfo;
         }
+
+        /// <summary>
+        /// Get FieldInfo for field.
+        /// </summary>
+        /// <typeparam name="T">Class containing field.</typeparam>
+        /// <param name="field">Field to get FieldInfo for.</param>
+        /// <returns>FieldInfo of field.</returns>
+        public static FieldInfo GetField<T>(string field)
+        {
+            if (string.IsNullOrWhiteSpace(field))
+            {
+                Assert.Fail("Field cannot be null or whitespace");
+            }
+
+            var fieldInfo = typeof(T).GetField(field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
+            if (fieldInfo == null)
+            {
+                Assert.Fail($"Could not find method {field}");
+            }
+
+            return fieldInfo;
+        }
     }
 }
