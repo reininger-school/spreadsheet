@@ -25,9 +25,6 @@ namespace Cpts321
         /// <param name="columns">Number of columns.</param>
         public Spreadsheet(int rows, int columns)
         {
-            for (int i = 0; i < rows * columns; i++)
-            {
-            }
         }
     }
 }
