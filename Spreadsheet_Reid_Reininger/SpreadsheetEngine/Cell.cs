@@ -22,6 +22,11 @@ namespace Cpts321
         protected string text;
 
         /// <summary>
+        /// Evaluated text of cell.
+        /// </summary>
+        protected string value;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Cell"/> class.
         /// </summary>
         /// <param name="rowIndex">Cell's row index.</param>
@@ -62,12 +67,12 @@ namespace Cpts321
         /// </summary>
         public string Value
         {
-            get => this.Value;
+            get => this.value;
             protected set
             {
                 if (this.Text[0] != '=')
                 {
-                    this.Value = this.Text;
+                    this.value = this.Text;
                 }
             }
         }

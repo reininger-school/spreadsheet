@@ -142,6 +142,24 @@ namespace CellTests
         }
 
         /// <summary>
+        /// Test Value is same as Text when Text does not begin with a '='.
+        /// </summary>
+        /// <param name="text">Value of Text to test.</param>
+        /// <param name="result">Whether Value should be the Same as Text.</param>
+        [TestCase("", true)]
+        [TestCase("a", true)]
+        [TestCase("=", false)]
+        [TestCase("=a", false)]
+        public void TestValueIsText(string text, bool result)
+        {
+            var textInfo = this.GetProperty<Cell>("Text");
+            var valueInfo = this.GetProperty<Cell>("Value");
+            textInfo.SetValue(this.cell, text);
+            bool same = textInfo.GetValue(this.cell) == valueInfo.GetValue(this.cell);
+            Assert.IsTrue(same == result);
+        }
+
+        /// <summary>
         /// Returns PropertyInfo of given type and property.
         /// </summary>
         /// <typeparam name="T">Class containing property to get.</typeparam>
