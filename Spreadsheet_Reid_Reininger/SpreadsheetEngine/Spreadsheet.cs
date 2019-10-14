@@ -25,6 +25,7 @@ namespace Cpts321
         /// <param name="columns">Number of columns.</param>
         public Spreadsheet(int rows, int columns)
         {
+            this.cells = new Cell[rows, columns];
         }
     }
 }
