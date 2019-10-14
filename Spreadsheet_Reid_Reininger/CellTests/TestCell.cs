@@ -22,6 +22,11 @@ namespace CellTests
     public class TestCell
     {
         /// <summary>
+        /// Default string for cell. Done for testing purposes.
+        /// </summary>
+        private const string DefaultString = "Default String";
+
+        /// <summary>
         /// Cell for testing.
         /// </summary>
         private Cell cell;
@@ -33,7 +38,7 @@ namespace CellTests
         public void NewCell()
         {
             this.cell = new MockCell(0, 0);
-            this.GetProperty<Cell>("Text").SetValue(this.cell, "Default String");
+            this.GetProperty<Cell>("Text").SetValue(this.cell, DefaultString);
         }
 
         /// <summary>
@@ -85,27 +90,19 @@ namespace CellTests
         [TestCase("Text")]
         public void TestProtectedSetProperties(string property)
         {
-            var methodInfo = GetProperty<Cell>("Text");
+            var methodInfo = this.GetProperty<Cell>("Text");
             Assert.IsTrue(methodInfo.GetGetMethod(true).IsPublic, $"{property} getter is not public");
             Assert.IsFalse(methodInfo.GetSetMethod(true).IsPublic, $"{property} setter is public");
         }
 
-        [Test]
-        public void TestTextSetPropertyChanged(string testString, bool fire)
-        {
-            const string defaultString = "default String";
-            void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
-            {
-                Assert.Fail("PropertyChanged event fired");
-            }
-
-            var textInfo = this.GetProperty<Cell>("Text");
-            textInfo.SetValue(this.cell, testString);
-            this.cell.PropertyChanged += Cell_PropertyChanged;
-            textInfo.SetValue(this.cell, testString);
-        }
-
-        public void TestSetTextDifferent()
+        /// <summary>
+        /// Test if PropertyChanged event fires when appropriate changing Text property.
+        /// </summary>
+        /// <param name="testString">String to change Text to.</param>
+        /// <param name="fire">Whether PropertyChanged event should fire or not.</param>
+        [TestCase(DefaultString, false)]
+        [TestCase("a", true)]
+        public void TestSetTextPropertyChanged(string testString, bool fire)
         {
             bool fired = false;
             void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -113,11 +110,10 @@ namespace CellTests
                 fired = true;
             }
 
-            var textInfo = this.GetProperty<Cell>("Text");
-            textInfo.SetValue(this.cell, "a");
             this.cell.PropertyChanged += Cell_PropertyChanged;
-            textInfo.SetValue(this.cell, "b");
-            Assert.IsTrue(fired);
+            var textInfo = this.GetProperty<Cell>("Text");
+            textInfo.SetValue(this.cell, testString);
+            Assert.AreEqual(fire, fired);
         }
 
         /// <summary>
