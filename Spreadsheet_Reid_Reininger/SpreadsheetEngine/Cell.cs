@@ -45,6 +45,7 @@ namespace Cpts321
 
             this.RowIndex = rowIndex;
             this.ColumnIndex = columnIndex;
+            this.PropertyChanged += this.Cell_PropertyChanged;
         }
 
         /// <summary>
@@ -63,7 +64,7 @@ namespace Cpts321
         public int ColumnIndex { get; }
 
         /// <summary>
-        /// Gets or sets  evaluated value of the cell.
+        /// Gets or sets evaluated value of the cell.
         /// </summary>
         public string Value
         {
@@ -73,6 +74,10 @@ namespace Cpts321
                 if (this.Text[0] != '=')
                 {
                     this.value = this.Text;
+                }
+                else
+                {
+                    this.value = value;
                 }
             }
         }
@@ -94,6 +99,11 @@ namespace Cpts321
                 this.text = value;
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
             }
+        }
+
+        private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.Value = null;
         }
     }
 }
