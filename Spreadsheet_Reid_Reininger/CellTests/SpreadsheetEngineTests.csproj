@@ -60,6 +60,7 @@
     <Compile Include="MockCell.cs" />
     <Compile Include="TestCell.cs" />
     <Compile Include="TestSpreadsheet.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

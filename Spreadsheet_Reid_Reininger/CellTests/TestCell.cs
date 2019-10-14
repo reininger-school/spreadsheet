@@ -1,6 +1,5 @@
 ﻿// Reid Reininger
 // ID: 11512839
-
 namespace CellTests
 {
     using System;
@@ -12,6 +11,7 @@ namespace CellTests
     using System.Security.Permissions;
     using System.Text;
     using System.Threading.Tasks;
+    using CellTests;
     using Cpts321;
     using NUnit.Framework;
 
@@ -38,7 +38,7 @@ namespace CellTests
         public void NewCell()
         {
             this.cell = new MockCell(0, 0);
-            this.GetProperty<Cell>("Text").SetValue(this.cell, DefaultString);
+            Utility.GetProperty<Cell>("Text").SetValue(this.cell, DefaultString);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace CellTests
         [TestCase("Value")]
         public void TestProtectedSetProperties(string property)
         {
-            var methodInfo = this.GetProperty<Cell>("Text");
+            var methodInfo = Utility.GetProperty<Cell>("Text");
             Assert.IsTrue(methodInfo.GetGetMethod(true).IsPublic, $"{property} getter is not public");
             Assert.IsFalse(methodInfo.GetSetMethod(true).IsPublic, $"{property} setter is public");
         }
@@ -112,7 +112,7 @@ namespace CellTests
             }
 
             this.cell.PropertyChanged += Cell_PropertyChanged;
-            var textInfo = this.GetProperty<Cell>("Text");
+            var textInfo = Utility.GetProperty<Cell>("Text");
             textInfo.SetValue(this.cell, testString);
             Assert.AreEqual(fire, fired);
         }
@@ -151,55 +151,11 @@ namespace CellTests
         [TestCase("=a", false)]
         public void TestValueIsText(string text, bool result)
         {
-            var textInfo = this.GetProperty<Cell>("Text");
-            var valueInfo = this.GetProperty<Cell>("Value");
+            var textInfo = Utility.GetProperty<Cell>("Text");
+            var valueInfo = Utility.GetProperty<Cell>("Value");
             textInfo.SetValue(this.cell, text);
             bool same = textInfo.GetValue(this.cell) == valueInfo.GetValue(this.cell);
             Assert.IsTrue(same == result);
-        }
-
-        /// <summary>
-        /// Returns PropertyInfo of given type and property.
-        /// </summary>
-        /// <typeparam name="T">Class containing property to get.</typeparam>
-        /// <param name="property">Property to be retrieved.</param>
-        /// <returns>Property info.</returns>
-        public PropertyInfo GetProperty<T>(string property)
-        {
-            if (string.IsNullOrWhiteSpace(property))
-            {
-                Assert.Fail("Property cannot be null or whitespace");
-            }
-
-            var propertyInfo = typeof(T).GetProperty(property, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
-            if (propertyInfo == null)
-            {
-                Assert.Fail($"Could not find property {property}");
-            }
-
-            return propertyInfo;
-        }
-
-        /// <summary>
-        /// Return MethodInfo for given method.
-        /// </summary>
-        /// <typeparam name="T">Class containg method.</typeparam>
-        /// <param name="method">Name of method to get MethodInfo for.</param>
-        /// <returns>MethodInfo of method in class T.</returns>
-        public MethodInfo GetMethod<T>(string method)
-        {
-            if (string.IsNullOrWhiteSpace(method))
-            {
-                Assert.Fail("Method cannot be null or whitespace");
-            }
-
-            var methodInfo = typeof(T).GetMethod(method, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
-            if (methodInfo == null)
-            {
-                Assert.Fail($"Could not find method {method}");
-            }
-
-            return methodInfo;
         }
     }
 }
