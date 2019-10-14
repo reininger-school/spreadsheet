@@ -60,7 +60,7 @@ namespace CellTests
         /// Test Cell created is of desired type.
         /// </summary>
         /// <param name="type">Enum type of cell to create.</param>
-        /// <param name="expected">Expected created cell type</param>
+        /// <param name="expected">Expected created cell type.</param>
         [TestCase(Spreadsheet.CellType.Text, typeof(TextCell))]
         public void TestCreateCell(Spreadsheet.CellType type, Type expected)
         {

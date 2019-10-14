@@ -17,16 +17,6 @@ namespace Cpts321
     /// </summary>
     public class Spreadsheet
     {
-        /// <summary>
-        /// Types of Cells.
-        /// </summary>
-        public enum CellType {
-            /// <summary>
-            /// Cell with text.
-            /// </summary>
-            Text,
-        }
-
         // Reference to cells
         private Cell[,] cells;
 
@@ -48,6 +38,17 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Types of Cells.
+        /// </summary>
+        public enum CellType
+        {
+            /// <summary>
+            /// Cell with text.
+            /// </summary>
+            Text,
+        }
+
+        /// <summary>
         /// Returns a cell of the given type.
         /// </summary>
         /// <param name="type">Type of cell to create.</param>
@@ -56,7 +57,13 @@ namespace Cpts321
         /// <returns>New instance of cell type.</returns>
         public static Cell CreateCell(CellType type, int row, int column)
         {
-            throw new NotImplementedException();
+            switch (type)
+            {
+                case CellType.Text:
+                    return new TextCell(row, column);
+                default:
+                    return null;
+            }
         }
     }
 }
