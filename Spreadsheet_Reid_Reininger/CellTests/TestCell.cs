@@ -117,6 +117,14 @@ namespace CellTests
         }
 
         /// <summary>
+        /// Tests Cell implements INotifyPropertyChanged.
+        /// </summary>
+        public void TestImplementsINotifyPropertyChanged()
+        {
+            Assert.AreEqual(typeof(Cell).GetTypeInfo().BaseType, typeof(INotifyPropertyChanged));
+        }
+
+        /// <summary>
         /// Returns PropertyInfo of given type and property.
         /// </summary>
         /// <typeparam name="T">Class containing property to get.</typeparam>
