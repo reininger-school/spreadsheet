@@ -24,7 +24,17 @@ namespace CellTests
         /// <summary>
         /// Cell for testing.
         /// </summary>
-        private Cell cell = new MockCell(0, 0);
+        private Cell cell;
+
+        /// <summary>
+        /// Reset cell.
+        /// </summary>
+        [SetUp]
+        public void NewCell()
+        {
+            this.cell = new MockCell(0, 0);
+            this.GetProperty<Cell>("Text").SetValue(this.cell, "Default String");
+        }
 
         /// <summary>
         /// Test valid input for Cell constructor.
@@ -69,24 +79,21 @@ namespace CellTests
         }
 
         /// <summary>
-        /// Test properties are nonpublic.
+        /// Test properties have public get protected set.
         /// </summary>
         /// <param name="property">Property to test.</param>
-        public void TestProtectedProperties(string property)
+        [TestCase("Text")]
+        public void TestProtectedSetProperties(string property)
         {
-            foreach (var element in typeof(Cell).GetProperty(property, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).GetAccessors(true))
-            {
-                Assert.IsFalse(element.IsPublic, $"{element.Name} is public");
-            }
+            var methodInfo = GetProperty<Cell>("Text");
+            Assert.IsTrue(methodInfo.GetGetMethod(true).IsPublic, $"{property} getter is not public");
+            Assert.IsFalse(methodInfo.GetSetMethod(true).IsPublic, $"{property} setter is public");
         }
 
-        /// <summary>
-        /// Test PropertyChanged event is not fired when Text is set to same text.
-        /// </summary>
         [Test]
-        public void TestSetTextSame()
+        public void TestTextSetPropertyChanged(string testString, bool fire)
         {
-            const string testString = "Test String";
+            const string defaultString = "default String";
             void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
             {
                 Assert.Fail("PropertyChanged event fired");
@@ -96,6 +103,21 @@ namespace CellTests
             textInfo.SetValue(this.cell, testString);
             this.cell.PropertyChanged += Cell_PropertyChanged;
             textInfo.SetValue(this.cell, testString);
+        }
+
+        public void TestSetTextDifferent()
+        {
+            bool fired = false;
+            void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                fired = true;
+            }
+
+            var textInfo = this.GetProperty<Cell>("Text");
+            textInfo.SetValue(this.cell, "a");
+            this.cell.PropertyChanged += Cell_PropertyChanged;
+            textInfo.SetValue(this.cell, "b");
+            Assert.IsTrue(fired);
         }
 
         /// <summary>
