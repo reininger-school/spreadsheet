@@ -133,6 +133,14 @@ namespace CellTests
         }
 
         /// <summary>
+        /// Test Cell is public class.
+        /// </summary>
+        public void TestIsPublic()
+        {
+            Assert.IsTrue(typeof(Cell).IsPublic);
+        }
+
+        /// <summary>
         /// Returns PropertyInfo of given type and property.
         /// </summary>
         /// <typeparam name="T">Class containing property to get.</typeparam>
