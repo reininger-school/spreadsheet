@@ -125,6 +125,14 @@ namespace CellTests
         }
 
         /// <summary>
+        /// Test Cell is abstract class.
+        /// </summary>
+        public void TestIsAbstract()
+        {
+            Assert.IsTrue(typeof(Cell).IsAbstract);
+        }
+
+        /// <summary>
         /// Returns PropertyInfo of given type and property.
         /// </summary>
         /// <typeparam name="T">Class containing property to get.</typeparam>
