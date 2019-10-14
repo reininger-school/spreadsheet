@@ -53,25 +53,6 @@ namespace Cpts321
         public int ColumnIndex { get; }
 
         /// <summary>
-        /// Gets or sets text actually typed in cell.
-        /// </summary>
-        public string Text
-        {
-            get => this.Text;
-            protected set
-            {
-                // do nothing if same text
-                if (value == this.Text)
-                {
-                    return;
-                }
-
-                this.Text = value;
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
-            }
-        }
-
-        /// <summary>
         /// Gets or sets  evaluated value of the cell.
         /// </summary>
         public string Value
@@ -83,6 +64,25 @@ namespace Cpts321
                 {
                     this.Value = this.Text;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets text actually typed in cell.
+        /// </summary>
+        protected string Text
+        {
+            get => this.Text;
+            set
+            {
+                // do nothing if same text
+                if (value == this.Text)
+                {
+                    return;
+                }
+
+                this.Text = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
             }
         }
     }
