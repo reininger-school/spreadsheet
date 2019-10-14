@@ -51,6 +51,7 @@
     <Compile Include="Cell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spreadsheet.cs" />
+    <Compile Include="TextCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
