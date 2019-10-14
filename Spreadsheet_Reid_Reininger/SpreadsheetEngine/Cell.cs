@@ -78,7 +78,7 @@ namespace Cpts321
         public string Text
         {
             get => this.text;
-            set
+            protected set
             {
                 // do nothing if same text
                 if (value == this.text)
