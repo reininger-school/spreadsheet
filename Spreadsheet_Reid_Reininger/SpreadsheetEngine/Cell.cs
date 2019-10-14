@@ -64,12 +64,12 @@ namespace Cpts321
         public int ColumnIndex { get; }
 
         /// <summary>
-        /// Gets or sets evaluated value of the cell.
+        /// Gets evaluated value of the cell.
         /// </summary>
         public string Value
         {
             get => this.value;
-            protected set
+            internal set
             {
                 if (this.Text[0] != '=')
                 {
@@ -83,12 +83,12 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Gets or sets text actually typed in cell.
+        /// Gets text actually typed in cell.
         /// </summary>
         public string Text
         {
             get => this.text;
-            protected set
+            internal set
             {
                 // do nothing if same text
                 if (value == this.text)

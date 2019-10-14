@@ -84,7 +84,7 @@ namespace CellTests
         }
 
         /// <summary>
-        /// Test properties have public get protected set.
+        /// Test properties have public get nonpublic set.
         /// </summary>
         /// <param name="property">Property to test.</param>
         [TestCase("Text")]
