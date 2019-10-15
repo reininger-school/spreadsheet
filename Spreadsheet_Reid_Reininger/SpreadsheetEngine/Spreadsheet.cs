@@ -74,6 +74,17 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Returns cell at given row and column.
+        /// </summary>
+        /// <param name="row">Cell's row.</param>
+        /// <param name="column">Cell's column.</param>
+        /// <returns>Reference to cell.</returns>
+        public Cell GetCell(int row, int column)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Fires CellPropertyChanged when a cells property has changed.
         /// </summary>
         /// <param name="sender">Changed cell.</param>

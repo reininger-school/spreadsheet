@@ -21,6 +21,8 @@ namespace CellTests
     [TestFixture]
     public class TestSpreadsheet
     {
+        private Spreadsheet sheet = new Spreadsheet(2, 2);
+
         /// <summary>
         /// Test constructor using valid input.
         /// </summary>
@@ -50,9 +52,8 @@ namespace CellTests
         [TestCase(1, 1)]
         public void TestInitializeCellRowColumns(int row, int column)
         {
-            var sheet = new Spreadsheet(2, 2);
             var fieldInfo = Utility.GetField<Spreadsheet>("cells");
-            Cell[,] cells = (Cell[,])fieldInfo.GetValue(sheet);
+            Cell[,] cells = (Cell[,])fieldInfo.GetValue(this.sheet);
             Assert.AreEqual(cells[row, column].RowIndex, row, "RowIndex is not equal to array index");
             Assert.AreEqual(cells[row, column].ColumnIndex, column, "ColumnIndex is not equal to arrayr index");
         }
@@ -81,11 +82,26 @@ namespace CellTests
                 fired = true;
             }
 
-            var sheet = new Spreadsheet(2, 2);
-            sheet.CellPropertyChanged += Sheet_CellPropertyChanged;
-            var cells = (Cell[,])Utility.GetField<Spreadsheet>("cells").GetValue(sheet);
+            this.sheet.CellPropertyChanged += Sheet_CellPropertyChanged;
+            var cells = (Cell[,])Utility.GetField<Spreadsheet>("cells").GetValue(this.sheet);
             cells[0, 0].Text = "test";
             Assert.AreEqual(true, fired);
+        }
+
+        /// <summary>
+        /// Test existing correct cell is returned.
+        /// </summary>
+        /// <param name="row">Cell's row.</param>
+        /// <param name="column">Cell's column.</param>
+        [TestCase(0, 0)]
+        [TestCase(0, 1)]
+        [TestCase(1, 0)]
+        [TestCase(1, 1)]
+        public void TestGetCellExists(int row, int column)
+        {
+            Cell cell = this.sheet.GetCell(row, column);
+            Assert.AreEqual(row, cell.RowIndex, "Incorrect row");
+            Assert.AreEqual(column, cell.ColumnIndex, "Incorrect column");
         }
     }
 }
