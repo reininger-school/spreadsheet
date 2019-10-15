@@ -81,7 +81,7 @@ namespace Cpts321
         /// <returns>Reference to cell.</returns>
         public Cell GetCell(int row, int column)
         {
-            throw new NotImplementedException();
+            return this.cells[row, column];
         }
 
         /// <summary>
