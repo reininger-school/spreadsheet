@@ -71,7 +71,7 @@ namespace Cpts321
             get => this.value;
             internal set
             {
-                if (this.Text[0] != '=')
+                if (string.IsNullOrWhiteSpace(this.Text) || this.Text[0] != '=')
                 {
                     this.value = this.Text;
                 }
