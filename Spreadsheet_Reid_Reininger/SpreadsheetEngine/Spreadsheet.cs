@@ -56,6 +56,14 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Gets number of rows in spreadsheet.
+        /// </summary>
+        public int RowCount
+        {
+            get => this.cells.GetLength(0);
+        }
+
+        /// <summary>
         /// Gets number of columns in spreadsheet.
         /// </summary>
         public int ColumnCount
