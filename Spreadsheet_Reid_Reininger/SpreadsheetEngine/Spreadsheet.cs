@@ -81,6 +81,11 @@ namespace Cpts321
         /// <returns>Reference to cell.</returns>
         public Cell GetCell(int row, int column)
         {
+            if (row < 0 || column < 0 || row >= this.cells.GetLength(0) || column >= this.cells.GetLength(1))
+            {
+                return null;
+            }
+
             return this.cells[row, column];
         }
 
