@@ -146,6 +146,7 @@ namespace CellTests
         /// </summary>
         /// <param name="text">Value of Text to test.</param>
         /// <param name="result">Whether Value should be the Same as Text.</param>
+        [TestCase("", true)]
         [TestCase("a", true)]
         [TestCase("=", false)]
         [TestCase("=a", false)]
