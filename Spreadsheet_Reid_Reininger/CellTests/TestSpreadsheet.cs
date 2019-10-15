@@ -21,7 +21,18 @@ namespace CellTests
     [TestFixture]
     public class TestSpreadsheet
     {
-        private Spreadsheet sheet = new Spreadsheet(2, 2);
+        private Spreadsheet sheet;
+        private Cell[,] cells;
+
+        /// <summary>
+        /// Setup sheet and cells.
+        /// </summary>
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            this.sheet = new Spreadsheet(2, 2);
+            this.cells = (Cell[,])Utility.GetField<Spreadsheet>("cells").GetValue(this.sheet);
+        }
 
         /// <summary>
         /// Test constructor using valid input.
@@ -53,9 +64,8 @@ namespace CellTests
         public void TestInitializeCellRowColumns(int row, int column)
         {
             var fieldInfo = Utility.GetField<Spreadsheet>("cells");
-            Cell[,] cells = (Cell[,])fieldInfo.GetValue(this.sheet);
-            Assert.AreEqual(cells[row, column].RowIndex, row, "RowIndex is not equal to array index");
-            Assert.AreEqual(cells[row, column].ColumnIndex, column, "ColumnIndex is not equal to arrayr index");
+            Assert.AreEqual(this.cells[row, column].RowIndex, row, "RowIndex is not equal to array index");
+            Assert.AreEqual(this.cells[row, column].ColumnIndex, column, "ColumnIndex is not equal to arrayr index");
         }
 
         /// <summary>
@@ -83,8 +93,7 @@ namespace CellTests
             }
 
             this.sheet.CellPropertyChanged += Sheet_CellPropertyChanged;
-            var cells = (Cell[,])Utility.GetField<Spreadsheet>("cells").GetValue(this.sheet);
-            cells[0, 0].Text = "test";
+            this.cells[0, 0].Text = "test";
             Assert.AreEqual(true, fired);
         }
 
@@ -105,6 +114,23 @@ namespace CellTests
         }
 
         /// <summary>
+        /// Test existing correct cell is returned.
+        /// </summary>
+        /// <param name="name">Cell's name.</param>
+        /// <param name="row">Cell's row.</param>
+        /// <param name="column">Cell's column.</param>
+        [TestCase("A1", 0, 0)]
+        [TestCase("A2", 0, 1)]
+        [TestCase("B1", 1, 0)]
+        [TestCase("B2", 1, 1)]
+        public void TestNameGetCellExists(string name, int row, int column)
+        {
+            Cell cell = this.sheet.GetCell(name);
+            Assert.AreEqual(row, cell.RowIndex, "Incorrect row");
+            Assert.AreEqual(column, cell.ColumnIndex, "Incorrect column");
+        }
+
+        /// <summary>
         /// Test non-existent cell returns null.
         /// </summary>
         /// <param name="row">Cell's row.</param>
@@ -116,6 +142,18 @@ namespace CellTests
         public void TestGetCellDNE(int row, int column)
         {
             Assert.IsNull(this.sheet.GetCell(row, column));
+        }
+
+        /// <summary>
+        /// Test Value is set to Text when Text has no '=' prefix.
+        /// </summary>
+        /// <param name="s">String to assing to Text.</param>
+        [TestCase("string")]
+        [TestCase("")]
+        public void TestSetValueText(string s)
+        {
+            this.cells[0, 0].Text = s;
+            Assert.AreEqual(this.cells[0, 0].Text, this.cells[0, 0].Value);
         }
     }
 }

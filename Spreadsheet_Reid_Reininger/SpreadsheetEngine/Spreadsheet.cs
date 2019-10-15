@@ -106,6 +106,16 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Returns cell with given name.
+        /// </summary>
+        /// <param name="name">Name of cell.</param>
+        /// <returns>Cell with given name.</returns>
+        public Cell GetCell(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Fires CellPropertyChanged when a cells property has changed.
         /// </summary>
         /// <param name="sender">Changed cell.</param>
