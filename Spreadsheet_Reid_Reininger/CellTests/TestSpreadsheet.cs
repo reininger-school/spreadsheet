@@ -7,6 +7,7 @@ namespace CellTests
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -66,6 +67,25 @@ namespace CellTests
         {
             Cell cell = Spreadsheet.CreateCell(type, 0, 0);
             Assert.AreEqual(expected, cell.GetType());
+        }
+
+        /// <summary>
+        /// Test Spreadsheet fires CellPropertyChanged event when a cell's property changes.
+        /// </summary>
+        [Test]
+        public void TestCellPropertyChangedEvent()
+        {
+            bool fired = false;
+            void Sheet_CellPropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                fired = true;
+            }
+
+            var sheet = new Spreadsheet(2, 2);
+            sheet.CellPropertyChanged += Sheet_CellPropertyChanged;
+            var cells = (Cell[,])Utility.GetField<Spreadsheet>("cells").GetValue(sheet);
+            cells[0, 0].Text = "test";
+            Assert.AreEqual(true, fired);
         }
     }
 }
