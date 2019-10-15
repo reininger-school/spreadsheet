@@ -56,6 +56,14 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Gets number of columns in spreadsheet.
+        /// </summary>
+        public int ColumnCount
+        {
+            get => this.cells.GetLength(1);
+        }
+
+        /// <summary>
         /// Returns a cell of the given type.
         /// </summary>
         /// <param name="type">Type of cell to create.</param>
