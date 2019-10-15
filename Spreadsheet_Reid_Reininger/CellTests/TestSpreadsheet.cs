@@ -103,5 +103,19 @@ namespace CellTests
             Assert.AreEqual(row, cell.RowIndex, "Incorrect row");
             Assert.AreEqual(column, cell.ColumnIndex, "Incorrect column");
         }
+
+        /// <summary>
+        /// Test non-existent cell returns null.
+        /// </summary>
+        /// <param name="row">Cell's row.</param>
+        /// <param name="column">Cell's column.</param>
+        [TestCase(-1, 0)]
+        [TestCase(0, -1)]
+        [TestCase(-1, -1)]
+        [TestCase(2, 2)]
+        public void TestGetCellDNE(int row, int column)
+        {
+            Assert.IsNull(this.sheet.GetCell(row, column));
+        }
     }
 }
