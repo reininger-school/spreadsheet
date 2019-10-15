@@ -6,6 +6,7 @@ namespace Cpts321
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -33,9 +34,15 @@ namespace Cpts321
                 for (int j = 0; j < columns; j++)
                 {
                     this.cells[i, j] = CreateCell(CellType.Text, i, j);
+                    this.cells[i, j].PropertyChanged += this.Cell_PropertyChanged;
                 }
             }
         }
+
+        /// <summary>
+        /// Event fires whenever a cell property in spreadsheet changes.
+        /// </summary>
+        public event PropertyChangedEventHandler CellPropertyChanged;
 
         /// <summary>
         /// Types of Cells.
@@ -64,6 +71,16 @@ namespace Cpts321
                 default:
                     return null;
             }
+        }
+
+        /// <summary>
+        /// Fires CellPropertyChanged when a cells property has changed.
+        /// </summary>
+        /// <param name="sender">Changed cell.</param>
+        /// <param name="e">Event args from changed cell.</param>
+        private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.CellPropertyChanged?.Invoke(sender, e);
         }
     }
 }
