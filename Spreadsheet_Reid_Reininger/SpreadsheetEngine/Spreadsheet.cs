@@ -1,17 +1,11 @@
-﻿/*
-Author: Reid Reininger
-Student ID: 11512839
-*/
+﻿// Reid Reininger
+// 11512839
 namespace Cpts321
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using System.Text;
     using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
-    using Cpts321;
     using SpreadsheetEngine;
 
     /// <summary>
@@ -35,13 +29,15 @@ namespace Cpts321
                 for (int j = 0; j < columns; j++)
                 {
                     this.cells[i, j] = CreateCell(CellType.Text, i, j);
+
+                    // subscribe Spreadsheet to Cell's PropertyChanged event
                     this.cells[i, j].PropertyChanged += this.Cell_PropertyChanged;
                 }
             }
         }
 
         /// <summary>
-        /// Event fires whenever a cell property in spreadsheet changes.
+        /// Fires whenever a cell's property changes.
         /// </summary>
         public event PropertyChangedEventHandler CellPropertyChanged;
 
@@ -51,13 +47,13 @@ namespace Cpts321
         public enum CellType
         {
             /// <summary>
-            /// Cell with text.
+            /// Cell with text value.
             /// </summary>
             Text,
         }
 
         /// <summary>
-        /// Gets number of rows in spreadsheet.
+        /// Gets number of rows in Spreadsheet.
         /// </summary>
         public int RowCount
         {
@@ -65,7 +61,7 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Gets number of columns in spreadsheet.
+        /// Gets number of columns in Spreadsheet.
         /// </summary>
         public int ColumnCount
         {
@@ -73,7 +69,7 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Returns a cell of the given type.
+        /// Creates a cell of the given type.
         /// </summary>
         /// <param name="type">Type of cell to create.</param>
         /// <param name="row">Cell's row.</param>
@@ -91,13 +87,14 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Returns cell at given row and column.
+        /// Gets cell at row and column.
         /// </summary>
         /// <param name="row">Cell's row.</param>
         /// <param name="column">Cell's column.</param>
         /// <returns>Reference to cell.</returns>
         public Cell GetCell(int row, int column)
         {
+            // check row and column are not out of bounds.
             if (row < 0 || column < 0 || row >= this.RowCount || column >= this.ColumnCount)
             {
                 return null;
@@ -107,10 +104,11 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Returns cell with given name.
+        /// Gets cell with given name.
         /// </summary>
         /// <param name="name">Name of cell.</param>
-        /// <returns>Cell with given name.</returns>
+        /// <returns>Cell with name.</returns>
+        /// TODO: String parsing is clumsy and specific.
         public Cell GetCell(string name)
         {
             int row = 0, column = 0;
@@ -120,10 +118,11 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Convert Letters to column.
+        /// Convert string of letters to integer value.
         /// </summary>
         /// <param name="name">string of capital letters.</param>
         /// <returns>Number associated with letter.</returns>
+        /// TODO: Meant to treat letters as base 26 system, currently only works with one letter strings.
         public int ConvertLetters(string name)
         {
             int result = 0;
@@ -138,21 +137,8 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Fires CellPropertyChanged when a cells property has changed.
+        /// Demo of cell values updating in UI.
         /// </summary>
-        /// <param name="sender">Changed cell.</param>
-        /// <param name="e">Event args from changed cell.</param>
-        private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            Cell cell = (Cell)sender;
-            if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
-            {
-                cell.Value = this.GetCell(cell.Text.Remove(0, 1)).Value;
-            }
-
-            this.CellPropertyChanged?.Invoke(sender, e);
-        }
-
         public void Demo()
         {
             var random = new Random();
@@ -169,6 +155,23 @@ namespace Cpts321
                 this.GetCell(i - 1, 1).Text = $"This is cell B{i}";
                 this.GetCell(i - 1, 0).Text = $"=B{i}";
             }
+        }
+
+        /// <summary>
+        /// Sets cell's value when a property changes, and fires CellPropertyChanged event.
+        /// </summary>
+        /// <param name="sender">Changed cell.</param>
+        /// <param name="e">Event args from changed cell.</param>
+        private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // Set cell value.
+            Cell cell = (Cell)sender;
+            if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
+            {
+                cell.Value = this.GetCell(cell.Text.Remove(0, 1)).Value;
+            }
+
+            this.CellPropertyChanged?.Invoke(sender, e);
         }
     }
 }
