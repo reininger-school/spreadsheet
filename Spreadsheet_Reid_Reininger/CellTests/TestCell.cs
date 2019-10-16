@@ -1,17 +1,10 @@
 ﻿// Reid Reininger
-// ID: 11512839
+// 11512839
 namespace CellTests
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
     using System.Reflection;
-    using System.Security.Permissions;
-    using System.Text;
-    using System.Threading.Tasks;
-    using CellTests;
     using Cpts321;
     using NUnit.Framework;
 
@@ -22,7 +15,7 @@ namespace CellTests
     public class TestCell
     {
         /// <summary>
-        /// Default string for cell. Done for testing purposes.
+        /// Default string for cell for testing purposes.
         /// </summary>
         private const string DefaultString = "Default String";
 
@@ -37,7 +30,7 @@ namespace CellTests
         [SetUp]
         public void NewCell()
         {
-            this.cell = new MockCell(0, 0);
+            this.cell = new MockCell(0, 0); // Minimal concrete class for testing
             Utility.GetProperty<Cell>("Text").SetValue(this.cell, DefaultString);
         }
 
@@ -46,11 +39,11 @@ namespace CellTests
         /// </summary>
         /// <param name="rowIndex">Cells' row index.</param>
         /// <param name="columnIndex">Cell's column index.</param>
-        [TestCase(0, 0)] // Edge case, least possible indices
-        [TestCase(0, 1)] // Edge case
-        [TestCase(1, 0)] // Edge case
-        [TestCase(1, 1)] // Edge case
-        [TestCase(2, 3)] // Normal case
+        [TestCase(0, 0)]
+        [TestCase(0, 1)]
+        [TestCase(1, 0)]
+        [TestCase(1, 1)]
+        [TestCase(2, 3)]
         public void TestCellConstructorValidInput(int rowIndex, int columnIndex)
         {
             var cell = new MockCell(rowIndex, columnIndex);
@@ -84,7 +77,7 @@ namespace CellTests
         }
 
         /// <summary>
-        /// Test properties have public get nonpublic set.
+        /// Test properties have public get, nonpublic set.
         /// </summary>
         /// <param name="property">Property to test.</param>
         [TestCase("Text")]
@@ -97,7 +90,7 @@ namespace CellTests
         }
 
         /// <summary>
-        /// Test if PropertyChanged event fires when appropriate changing Text property.
+        /// Test PropertyChanged event fires when Text property changes.
         /// </summary>
         /// <param name="testString">String to change Text to.</param>
         /// <param name="fire">Whether PropertyChanged event should fire or not.</param>
