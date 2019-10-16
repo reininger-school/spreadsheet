@@ -1,28 +1,21 @@
-﻿/*
-Author: Reid Reininger
-Student ID: 11512839
-*/
+﻿// Reid Reininger
+// 11512839
 namespace CellTests
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Cpts321;
     using NUnit.Framework;
     using SpreadsheetEngine;
 
     /// <summary>
-    /// Test suite for Spreadsheet.
+    /// Spreadsheet test suite.
     /// </summary>
     [TestFixture]
     public class TestSpreadsheet
     {
-        private Spreadsheet sheet;
-        private Cell[,] cells;
+        private Spreadsheet sheet; // Spreadsheet instantiation for testing.
+        private Cell[,] cells; // reference to sheet's array of Cells.
 
         /// <summary>
         /// Setup sheet and cells.
@@ -37,8 +30,8 @@ namespace CellTests
         /// <summary>
         /// Test constructor using valid input.
         /// </summary>
-        /// <param name="rows">Rows in spreadsheet.</param>
-        /// <param name="columns">Columns in spreadsheet.</param>
+        /// <param name="rows">Number of rows for Spreadsheet.</param>
+        /// <param name="columns">Number of columns for Spreadsheet.</param>
         [TestCase(0, 0)]
         [TestCase(0, 1)]
         [TestCase(1, 0)]
@@ -53,7 +46,7 @@ namespace CellTests
         }
 
         /// <summary>
-        /// Test that cell and array indices match.
+        /// Test cell and cell array indices match.
         /// </summary>
         /// <param name="row">Array row.</param>
         /// <param name="column">Array column.</param>
@@ -72,7 +65,7 @@ namespace CellTests
         /// Test Cell created is of desired type.
         /// </summary>
         /// <param name="type">Enum type of cell to create.</param>
-        /// <param name="expected">Expected created cell type.</param>
+        /// <param name="expected">Expected cell type.</param>
         [TestCase(Spreadsheet.CellType.Text, typeof(TextCell))]
         public void TestCreateCell(Spreadsheet.CellType type, Type expected)
         {
@@ -98,7 +91,7 @@ namespace CellTests
         }
 
         /// <summary>
-        /// Test existing correct cell is returned.
+        /// Test correct existent cell is returned.
         /// </summary>
         /// <param name="row">Cell's row.</param>
         /// <param name="column">Cell's column.</param>
@@ -114,7 +107,7 @@ namespace CellTests
         }
 
         /// <summary>
-        /// Test existing correct cell is returned.
+        /// Test correct existent cell is returned.
         /// </summary>
         /// <param name="name">Cell's name.</param>
         /// <param name="row">Cell's row.</param>
