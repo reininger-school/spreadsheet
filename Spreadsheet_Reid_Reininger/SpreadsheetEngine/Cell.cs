@@ -1,15 +1,9 @@
-﻿/*
-Author: Reid Reininger
-Student ID: 11512839
-*/
+﻿// Reid Reininger
+// 11512839
 namespace Cpts321
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Represents a cell in the grid.
@@ -45,26 +39,28 @@ namespace Cpts321
 
             this.RowIndex = rowIndex;
             this.ColumnIndex = columnIndex;
+
+            // subscribe cell to own PropertyChanged event
             this.PropertyChanged += this.Cell_PropertyChanged;
         }
 
         /// <summary>
-        /// Fires everytime property changes.
+        /// Fires everytime a property changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Gets row index cell belongs to.
+        /// Gets cell's row index.
         /// </summary>
         public int RowIndex { get; }
 
         /// <summary>
-        /// Gets column index cell belongs to.
+        /// Gets cell's column index.
         /// </summary>
         public int ColumnIndex { get; }
 
         /// <summary>
-        /// Gets evaluated value of the cell.
+        /// Gets and sets cell's evaluated value.
         /// </summary>
         public string Value
         {
@@ -83,7 +79,7 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Gets text actually typed in cell.
+        /// Gets and sets text actually typed in cell.
         /// </summary>
         public string Text
         {
@@ -101,6 +97,11 @@ namespace Cpts321
             }
         }
 
+        /// <summary>
+        /// Sets value when text changes.
+        /// </summary>
+        /// <param name="sender">Cell with changed property.</param>
+        /// <param name="e">Event args.</param>
         private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.Value = null;
