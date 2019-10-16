@@ -145,6 +145,21 @@ namespace CellTests
         }
 
         /// <summary>
+        /// Test convert capital letters to corresponding integer value.
+        /// </summary>
+        /// <param name="letters">String to convert.</param>
+        /// <param name="expected">Expected result.</param>
+        [TestCase("A", 0)]
+        [TestCase("B", 1)]
+        [TestCase("Z", 25)]
+
+        // [TestCase("AA", 26)]
+        public void TestConvertLetters(string letters, int expected)
+        {
+            Assert.AreEqual(expected, sheet.ConvertLetters(letters));
+        }
+
+        /// <summary>
         /// Test Value is set to Text when Text has no '=' prefix.
         /// </summary>
         /// <param name="s">String to assing to Text.</param>

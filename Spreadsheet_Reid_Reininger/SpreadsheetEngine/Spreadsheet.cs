@@ -112,7 +112,27 @@ namespace Cpts321
         /// <returns>Cell with given name.</returns>
         public Cell GetCell(string name)
         {
+            int row = 0, column = 0;
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Convert Letters to column.
+        /// </summary>
+        /// <param name="name">string of capital letters.</param>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        public int ConvertLetters(string name)
+        {
+            int result = 0;
+            int index = 1;
+            var revName = name.Reverse<char>();
+            foreach (char c in revName)
+            {
+                result += (int)Math.Pow(c - 'A', index++);
+            }
+
+            return result;
         }
 
         /// <summary>
