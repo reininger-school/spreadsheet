@@ -174,5 +174,20 @@ namespace CellTests
             this.cells[0, 1].Text = "=A1";
             Assert.AreEqual(this.cells[0, 0].Value, this.cells[0, 0].Value);
         }
+
+        /// <summary>
+        /// Test a cell's value is updated before Spreadsheet fires CellPropertyChanged event.
+        /// </summary>
+        [Test]
+        public void TestCellValueSetBeforeCellPropertyChanged()
+        {
+            void Sheet_CellPropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                Assert.AreEqual(this.cells[0, 0].Text, this.cells[0, 0].Value);
+            }
+
+            this.sheet.CellPropertyChanged += Sheet_CellPropertyChanged;
+            this.cells[0, 0].Text = "Test";
+        }
     }
 }
