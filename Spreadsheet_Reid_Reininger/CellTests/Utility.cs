@@ -1,11 +1,8 @@
-﻿namespace CellTests
+﻿// Reid Reininger
+// 11512839
+namespace CellTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
     using NUnit.Framework;
 
     /// <summary>
@@ -14,10 +11,10 @@
     public static class Utility
     {
         /// <summary>
-        /// Returns PropertyInfo of given type and property.
+        /// Get PropertyInfo.
         /// </summary>
-        /// <typeparam name="T">Class containing property to get.</typeparam>
-        /// <param name="property">Property to be retrieved.</param>
+        /// <typeparam name="T">Class containing property.</typeparam>
+        /// <param name="property">Property identifier.</param>
         /// <returns>Property info.</returns>
         public static PropertyInfo GetProperty<T>(string property)
         {
@@ -36,11 +33,11 @@
         }
 
         /// <summary>
-        /// Return MethodInfo for given method.
+        /// Get MethodInfo.
         /// </summary>
-        /// <typeparam name="T">Class containg method.</typeparam>
-        /// <param name="method">Name of method to get MethodInfo for.</param>
-        /// <returns>MethodInfo of method in class T.</returns>
+        /// <typeparam name="T">Class containing method.</typeparam>
+        /// <param name="method">Method identifier.</param>
+        /// <returns>Method info.</returns>
         public static MethodInfo GetMethod<T>(string method)
         {
             if (string.IsNullOrWhiteSpace(method))
@@ -58,11 +55,11 @@
         }
 
         /// <summary>
-        /// Get FieldInfo for field.
+        /// Get FieldInfo.
         /// </summary>
         /// <typeparam name="T">Class containing field.</typeparam>
-        /// <param name="field">Field to get FieldInfo for.</param>
-        /// <returns>FieldInfo of field.</returns>
+        /// <param name="field">Field identifier.</param>
+        /// <returns>Field info.</returns>
         public static FieldInfo GetField<T>(string field)
         {
             if (string.IsNullOrWhiteSpace(field))
@@ -73,7 +70,7 @@
             var fieldInfo = typeof(T).GetField(field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
             if (fieldInfo == null)
             {
-                Assert.Fail($"Could not find method {field}");
+                Assert.Fail($"Could not find field {field}");
             }
 
             return fieldInfo;
