@@ -33,6 +33,7 @@
             this.B = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.C = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.D = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,11 +83,22 @@
             this.D.Name = "D";
             this.D.Width = 125;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(58, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Demo";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "Spreadsheet Cpts 321";
@@ -103,6 +115,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn B;
         private System.Windows.Forms.DataGridViewTextBoxColumn C;
         private System.Windows.Forms.DataGridViewTextBoxColumn D;
+        private System.Windows.Forms.Button button1;
     }
 }
 

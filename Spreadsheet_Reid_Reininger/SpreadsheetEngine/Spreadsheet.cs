@@ -98,7 +98,7 @@ namespace Cpts321
         /// <returns>Reference to cell.</returns>
         public Cell GetCell(int row, int column)
         {
-            if (row < 0 || column < 0 || row >= this.cells.GetLength(0) || column >= this.cells.GetLength(1))
+            if (row < 0 || column < 0 || row >= this.RowCount || column >= this.ColumnCount)
             {
                 return null;
             }
@@ -144,11 +144,30 @@ namespace Cpts321
         /// <param name="e">Event args from changed cell.</param>
         private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.CellPropertyChanged?.Invoke(sender, e);
             Cell cell = (Cell)sender;
             if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
             {
                 cell.Value = this.GetCell(cell.Text.Remove(0, 1)).Value;
+            }
+
+            this.CellPropertyChanged?.Invoke(sender, e);
+        }
+
+        public void Demo()
+        {
+            var random = new Random();
+            int row = 0, column = 0;
+            for (int i = 0; i < 50; i++)
+            {
+                row = random.Next(0, this.RowCount - 1);
+                column = random.Next(0, this.ColumnCount - 1);
+                this.GetCell(row, column).Text = "Hello, World!";
+            }
+
+            for (int i = 1; i <= this.RowCount; i++)
+            {
+                this.GetCell(i - 1, 1).Text = $"This is cell B{i}";
+                this.GetCell(i - 1, 0).Text = $"=B{i}";
             }
         }
     }
