@@ -1,10 +1,7 @@
-﻿namespace SpreadsheetEngine
+﻿// Reid Reininger
+// 11512839
+namespace SpreadsheetEngine
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Cpts321;
 
     /// <summary>
