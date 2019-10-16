@@ -1,17 +1,11 @@
 ﻿// Reid Reininger
-// ID: 11512839
-
+// 11512839
 namespace CellTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Cpts321;
 
     /// <summary>
-    /// Mock concrete class to test abstract cell class.
+    /// Mock concrete class to test abstract Cell class.
     /// </summary>
     public class MockCell : Cell
     {
