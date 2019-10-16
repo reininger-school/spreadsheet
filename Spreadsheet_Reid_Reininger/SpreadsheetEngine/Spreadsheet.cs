@@ -9,10 +9,10 @@ namespace Cpts321
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Cpts321;
     using SpreadsheetEngine;
-    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Contains all cells.
@@ -145,6 +145,11 @@ namespace Cpts321
         private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.CellPropertyChanged?.Invoke(sender, e);
+            Cell cell = (Cell)sender;
+            if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
+            {
+                cell.Value = this.GetCell(cell.Text.Remove(0, 1)).Value;
+            }
         }
     }
 }

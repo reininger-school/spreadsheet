@@ -170,5 +170,16 @@ namespace CellTests
             this.cells[0, 0].Text = s;
             Assert.AreEqual(this.cells[0, 0].Text, this.cells[0, 0].Value);
         }
+
+        /// <summary>
+        /// Test Value is set to specified cell value when text has '=' prefix.
+        /// </summary>
+        [Test]
+        public void TestSetValueFormula()
+        {
+            this.cells[0, 0].Text = "TestString";
+            this.cells[0, 1].Text = "=A1";
+            Assert.AreEqual(this.cells[0, 0].Value, this.cells[0, 0].Value);
+        }
     }
 }
