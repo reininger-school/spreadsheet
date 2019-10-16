@@ -120,8 +120,8 @@ namespace CellTests
         /// <param name="row">Cell's row.</param>
         /// <param name="column">Cell's column.</param>
         [TestCase("A1", 0, 0)]
-        [TestCase("A2", 0, 1)]
-        [TestCase("B1", 1, 0)]
+        [TestCase("A2", 1, 0)]
+        [TestCase("B1", 0, 1)]
         [TestCase("B2", 1, 1)]
         public void TestNameGetCellExists(string name, int row, int column)
         {
@@ -156,7 +156,7 @@ namespace CellTests
         // [TestCase("AA", 26)]
         public void TestConvertLetters(string letters, int expected)
         {
-            Assert.AreEqual(expected, sheet.ConvertLetters(letters));
+            Assert.AreEqual(expected, this.sheet.ConvertLetters(letters));
         }
 
         /// <summary>

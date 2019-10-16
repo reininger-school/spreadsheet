@@ -12,6 +12,7 @@ namespace Cpts321
     using System.Threading.Tasks;
     using Cpts321;
     using SpreadsheetEngine;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Contains all cells.
@@ -113,15 +114,16 @@ namespace Cpts321
         public Cell GetCell(string name)
         {
             int row = 0, column = 0;
-            throw new NotImplementedException();
+            row = int.Parse(Regex.Split(name, @"\D+")[1]) - 1;
+            column = this.ConvertLetters(Regex.Split(name, @"\d+")[0]);
+            return this.GetCell(row, column);
         }
 
         /// <summary>
         /// Convert Letters to column.
         /// </summary>
         /// <param name="name">string of capital letters.</param>
-        /// <param name="row"></param>
-        /// <returns></returns>
+        /// <returns>Number associated with letter.</returns>
         public int ConvertLetters(string name)
         {
             int result = 0;
