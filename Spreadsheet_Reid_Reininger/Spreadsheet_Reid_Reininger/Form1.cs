@@ -1,22 +1,14 @@
-﻿/*
-Author: Reid Reininger
-Student ID: 11512839
-*/
+﻿// Reid Reininger
+// 11512839
 namespace Spreadsheet_Reid_Reininger
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
     using Cpts321;
 
     /// <summary>
-    /// UI code for spreadsheet application.
+    /// UI for spreadsheet application.
     /// </summary>
     public partial class Form1 : Form
     {
@@ -52,6 +44,11 @@ namespace Spreadsheet_Reid_Reininger
             }
         }
 
+        /// <summary>
+        /// Change gridview to reflect changed cell property.
+        /// </summary>
+        /// <param name="sender">Changed cell.</param>
+        /// <param name="e">Evenet args.</param>
         private void Sheet_CellPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Cell cell = (Cell)sender;
