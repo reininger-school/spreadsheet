@@ -5,7 +5,7 @@ namespace Cpts321
     /// <summary>
     /// Node interface for expression tree.
     /// </summary>
-    public interface INode
+    internal interface INode
     {
         /// <summary>
         /// Evaluates value of node.
