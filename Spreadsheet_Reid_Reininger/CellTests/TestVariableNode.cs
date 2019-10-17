@@ -25,5 +25,22 @@ namespace CellTests
             var node = new VariableNode("x", 1);
             Assert.AreEqual(1, node.Evaluate());
         }
+
+        /// <summary>
+        /// Test valid variable names.
+        /// </summary>
+        /// <param name="name">Name of varialbe.</param>
+        [TestCase("a")]
+        [TestCase("A")]
+        [TestCase("aa")]
+        [TestCase("Aa")]
+        [TestCase("a1")]
+        [TestCase("A1")]
+        [TestCase("A12")]
+        [TestCase("test")]
+        public void TestValidName(string name)
+        {
+            Assert.DoesNotThrow(() => new VariableNode(name, 0));
+        }
     }
 }
