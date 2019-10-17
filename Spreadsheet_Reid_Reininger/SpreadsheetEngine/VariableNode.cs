@@ -2,7 +2,8 @@
 // 11512839
 namespace Cpts321
 {
-    using System.Collections.Generic;
+    using System.Text.RegularExpressions;
+    using System;
 
     /// <summary>
     /// Represents a variable value.
@@ -29,7 +30,17 @@ namespace Cpts321
         internal string Name
         {
             get => this.name;
-            set => this.name = value;
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value) && Regex.Match(value, @"^([A-Z]|[a-z])([A-Z]|[a-z]|[0-9])*$").Success)
+                {
+                    this.name = value;
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
         }
 
         /// <summary>

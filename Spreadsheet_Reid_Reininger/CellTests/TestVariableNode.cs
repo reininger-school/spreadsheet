@@ -51,6 +51,8 @@ namespace CellTests
         [TestCase("0")]
         [TestCase("01")]
         [TestCase("1a")]
+        [TestCase("0a1")]
+        [TestCase("a1@")]
         [TestCase("")]
         [TestCase(null)]
         public void TestInvalidName(string name)
