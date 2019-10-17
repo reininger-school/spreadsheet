@@ -57,7 +57,9 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockBinaryOperatorNode.cs" />
     <Compile Include="MockCell.cs" />
+    <Compile Include="TestBinaryOperatorNode.cs" />
     <Compile Include="TestCell.cs" />
     <Compile Include="TestSpreadsheet.cs" />
     <Compile Include="Utility.cs" />
