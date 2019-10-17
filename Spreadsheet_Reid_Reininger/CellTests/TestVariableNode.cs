@@ -29,7 +29,7 @@ namespace CellTests
         /// <summary>
         /// Test valid variable names.
         /// </summary>
-        /// <param name="name">Name of varialbe.</param>
+        /// <param name="name">Variable name.</param>
         [TestCase("a")]
         [TestCase("A")]
         [TestCase("aa")]
@@ -41,6 +41,21 @@ namespace CellTests
         public void TestValidName(string name)
         {
             Assert.DoesNotThrow(() => new VariableNode(name, 0));
+        }
+
+        /// <summary>
+        /// Test invalid names.
+        /// </summary>
+        /// <param name="name">Variable name.</param>
+        [TestCase("@")]
+        [TestCase("0")]
+        [TestCase("01")]
+        [TestCase("1a")]
+        [TestCase("")]
+        [TestCase(null)]
+        public void TestInvalidName(string name)
+        {
+            Assert.Throws<ArgumentException>(() => new VariableNode(name, 0));
         }
     }
 }
