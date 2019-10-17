@@ -22,7 +22,7 @@ namespace Cpts321
         /// <param name="op">String to represent operator in expressions.</param>
         protected OperatorNode(string op)
         {
-            this.Op = op;
+            this.op = op;
         }
 
         /// <summary>
@@ -31,7 +31,6 @@ namespace Cpts321
         internal string Op
         {
             get => this.op;
-            private set => this.op = value;
         }
 
         /// <summary>
