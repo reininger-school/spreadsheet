@@ -11,6 +11,8 @@ namespace Cpts321
     public class ExpressionTree
     {
         private Dictionary<string, double> variables = new Dictionary<string, double>();
+        private string expression;
+        private Node root;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
@@ -18,6 +20,26 @@ namespace Cpts321
         /// <param name="expression">Expression to construct tree.</param>
         public ExpressionTree(string expression)
         {
+            this.expression = expression;
+        }
+
+        /// <summary>
+        /// Gets or sets expression.
+        /// </summary>
+        public string Expression
+        {
+            get => this.expression;
+            set => this.expression = value;
+        }
+
+        /// <summary>
+        /// Converts infix expression to postfix expression.
+        /// </summary>
+        /// <param name="expression">Infix expression.</param>
+        /// <returns>Postfix expression.</returns>
+        public static string InfixToPostfix(string expression)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -35,6 +57,14 @@ namespace Cpts321
         /// </summary>
         /// <returns>Double evaluated value of tree.</returns>
         public double Evaluate()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Builds ExpressionTree.
+        /// </summary>
+        private void BuildTree()
         {
             throw new NotImplementedException();
         }

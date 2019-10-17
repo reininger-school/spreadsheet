@@ -61,6 +61,7 @@
     <Compile Include="MockCell.cs" />
     <Compile Include="TestBinaryOperatorNode.cs" />
     <Compile Include="TestCell.cs" />
+    <Compile Include="TestExpressionTree.cs" />
     <Compile Include="TestSpreadsheet.cs" />
     <Compile Include="TestVariableNode.cs" />
     <Compile Include="Utility.cs" />

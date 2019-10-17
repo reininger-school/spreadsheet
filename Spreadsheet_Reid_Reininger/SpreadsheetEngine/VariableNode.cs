@@ -2,8 +2,8 @@
 // 11512839
 namespace Cpts321
 {
-    using System.Text.RegularExpressions;
     using System;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Represents a variable value.
