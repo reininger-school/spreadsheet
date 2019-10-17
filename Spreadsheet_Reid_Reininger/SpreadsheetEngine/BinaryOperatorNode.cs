@@ -15,8 +15,8 @@ namespace Cpts321
     internal abstract class BinaryOperatorNode : OperatorNode
     {
         private BinaryOp function;
-        private INode left;
-        private INode right;
+        private Node left;
+        private Node right;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryOperatorNode"/> class.
@@ -25,7 +25,7 @@ namespace Cpts321
         /// <param name="right">Right child.</param>
         /// <param name="op">String representing operator in expression.</param>
         /// <param name="function">Binary function to perform on left, right.</param>
-        internal BinaryOperatorNode(string op, BinaryOp function, INode left = null, INode right = null)
+        internal BinaryOperatorNode(string op, BinaryOp function, Node left = null, Node right = null)
             : base(op)
         {
             this.function = function;
@@ -69,7 +69,7 @@ namespace Cpts321
         /// <summary>
         /// Gets or sets left operand.
         /// </summary>
-        internal INode LeftNode
+        internal Node LeftNode
         {
             get => this.left;
             set => this.left = value;
@@ -78,7 +78,7 @@ namespace Cpts321
         /// <summary>
         /// Gets or sets right operand.
         /// </summary>
-        internal INode RightNode
+        internal Node RightNode
         {
             get => this.right;
             set => this.right = value;
@@ -88,7 +88,7 @@ namespace Cpts321
         /// Evaluate node.
         /// </summary>
         /// <returns>Double value of node.</returns>
-        public override double Evaluate()
+        internal override double Evaluate()
         {
             return this.function(this.Left, this.Right);
         }

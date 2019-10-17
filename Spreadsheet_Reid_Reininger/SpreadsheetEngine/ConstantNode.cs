@@ -13,7 +13,7 @@ namespace Cpts321
     /// <summary>
     /// Node with constant value.
     /// </summary>
-    internal class ConstantNode : INode
+    internal class ConstantNode : Node
     {
         private double value;
 
@@ -39,7 +39,7 @@ namespace Cpts321
         /// Gets value of node.
         /// </summary>
         /// <returns>Double value of node.</returns>
-        public double Evaluate()
+        internal override double Evaluate()
         {
             return this.Value;
         }

@@ -12,7 +12,7 @@ namespace Cpts321
     /// <summary>
     /// Abstract class for operator nodes.
     /// </summary>
-    internal abstract class OperatorNode : INode
+    internal abstract class OperatorNode : Node
     {
         private string op;
 
@@ -37,6 +37,6 @@ namespace Cpts321
         /// Evaluates value of node.
         /// </summary>
         /// <returns>Value of node as double.</returns>
-        public abstract double Evaluate();
+        internal override abstract double Evaluate();
     }
 }

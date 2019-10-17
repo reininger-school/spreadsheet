@@ -12,7 +12,7 @@ namespace Cpts321
         /// </summary>
         /// <param name="left">Left operand.</param>
         /// <param name="right">Right operand.</param>
-        internal DivisionNode(INode left = null, INode right = null)
+        internal DivisionNode(Node left = null, Node right = null)
             : base("/", (x, y) => x / y, left, right)
         {
         }

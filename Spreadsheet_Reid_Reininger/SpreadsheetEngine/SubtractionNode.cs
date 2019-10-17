@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="left">Left operand.</param>
         /// <param name="right">Right operand.</param>
-        internal SubtractionNode(INode left = null, INode right = null)
+        internal SubtractionNode(Node left = null, Node right = null)
             : base("-", (x, y) => x - y, left, right)
         {
         }

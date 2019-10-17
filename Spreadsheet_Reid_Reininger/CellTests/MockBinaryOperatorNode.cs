@@ -22,7 +22,7 @@ namespace Cpts321
         /// <param name="function">Binary function.</param>
         /// <param name="left">Left operand.</param>
         /// <param name="right">Right operand.</param>
-        internal MockBinaryOperatorNode(string op, BinaryOp function, INode left, INode right)
+        internal MockBinaryOperatorNode(string op, BinaryOp function, Node left, Node right)
             : base(op, function, left, right)
         {
         }

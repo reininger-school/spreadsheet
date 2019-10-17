@@ -3,12 +3,15 @@
 namespace Cpts321
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Arithmetic expression parser and evaluator.
     /// </summary>
     public class ExpressionTree
     {
+        private Dictionary<string, double> variables = new Dictionary<string, double>();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
         /// </summary>
