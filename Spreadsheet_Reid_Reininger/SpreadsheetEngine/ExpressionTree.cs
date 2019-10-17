@@ -1,6 +1,5 @@
 ﻿// Reid Reininger
 // 11512839
-
 namespace Cpts321
 {
     using System;

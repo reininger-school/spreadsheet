@@ -17,9 +17,22 @@ namespace Cpts321
         private string op;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="OperatorNode"/> class.
+        /// </summary>
+        /// <param name="op">String to represent operator in expressions.</param>
+        protected OperatorNode(string op)
+        {
+            this.Op = op;
+        }
+
+        /// <summary>
         /// Gets string representing operator in expression.
         /// </summary>
-        public string Op { get; }
+        internal string Op
+        {
+            get => this.op;
+            private set => this.op = value;
+        }
 
         /// <summary>
         /// Evaluates value of node.

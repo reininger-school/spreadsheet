@@ -48,8 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryOperatorNode.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="ConstantNode.cs" />
     <Compile Include="ExpressionTree.cs" />
+    <Compile Include="INode.cs" />
+    <Compile Include="OperatorNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spreadsheet.cs" />
     <Compile Include="TextCell.cs" />
