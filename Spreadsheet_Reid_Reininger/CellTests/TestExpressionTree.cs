@@ -36,12 +36,18 @@ namespace Cpts321
         {
         }
 
-        [TestCase("1", "1")]
-        [TestCase("1+1", "11+")]
-        [TestCase("1+1+1", "11+1+")]
-        public void TestInfixToPostfix(string infix, string expected)
+        /// <summary>
+        /// Test valid infix to postfix input and result.
+        /// </summary>
+        /// <param name="infix">Infix expression.</param>
+        /// <param name="expected">String array of expected output, stack converted to array for testing purposes.</param>
+        [TestCase("1", new string[] { "1" })]
+        [TestCase("1+1", new string[] { "+", "1", "1" })]
+        [TestCase("1+1+1", new string[] { "+", "1", "+", "1", "1" })]
+        [TestCase("11+1", new string[] { "+", "1", "11" })]
+        public void TestInfixToPostfix(string infix, string[] expected)
         {
-            Assert.AreEqual(expected, ExpressionTree.InfixToPostfix(infix));
+            Assert.AreEqual(expected, ExpressionTree.InfixToPostfix(infix).ToArray());
         }
     }
 }
