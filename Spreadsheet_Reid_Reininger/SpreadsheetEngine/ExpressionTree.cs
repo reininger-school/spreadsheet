@@ -14,6 +14,7 @@ namespace Cpts321
     {
         private Dictionary<string, double> variables = new Dictionary<string, double>();
         private string expression;
+        private Regex operatorsRegex = new Regex(@"([*+/-])");
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
@@ -38,16 +39,15 @@ namespace Cpts321
         /// </summary>
         /// <param name="infix">Infix expression.</param>
         /// <returns>Postfix expression.</returns>
-        public static Stack<string> InfixToPostfix(string infix)
+        private Stack<string> InfixToPostfix()
         {
             var postfix = new Stack<string>();
             var stack = new Stack<string>();
-            var operatorsRegex = new Regex(@"([*+/-])");
-            var tokens = operatorsRegex.Split(infix);
+            var tokens = this.operatorsRegex.Split(this.expression);
             foreach (var s in tokens)
             {
                 // output if operand
-                if (!operatorsRegex.IsMatch(s))
+                if (!this.operatorsRegex.IsMatch(s))
                 {
                     postfix.Push(s);
                 }

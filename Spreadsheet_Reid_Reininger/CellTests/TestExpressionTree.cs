@@ -48,7 +48,10 @@ namespace Cpts321
         [TestCase("11+alpha+1+2+beta", new string[] { "+", "beta", "+", "2", "+", "1", "+", "alpha", "11"})]
         public void TestInfixToPostfix(string infix, string[] expected)
         {
-            Assert.AreEqual(expected, ExpressionTree.InfixToPostfix(infix).ToArray());
+            this.tree.Expression = infix;
+            var methodInfo = Utility.GetMethod<ExpressionTree>("InfixToPostfix");
+            var stack = (Stack<string>)methodInfo.Invoke(this.tree, null);
+            Assert.AreEqual(expected, stack.ToArray());
         }
     }
 }
