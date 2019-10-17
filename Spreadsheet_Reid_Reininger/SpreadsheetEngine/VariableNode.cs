@@ -15,7 +15,8 @@ namespace Cpts321
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableNode"/> class.
         /// </summary>
-        /// <param name="value">Reference to node value.</param>
+        /// <param name="value">Node value.</param>
+        /// <param name="name">Name of variable.</param>
         internal VariableNode(string name, double value)
         {
             this.Name = name;
@@ -46,7 +47,7 @@ namespace Cpts321
         /// <returns>Value of node as double.</returns>
         internal override double Evaluate()
         {
-            throw new System.NotImplementedException();
+            return this.Value;
         }
     }
 }

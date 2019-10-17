@@ -7,8 +7,8 @@ namespace CellTests
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using NUnit.Framework;
     using Cpts321;
+    using NUnit.Framework;
 
     /// <summary>
     /// VariableNode Test Suite.
@@ -16,6 +16,9 @@ namespace CellTests
     [TestFixture]
     internal class TestVariableNode
     {
+        /// <summary>
+        /// Test evaluate function.
+        /// </summary>
         [Test]
         public void TestEvaluate()
         {
