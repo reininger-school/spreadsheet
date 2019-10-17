@@ -4,6 +4,8 @@ namespace Cpts321
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Arithmetic expression parser and evaluator.
@@ -12,7 +14,6 @@ namespace Cpts321
     {
         private Dictionary<string, double> variables = new Dictionary<string, double>();
         private string expression;
-        private Node root;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
@@ -35,11 +36,46 @@ namespace Cpts321
         /// <summary>
         /// Converts infix expression to postfix expression.
         /// </summary>
-        /// <param name="expression">Infix expression.</param>
+        /// <param name="infix">Infix expression.</param>
         /// <returns>Postfix expression.</returns>
-        public static string InfixToPostfix(string expression)
+        public static Stack<string> InfixToPostfix(string infix)
         {
-            throw new NotImplementedException();
+            var postfix = new Stack<string>();
+            var stack = new Stack<string>();
+            var operatorsRegex = new Regex(@"([*+/-])");
+            var tokens = operatorsRegex.Split(infix);
+            foreach (var s in tokens)
+            {
+                // output if operand
+                if (!operatorsRegex.IsMatch(s))
+                {
+                    postfix.Push(s);
+                }
+
+                // if operator and stack is empty
+                else if (stack.Count == 0)
+                {
+                    stack.Push(s);
+                }
+
+                // if operator and lower or same precedence
+                else
+                {
+                    while (stack.Count > 0)
+                    {
+                        postfix.Push(stack.Pop());
+                    }
+
+                    stack.Push(s);
+                }
+            }
+
+            while (stack.Count > 0)
+            {
+                postfix.Push(stack.Pop());
+            }
+
+            return postfix;
         }
 
         /// <summary>
