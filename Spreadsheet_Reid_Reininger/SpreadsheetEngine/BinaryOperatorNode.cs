@@ -90,7 +90,7 @@ namespace Cpts321
         /// <returns>Double value of node.</returns>
         public override double Evaluate()
         {
-            throw new NotImplementedException();
+            return this.function(this.Left, this.Right);
         }
     }
 }
