@@ -9,23 +9,35 @@ namespace Cpts321
     /// </summary>
     internal class VariableNode : Node
     {
+        private string name;
         private double value;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableNode"/> class.
         /// </summary>
         /// <param name="value">Reference to node value.</param>
-        internal VariableNode(double value)
+        internal VariableNode(string name, double value)
         {
-            this.value = value;
+            this.Name = name;
+            this.Value = value;
+        }
+
+        /// <summary>
+        /// Gets or Sets name.
+        /// </summary>
+        internal string Name
+        {
+            get => this.name;
+            set => this.name = value;
         }
 
         /// <summary>
         /// Gets value of node.
         /// </summary>
-        private double Value
+        internal double Value
         {
             get => this.value;
+            private set => this.value = value;
         }
 
         /// <summary>
