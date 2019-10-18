@@ -9,14 +9,15 @@ namespace Cpts321
     using System.Text;
     using System.Threading.Tasks;
     using NUnit.Framework;
+    using System.Reflection;
 
     /// <summary>
     /// ExpresiionTree test suite.
     /// </summary>
     [TestFixture]
-    public class TestExpressionTree
+    internal class TestExpressionTree
     {
-        private ExpressionTree tree = new ExpressionTree(null);
+        private ExpressionTree tree = new ExpressionTree("1");
 
         /// <summary>
         /// Test valid infix to postfix input and result.
@@ -79,10 +80,13 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Test tree is built correctly.
+        /// Test BuildTree with a single node.
         /// </summary>
+        [Test]
         public void TestBuildTree()
         {
+            var methodInfo = typeof(ExpressionTree).GetMethod("BuildTree", BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(string[]) }, null);
+            Assert.AreEqual(((ConstantNode)methodInfo.Invoke(this.tree, new object[] { new string[] { "1" } })).Evaluate(), new ConstantNode(1).Evaluate());
         }
     }
 }
