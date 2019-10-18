@@ -35,9 +35,32 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Sets the specified variable within the ExpressionTree variables dictionary.
+        /// </summary>
+        /// <param name="variableName">Variable's name.</param>
+        /// <param name="variableValue">Variable's value.</param>
+        public void SetVariable(string variableName, double variableValue)
+        {
+            if (this.variables.ContainsKey(variableName))
+            {
+                this.variables[variableName] = variableValue;
+            }
+
+            // this.variables.Add(variableName, variableValue);
+        }
+
+        /// <summary>
+        /// Evaluates expression to a double value.
+        /// </summary>
+        /// <returns>Double evaluated value of tree.</returns>
+        public double Evaluate()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Converts infix expression to postfix expression.
         /// </summary>
-        /// <param name="infix">Infix expression.</param>
         /// <returns>Postfix expression.</returns>
         private Stack<string> InfixToPostfix()
         {
@@ -76,25 +99,6 @@ namespace Cpts321
             }
 
             return postfix;
-        }
-
-        /// <summary>
-        /// Sets the specified variable within the ExpressionTree variables dictionary.
-        /// </summary>
-        /// <param name="variableName">Variable's name.</param>
-        /// <param name="variableValue">Variable's value.</param>
-        public void SetVariable(string variableName, double variableValue)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Evaluates expression to a double value.
-        /// </summary>
-        /// <returns>Double evaluated value of tree.</returns>
-        public double Evaluate()
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
