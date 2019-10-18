@@ -103,6 +103,11 @@ namespace Cpts321
             return postfix;
         }
 
+        public Func<double> GetVariableFunc(string variable)
+        {
+            return () => this.variables[variable];
+        }
+
         /// <summary>
         /// Builds ExpressionTree.
         /// </summary>
