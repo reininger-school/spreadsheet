@@ -64,6 +64,7 @@ namespace Cpts321
             const double value = 1;
             var fieldInfo = Utility.GetField<ExpressionTree>("variables");
             var variables = (Dictionary<string, double>)fieldInfo.GetValue(this.tree);
+            variables.Clear();
             variables.Add(key, 0);
             this.tree.SetVariable(key, value);
             Assert.AreEqual(value, variables[key]);

@@ -45,8 +45,10 @@ namespace Cpts321
             {
                 this.variables[variableName] = variableValue;
             }
-
-            // this.variables.Add(variableName, variableValue);
+            else
+            {
+                this.variables.Add(variableName, variableValue);
+            }
         }
 
         /// <summary>
