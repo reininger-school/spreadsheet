@@ -15,6 +15,7 @@ namespace Cpts321
         private Dictionary<string, double> variables = new Dictionary<string, double>();
         private string expression;
         private Regex operatorsRegex = new Regex(@"([*+/-])");
+        private Node root;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
@@ -61,10 +62,20 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Return function to get value of variable.
+        /// </summary>
+        /// <param name="variable">Name of variable to get value for.</param>
+        /// <returns>Function to get value of variable.</returns>
+        public Func<double> GetVariableFunc(string variable)
+        {
+            return () => this.variables[variable];
+        }
+
+        /// <summary>
         /// Converts infix expression to postfix expression.
         /// </summary>
         /// <returns>Postfix expression.</returns>
-        private Stack<string> InfixToPostfix()
+        private string[] InfixToPostfix()
         {
             var postfix = new Stack<string>();
             var stack = new Stack<string>();
@@ -100,12 +111,7 @@ namespace Cpts321
                 postfix.Push(stack.Pop());
             }
 
-            return postfix;
-        }
-
-        public Func<double> GetVariableFunc(string variable)
-        {
-            return () => this.variables[variable];
+            return postfix.ToArray();
         }
 
         /// <summary>
@@ -113,7 +119,10 @@ namespace Cpts321
         /// </summary>
         private void BuildTree()
         {
-            throw new NotImplementedException();
+            foreach (var s in this.InfixToPostfix())
+            {
+
+            }
         }
     }
 }

@@ -50,8 +50,8 @@ namespace Cpts321
         {
             this.tree.Expression = infix;
             var methodInfo = Utility.GetMethod<ExpressionTree>("InfixToPostfix");
-            var stack = (Stack<string>)methodInfo.Invoke(this.tree, null);
-            Assert.AreEqual(expected, stack.ToArray());
+            var stack = (string[])methodInfo.Invoke(this.tree, null);
+            Assert.AreEqual(expected, stack);
         }
 
         /// <summary>
@@ -94,6 +94,11 @@ namespace Cpts321
             this.tree.SetVariable("x", 1);
             var node = new VariableNode("x", this.tree.GetVariableFunc("x"));
             Assert.AreEqual(1, node.Evaluate());
+        }
+
+        public void TestBuildTree()
+        {
+
         }
     }
 }
