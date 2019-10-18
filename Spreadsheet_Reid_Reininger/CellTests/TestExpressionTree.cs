@@ -84,5 +84,16 @@ namespace Cpts321
             this.tree.SetVariable(key, value);
             Assert.AreEqual(value, variables[key]);
         }
+
+        /// <summary>
+        /// Test Variable node can correctly get variables value.
+        /// </summary>
+        [Test]
+        public void TestGetVarialbeFunc()
+        {
+            this.tree.SetVariable("x", 1);
+            var node = new VariableNode("x", this.tree.GetVariableFunc("x"));
+            Assert.AreEqual(1, node.Evaluate());
+        }
     }
 }
