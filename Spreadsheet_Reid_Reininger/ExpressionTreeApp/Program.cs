@@ -21,13 +21,35 @@ namespace ExpressionTreeApp
         public static void Main()
         {
             bool status = true;
+            string input1, input2;
+            ExpressionTree tree = new ExpressionTree("1+11");
             while (status)
             {
-                PrintMenu(Console.Out, null);
-                var tree = new ExpressionTree("40 / 5 /      2");
-                Console.WriteLine(tree.Evaluate());
+                PrintMenu(Console.Out, tree.Expression);
+                input1 = Console.ReadLine();
+                switch (input1)
+                {
+                    case "1":
+                        Console.Write("Enter new expression: ");
+                        tree.Expression = Console.ReadLine();
+                        break;
+                    case "2":
+                        Console.Write("Enter variable name: ");
+                        input1 = Console.ReadLine();
+                        Console.Write("Enter variable value: ");
+                        input2 = Console.ReadLine();
+                        tree.SetVariable(input1, double.Parse(input2));
+                        break;
+                    case "3":
+                        Console.WriteLine(tree.Evaluate().ToString());
+                        break;
+                    case "4":
+                        status = false;
+                        break;
+                    default:
+                        break;
+                }
             }
-
         }
 
         /// <summary>

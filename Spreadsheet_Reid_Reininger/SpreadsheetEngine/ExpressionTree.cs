@@ -62,7 +62,7 @@ namespace Cpts321
         /// <returns>Double evaluated value of tree.</returns>
         public double Evaluate()
         {
-            return this.root.Evaluate();
+            return this.root?.Evaluate() ?? throw new Exception("No expresion to evaluate");
         }
 
         /// <summary>
