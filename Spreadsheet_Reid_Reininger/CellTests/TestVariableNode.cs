@@ -22,7 +22,7 @@ namespace CellTests
         [Test]
         public void TestEvaluate()
         {
-            var node = new VariableNode("x", 1);
+            var node = new VariableNode("x", () => 1);
             Assert.AreEqual(1, node.Evaluate());
         }
 
@@ -40,7 +40,7 @@ namespace CellTests
         [TestCase("test")]
         public void TestValidName(string name)
         {
-            Assert.DoesNotThrow(() => new VariableNode(name, 0));
+            Assert.DoesNotThrow(() => new VariableNode(name, () => 0));
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace CellTests
         [TestCase(null)]
         public void TestInvalidName(string name)
         {
-            Assert.Throws<ArgumentException>(() => new VariableNode(name, 0));
+            Assert.Throws<ArgumentException>(() => new VariableNode(name, () => 0));
         }
     }
 }

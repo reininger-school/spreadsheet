@@ -11,26 +11,26 @@ namespace Cpts321
     internal class VariableNode : Node
     {
         private string name;
-        private double value;
+        private Func<double> getValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VariableNode"/> class.
         /// </summary>
-        /// <param name="value">Node value.</param>
         /// <param name="name">Name of variable.</param>
-        internal VariableNode(string name, double value)
+        /// <param name="getValue">Function to ask ExpressionTree for its value.</param>
+        internal VariableNode(string name, Func<double> getValue)
         {
             this.Name = name;
-            this.Value = value;
+            this.getValue = getValue;
         }
 
         /// <summary>
-        /// Gets or Sets name.
+        /// Gets name.
         /// </summary>
         internal string Name
         {
             get => this.name;
-            set
+            private set
             {
                 if (!string.IsNullOrWhiteSpace(value) && Regex.Match(value, @"^([A-Z]|[a-z])([A-Z]|[a-z]|[0-9])*$").Success)
                 {
@@ -44,21 +44,12 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Gets value of node.
-        /// </summary>
-        internal double Value
-        {
-            get => this.value;
-            private set => this.value = value;
-        }
-
-        /// <summary>
         /// Gets evaluated value of Node.
         /// </summary>
         /// <returns>Value of node as double.</returns>
         internal override double Evaluate()
         {
-            return this.Value;
+            return this.getValue.Invoke();
         }
     }
 }
