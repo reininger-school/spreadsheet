@@ -53,5 +53,20 @@ namespace Cpts321
             var stack = (Stack<string>)methodInfo.Invoke(this.tree, null);
             Assert.AreEqual(expected, stack.ToArray());
         }
+
+        /// <summary>
+        /// Test setting the value of an existing variable.
+        /// </summary>
+        [Test]
+        public void TestSetVariableExists()
+        {
+            const string key = "test";
+            const double value = 1;
+            var fieldInfo = Utility.GetField<ExpressionTree>("variables");
+            var variables = (Dictionary<string, double>)fieldInfo.GetValue(this.tree);
+            variables.Add(key, 0);
+            tree.SetVariable(key, value);
+            Assert.AreEqual(value, variables[key]);
+        }
     }
 }
