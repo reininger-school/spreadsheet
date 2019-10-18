@@ -10,6 +10,10 @@ namespace Cpts321
     /// </summary>
     internal class VariableNode : Node
     {
+        /// <summary>
+        /// Gets Regex to match valid variable names.
+        /// </summary>
+        public static readonly Regex VariableName = new Regex(@"^([A-Z]|[a-z])([A-Z]|[a-z]|[0-9])*$");
         private string name;
         private Func<double> getValue;
 
@@ -32,7 +36,7 @@ namespace Cpts321
             get => this.name;
             private set
             {
-                if (!string.IsNullOrWhiteSpace(value) && Regex.Match(value, @"^([A-Z]|[a-z])([A-Z]|[a-z]|[0-9])*$").Success)
+                if (!string.IsNullOrWhiteSpace(value) && VariableName.Match(value).Success)
                 {
                     this.name = value;
                 }

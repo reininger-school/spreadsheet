@@ -58,7 +58,8 @@ namespace Cpts321
         /// <returns>Double evaluated value of tree.</returns>
         public double Evaluate()
         {
-            throw new NotImplementedException();
+            this.root = this.BuildTree(this.InfixToPostfix());
+            return this.root.Evaluate();
         }
 
         /// <summary>
@@ -114,15 +115,48 @@ namespace Cpts321
             return postfix.ToArray();
         }
 
+        private BinaryOperatorNode CreateBinaryOperatorNode(string op, Node left, Node right)
+        {
+            switch (op)
+            {
+                case "+":
+                    return new AdditionNode(left, right);
+                case "-":
+                    return new SubtractionNode(left, right);
+                case "/":
+                    return new DivisionNode(left, right);
+                case "*":
+                    return new MultiplicationNode(left, right);
+                default:
+                    return null;
+            }
+        }
+
         /// <summary>
         /// Builds ExpressionTree.
         /// </summary>
-        private void BuildTree()
+        private Node BuildTree(IEnumerable<string> statements)
         {
-            foreach (var s in this.InfixToPostfix())
+            // if no statements
+            if (statements.Count() == 0)
             {
-
+                return null;
             }
+
+            // if statement is an operator
+            if (this.operatorsRegex.IsMatch(statements.First()))
+            {
+                return this.CreateBinaryOperatorNode(statements.First(), this.BuildTree(statements.Skip<string>(2)), this.BuildTree(statements.Skip<string>(1)));
+            }
+
+            // if statment is a variable
+            if (VariableNode.VariableName.IsMatch(statements.First()))
+            {
+                return new VariableNode(statements.First(), this.GetVariableFunc(statements.First()));
+            }
+
+            // if statement is constant
+            return new ConstantNode(double.Parse(statements.First()));
         }
     }
 }

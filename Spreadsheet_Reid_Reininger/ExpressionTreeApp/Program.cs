@@ -8,6 +8,7 @@ namespace ExpressionTreeApp
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Cpts321;
 
     /// <summary>
     /// Console application for ExpressionTree app.
@@ -19,7 +20,14 @@ namespace ExpressionTreeApp
         /// </summary>
         public static void Main()
         {
-            PrintMenu(Console.Out, null);
+            bool status = true;
+            while (status)
+            {
+                PrintMenu(Console.Out, null);
+                var tree = new ExpressionTree("40 / 5 /      2");
+                Console.WriteLine(tree.Evaluate());
+            }
+
         }
 
         /// <summary>
