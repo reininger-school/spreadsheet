@@ -65,7 +65,22 @@ namespace Cpts321
             var fieldInfo = Utility.GetField<ExpressionTree>("variables");
             var variables = (Dictionary<string, double>)fieldInfo.GetValue(this.tree);
             variables.Add(key, 0);
-            tree.SetVariable(key, value);
+            this.tree.SetVariable(key, value);
+            Assert.AreEqual(value, variables[key]);
+        }
+
+        /// <summary>
+        /// Test setting value of a non-existent variable.
+        /// </summary>
+        [Test]
+        public void TestVariableDNE()
+        {
+            const string key = "test";
+            const double value = 1;
+            var fieldInfo = Utility.GetField<ExpressionTree>("variables");
+            var variables = (Dictionary<string, double>)fieldInfo.GetValue(this.tree);
+            variables.Clear();
+            this.tree.SetVariable(key, value);
             Assert.AreEqual(value, variables[key]);
         }
     }
