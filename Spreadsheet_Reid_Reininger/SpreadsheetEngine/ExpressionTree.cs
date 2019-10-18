@@ -23,7 +23,7 @@ namespace Cpts321
         /// <param name="expression">Expression to construct tree.</param>
         public ExpressionTree(string expression)
         {
-            this.expression = expression;
+            this.Expression = expression;
         }
 
         /// <summary>
@@ -32,7 +32,11 @@ namespace Cpts321
         public string Expression
         {
             get => this.expression;
-            set => this.expression = value;
+            set
+            {
+                this.expression = value;
+                this.BuildTree();
+            }
         }
 
         /// <summary>
@@ -58,7 +62,6 @@ namespace Cpts321
         /// <returns>Double evaluated value of tree.</returns>
         public double Evaluate()
         {
-            this.root = this.BuildTree(this.InfixToPostfix());
             return this.root.Evaluate();
         }
 
@@ -130,6 +133,14 @@ namespace Cpts321
                 default:
                     return null;
             }
+        }
+
+        /// <summary>
+        /// Builds ExpressionTree from rexpression.
+        /// </summary>
+        private void BuildTree()
+        {
+            this.root = this.BuildTree(this.InfixToPostfix());
         }
 
         /// <summary>
