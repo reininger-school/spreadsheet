@@ -29,6 +29,7 @@ namespace Cpts321
         [TestCase("1+1+1", new string[] { "+", "1", "+", "1", "1" })]
         [TestCase("11+1", new string[] { "+", "1", "11" })]
         [TestCase("11+alpha+1+2+beta", new string[] { "+", "beta", "+", "2", "+", "1", "+", "alpha", "11" })]
+        [TestCase("2+4/2", new string[] { "+", "2", "/", "4", "2" })]
         public void TestInfixToPostfix(string infix, string[] expected)
         {
             this.tree.Expression = infix;
@@ -97,7 +98,7 @@ namespace Cpts321
         {
             var variables = (Dictionary<string, double>)Utility.GetField<ExpressionTree>("variables").GetValue(this.tree);
             this.tree.SetVariable("x", 1);
-            this.tree.Expression = ("1");
+            this.tree.Expression = "1";
             Assert.IsTrue(variables.Count() == 0);
         }
     }
