@@ -34,6 +34,7 @@ namespace Cpts321
             get => this.expression;
             set
             {
+                this.variables.Clear();
                 this.expression = value;
                 this.BuildTree();
             }
