@@ -88,5 +88,17 @@ namespace Cpts321
             var methodInfo = typeof(ExpressionTree).GetMethod("BuildTree", BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(string[]) }, null);
             Assert.AreEqual(((ConstantNode)methodInfo.Invoke(this.tree, new object[] { new string[] { "1" } })).Evaluate(), new ConstantNode(1).Evaluate());
         }
+
+        /// <summary>
+        /// Test variables are cleared after setting a new expression.
+        /// </summary>
+        [Test]
+        public void TestVariablesClearOnNewExpression()
+        {
+            var variables = (Dictionary<string, double>)Utility.GetField<ExpressionTree>("variables").GetValue(this.tree);
+            this.tree.SetVariable("x", 1);
+            this.tree.Expression = ("1");
+            Assert.IsTrue(variables.Count() == 0);
+        }
     }
 }
