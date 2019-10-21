@@ -34,8 +34,8 @@ namespace Cpts321
         [TestCase("8/4*3", 6)]
         [TestCase("8*4/2", 16)]
         [TestCase("(1)", 1)]
-        [TestCase("(1+1)", 1)]
-        [TestCase("(1+1)+1", 1)]
+        [TestCase("(1+1)", 2)]
+        [TestCase("(1+1)+1", 3)]
         [TestCase("(1+1)*2", 4)]
         public void BuildTreee(string infix, int expected)
         {

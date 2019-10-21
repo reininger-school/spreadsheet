@@ -14,7 +14,7 @@ namespace Cpts321
     {
         private Dictionary<string, double> variables = new Dictionary<string, double>();
         private string expression;
-        private Regex operatorsRegex = new Regex(@"([*+/-])");
+        private Regex operatorsRegex = new Regex(@"([)(*+/-])");
         private Node root;
 
         /// <summary>
@@ -90,6 +90,11 @@ namespace Cpts321
 
             foreach (var s in tokens)
             {
+                if (string.IsNullOrWhiteSpace(s))
+                {
+                    continue;
+                }
+
                 // output if operand
                 if (!this.operatorsRegex.IsMatch(s))
                 {
@@ -103,12 +108,32 @@ namespace Cpts321
                         postfix.Push(new ConstantNode(double.Parse(s)));
                     }
                 }
+
+                // if left parenthesis
+                else if (s == "(")
+                {
+                    stack.Push(new LeftParenthesis());
+                }
+
+                // if right parenthesis
+                else if (s == ")")
+                {
+                    poppedOp = stack.Pop();
+                    while (poppedOp.Op != "(")
+                    {
+                        binaryNode = (BinaryOperatorNode)poppedOp;
+                        binaryNode.RightNode = postfix.Pop();
+                        binaryNode.LeftNode = postfix.Pop();
+                        postfix.Push(poppedOp);
+                        poppedOp = stack.Pop();
+                    }
+                }
                 else
                 {
                     newOp = this.CreateOperatorNode(s);
 
-                    // if operator and stack is empty
-                    if (stack.Count == 0)
+                    // if operator and stack is empty or left parenthesis on top
+                    if (stack.Count == 0 || stack.Peek().Op == "(")
                     {
                         stack.Push(newOp);
                     }
