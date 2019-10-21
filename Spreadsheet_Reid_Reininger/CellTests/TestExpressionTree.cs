@@ -33,6 +33,10 @@ namespace Cpts321
         [TestCase("2*5+2*6", 22)]
         [TestCase("8/4*3", 6)]
         [TestCase("8*4/2", 16)]
+        [TestCase("(1)", 1)]
+        [TestCase("(1+1)", 1)]
+        [TestCase("(1+1)+1", 1)]
+        [TestCase("(1+1)*2", 4)]
         public void BuildTreee(string infix, int expected)
         {
             this.tree.Expression = infix;
