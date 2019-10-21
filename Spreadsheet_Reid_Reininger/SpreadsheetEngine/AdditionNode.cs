@@ -13,7 +13,7 @@ namespace Cpts321
         /// <param name="left">Left operand.</param>
         /// <param name="right">Right Operand.</param>
         internal AdditionNode(Node left = null, Node right = null)
-            : base("+", (x, y) => x + y, left, right)
+            : base("+", (x, y) => x + y, 2, left, right)
         {
         }
     }

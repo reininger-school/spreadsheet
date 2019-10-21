@@ -13,7 +13,7 @@ namespace Cpts321
         /// <param name="left">Left operand.</param>
         /// <param name="right">Right operand.</param>
         internal MultiplicationNode(Node left = null, Node right = null)
-            : base("*", (x, y) => x * y, left, right)
+            : base("*", (x, y) => x * y, 1, left, right)
         {
         }
     }

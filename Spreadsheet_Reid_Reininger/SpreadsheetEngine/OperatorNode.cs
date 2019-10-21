@@ -15,14 +15,17 @@ namespace Cpts321
     internal abstract class OperatorNode : Node
     {
         private string op;
+        private int precedence;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperatorNode"/> class.
         /// </summary>
         /// <param name="op">String to represent operator in expressions.</param>
-        protected OperatorNode(string op)
+        /// <param name="precedence">Precedence level of operator.</param>
+        protected OperatorNode(string op, int precedence)
         {
             this.op = op;
+            this.precedence = precedence;
         }
 
         /// <summary>
@@ -31,6 +34,14 @@ namespace Cpts321
         internal string Op
         {
             get => this.op;
+        }
+
+        /// <summary>
+        /// Gets precedence level of operator.
+        /// </summary>
+        internal int Precedence
+        {
+            get => this.precedence;
         }
 
         /// <summary>

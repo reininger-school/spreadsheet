@@ -25,8 +25,9 @@ namespace Cpts321
         /// <param name="right">Right child.</param>
         /// <param name="op">String representing operator in expression.</param>
         /// <param name="function">Binary function to perform on left, right.</param>
-        internal BinaryOperatorNode(string op, BinaryOp function, Node left = null, Node right = null)
-            : base(op)
+        /// <param name="precedence">Precedence level of operator.</param>
+        internal BinaryOperatorNode(string op, BinaryOp function, int precedence, Node left = null, Node right = null)
+            : base(op, precedence)
         {
             this.function = function;
             this.left = left;

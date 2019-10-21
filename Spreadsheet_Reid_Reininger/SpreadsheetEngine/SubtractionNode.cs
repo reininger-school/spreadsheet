@@ -11,7 +11,7 @@
         /// <param name="left">Left operand.</param>
         /// <param name="right">Right operand.</param>
         internal SubtractionNode(Node left = null, Node right = null)
-            : base("-", (x, y) => x - y, left, right)
+            : base("-", (x, y) => x - y, 2, left, right)
         {
         }
     }

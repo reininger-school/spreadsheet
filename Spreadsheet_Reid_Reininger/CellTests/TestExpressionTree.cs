@@ -24,18 +24,25 @@ namespace Cpts321
         /// </summary>
         /// <param name="infix">Infix expression.</param>
         /// <param name="expected">String array of expected output, stack converted to array for testing purposes.</param>
-        [TestCase("1", new string[] { "1" })]
-        [TestCase("1+1", new string[] { "+", "1", "1" })]
-        [TestCase("1+1+1", new string[] { "+", "1", "+", "1", "1" })]
-        [TestCase("11+1", new string[] { "+", "1", "11" })]
-        [TestCase("11+alpha+1+2+beta", new string[] { "+", "beta", "+", "2", "+", "1", "+", "alpha", "11" })]
-        [TestCase("2+4/2", new string[] { "+", "2", "/", "4", "2" })]
-        public void TestInfixToPostfix(string infix, string[] expected)
+        [TestCase("1", 1)]
+        [TestCase("1+1", 2)]
+        [TestCase("1+1+1", 3)]
+        [TestCase("11+1", 12)]
+        [TestCase("11+alpha+1+2+beta", 26)]
+        [TestCase("2+4/2", 4)]
+        [TestCase("2*5+2*6", 22)]
+        [TestCase("8/4*3", 6)]
+        [TestCase("8*4/2", 16)]
+        public void BuildTreee(string infix, int expected)
         {
             this.tree.Expression = infix;
-            var methodInfo = Utility.GetMethod<ExpressionTree>("InfixToPostfix");
-            var stack = (string[])methodInfo.Invoke(this.tree, null);
-            Assert.AreEqual(expected, stack);
+            this.tree.SetVariable("alpha", 5);
+            this.tree.SetVariable("beta", 7);
+            var fieldInfo = Utility.GetField<ExpressionTree>("root");
+            Node root = (Node)fieldInfo.GetValue(this.tree);
+            var methodInfo = Utility.GetMethod<ExpressionTree>("BuildTree");
+            methodInfo.Invoke(this.tree, null);
+            Assert.AreEqual(expected, root.Evaluate());
         }
 
         /// <summary>
@@ -78,16 +85,6 @@ namespace Cpts321
             this.tree.SetVariable("x", 1);
             var node = new VariableNode("x", this.tree.GetVariableFunc("x"));
             Assert.AreEqual(1, node.Evaluate());
-        }
-
-        /// <summary>
-        /// Test BuildTree with a single node.
-        /// </summary>
-        [Test]
-        public void TestBuildTree()
-        {
-            var methodInfo = typeof(ExpressionTree).GetMethod("BuildTree", BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(string[]) }, null);
-            Assert.AreEqual(((ConstantNode)methodInfo.Invoke(this.tree, new object[] { new string[] { "1" } })).Evaluate(), new ConstantNode(1).Evaluate());
         }
 
         /// <summary>
