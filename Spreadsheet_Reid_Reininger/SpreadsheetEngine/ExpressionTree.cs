@@ -77,98 +77,93 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Converts infix expression to postfix expression.
+        /// Converts infix expression to expression tree using Shunting-Yard algorithm.
         /// </summary>
-        /// <returns>Postfix expression.</returns>
-        private string[] InfixToPostfix()
+        private void BuildTree()
         {
-            var postfix = new Stack<string>();
-            var stack = new Stack<string>();
+            var postfix = new Stack<Node>();
+            var stack = new Stack<OperatorNode>();
             var tokens = this.operatorsRegex.Split(this.expression);
+            OperatorNode newOp;
+            OperatorNode poppedOp;
+            BinaryOperatorNode binaryNode;
+
             foreach (var s in tokens)
             {
                 // output if operand
                 if (!this.operatorsRegex.IsMatch(s))
                 {
-                    postfix.Push(s);
+                    // if variable
+                    if (VariableNode.VariableName.IsMatch(s))
+                    {
+                        postfix.Push(new VariableNode(s, this.GetVariableFunc(s)));
+                    }
+                    else
+                    {
+                        postfix.Push(new ConstantNode(double.Parse(s)));
+                    }
                 }
-
-                // if operator and stack is empty
-                else if (stack.Count == 0)
-                {
-                    stack.Push(s);
-                }
-
-                // if operator and lower or same precedence
                 else
                 {
-                    while (stack.Count > 0)
+                    newOp = this.CreateOperatorNode(s);
+
+                    // if operator and stack is empty
+                    if (stack.Count == 0)
                     {
-                        postfix.Push(stack.Pop());
+                        stack.Push(newOp);
                     }
 
-                    stack.Push(s);
+                    // if operator and higher precedence
+                    else if (newOp.Precedence < stack.Peek().Precedence)
+                    {
+                        stack.Push(newOp);
+                    }
+
+                    // if operator and lower or same precedence
+                    else if (newOp.Precedence >= stack.Peek().Precedence)
+                    {
+                        while (stack.Count > 0 && newOp.Precedence >= stack.Peek().Precedence)
+                        {
+                            poppedOp = stack.Pop();
+                            binaryNode = (BinaryOperatorNode)poppedOp;
+                            binaryNode.RightNode = postfix.Pop();
+                            binaryNode.LeftNode = postfix.Pop();
+                            postfix.Push(poppedOp);
+                        }
+
+                        stack.Push(newOp);
+                    }
                 }
             }
 
+            // pop remaining operators on stack
             while (stack.Count > 0)
             {
-                postfix.Push(stack.Pop());
+                poppedOp = stack.Pop();
+                binaryNode = (BinaryOperatorNode)poppedOp;
+                binaryNode.RightNode = postfix.Pop();
+                binaryNode.LeftNode = postfix.Pop();
+                postfix.Push(poppedOp);
             }
 
-            return postfix.ToArray();
+            this.root = postfix.Pop();
         }
 
-        private BinaryOperatorNode CreateBinaryOperatorNode(string op, Node left, Node right)
+        private OperatorNode CreateOperatorNode(string statement)
         {
-            switch (op)
+            switch (statement)
             {
                 case "+":
-                    return new AdditionNode(left, right);
+                    return new AdditionNode();
                 case "-":
-                    return new SubtractionNode(left, right);
+                    return new SubtractionNode();
                 case "/":
-                    return new DivisionNode(left, right);
+                    return new DivisionNode();
                 case "*":
-                    return new MultiplicationNode(left, right);
+                    return new MultiplicationNode();
                 default:
                     return null;
             }
-        }
-
-        /// <summary>
-        /// Builds ExpressionTree from rexpression.
-        /// </summary>
-        private void BuildTree()
-        {
-            this.root = this.BuildTree(this.InfixToPostfix());
-        }
-
-        /// <summary>
-        /// Builds ExpressionTree.
-        /// </summary>
-        private Node BuildTree(IEnumerable<string> statements)
-        {
-            // if no statements
-            if (statements.Count() == 0)
-            {
-                return null;
-            }
-
-            // if statement is an operator
-            if (this.operatorsRegex.IsMatch(statements.First()))
-            {
-                return this.CreateBinaryOperatorNode(statements.First(), this.BuildTree(statements.Skip<string>(2)), this.BuildTree(statements.Skip<string>(1)));
-            }
-
-            // if statment is a variable
-            if (VariableNode.VariableName.IsMatch(statements.First()))
-            {
-                return new VariableNode(statements.First(), this.GetVariableFunc(statements.First()));
-            }
-
-            // if statement is constant
-            return new ConstantNode(double.Parse(statements.First()));
         }
     }
 }
