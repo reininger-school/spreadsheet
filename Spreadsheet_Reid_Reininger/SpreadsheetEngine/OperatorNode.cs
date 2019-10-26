@@ -16,16 +16,40 @@ namespace Cpts321
     {
         private string op;
         private int precedence;
+        private Association associativity;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OperatorNode"/> class.
         /// </summary>
         /// <param name="op">String to represent operator in expressions.</param>
-        /// <param name="precedence">Precedence level of operator.</param>
-        protected OperatorNode(string op, int precedence)
+        /// <param name="precedence">Operator precedence level, lower levels have higher precedence.</param>
+        /// <param name="associativity">Operator associativity.</param>
+        protected OperatorNode(string op, int precedence, Association associativity)
         {
             this.op = op;
             this.precedence = precedence;
+            this.associativity = associativity;
+        }
+
+        /// <summary>
+        /// Operator associativity.
+        /// </summary>
+        internal enum Association
+        {
+            /// <summary>
+            /// Left associative.
+            /// </summary>
+            Left,
+
+            /// <summary>
+            /// Right associative.
+            /// </summary>
+            Right,
+
+            /// <summary>
+            /// Non associative.
+            /// </summary>
+            None,
         }
 
         /// <summary>
@@ -37,11 +61,19 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Gets precedence level of operator.
+        /// Gets operator precedence.
         /// </summary>
         internal int Precedence
         {
             get => this.precedence;
+        }
+
+        /// <summary>
+        /// Gets operator associativity.
+        /// </summary>
+        internal Association Associativity
+        {
+            get => this.associativity;
         }
 
         /// <summary>

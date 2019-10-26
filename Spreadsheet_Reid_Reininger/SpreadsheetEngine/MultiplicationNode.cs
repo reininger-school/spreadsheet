@@ -10,10 +10,8 @@ namespace Cpts321
         /// <summary>
         /// Initializes a new instance of the <see cref="MultiplicationNode"/> class.
         /// </summary>
-        /// <param name="left">Left operand.</param>
-        /// <param name="right">Right operand.</param>
-        internal MultiplicationNode(Node left = null, Node right = null)
-            : base("*", (x, y) => x * y, 1, left, right)
+        internal MultiplicationNode()
+            : base("*", (x, y) => x * y, 1, OperatorNode.Association.Left)
         {
         }
     }

@@ -13,14 +13,14 @@ namespace Cpts321
     /// </summary>
     internal class RightParenthesis : OperatorNode
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RightParenthesis"/> class.
         /// </summary>
         internal RightParenthesis()
-            : base(")", 0)
+            : base(")", 0, OperatorNode.Association.None)
         {
         }
+
         /// <summary>
         /// Should never be called.
         /// </summary>

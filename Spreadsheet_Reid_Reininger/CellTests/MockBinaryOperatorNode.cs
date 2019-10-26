@@ -20,10 +20,8 @@ namespace Cpts321
         /// </summary>
         /// <param name="op">String representing operator in expression.</param>
         /// <param name="function">Binary function.</param>
-        /// <param name="left">Left operand.</param>
-        /// <param name="right">Right operand.</param>
-        internal MockBinaryOperatorNode(string op, BinaryOp function, Node left, Node right)
-            : base(op, function, 0, left, right)
+        internal MockBinaryOperatorNode(string op, BinaryOp function)
+            : base(op, function, 0, OperatorNode.Association.None)
         {
         }
     }

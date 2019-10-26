@@ -21,17 +21,16 @@ namespace Cpts321
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryOperatorNode"/> class.
         /// </summary>
-        /// <param name="left">Left child.</param>
-        /// <param name="right">Right child.</param>
         /// <param name="op">String representing operator in expression.</param>
         /// <param name="function">Binary function to perform on left, right.</param>
         /// <param name="precedence">Precedence level of operator.</param>
-        internal BinaryOperatorNode(string op, BinaryOp function, int precedence, Node left = null, Node right = null)
-            : base(op, precedence)
+        /// <param name="associativity">Operator associativity.</param>
+        internal BinaryOperatorNode(string op, BinaryOp function, int precedence, OperatorNode.Association associativity)
+            : base(op, precedence, associativity)
         {
             this.function = function;
-            this.left = left;
-            this.right = right;
+            this.left = null;
+            this.right = null;
         }
 
         /// <summary>

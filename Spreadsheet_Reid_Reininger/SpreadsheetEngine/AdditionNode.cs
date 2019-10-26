@@ -10,10 +10,8 @@ namespace Cpts321
         /// <summary>
         /// Initializes a new instance of the <see cref="AdditionNode"/> class.
         /// </summary>
-        /// <param name="left">Left operand.</param>
-        /// <param name="right">Right Operand.</param>
-        internal AdditionNode(Node left = null, Node right = null)
-            : base("+", (x, y) => x + y, 2, left, right)
+        internal AdditionNode()
+            : base("+", (x, y) => x + y, 2, OperatorNode.Association.Left)
         {
         }
     }

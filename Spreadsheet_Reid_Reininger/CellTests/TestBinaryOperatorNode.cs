@@ -22,7 +22,9 @@ namespace Cpts321
         [Test]
         public void TestEvaluate()
         {
-            var node = new MockBinaryOperatorNode("*", (x, y) => x * y, new ConstantNode(3), new ConstantNode(4));
+            var node = new MockBinaryOperatorNode("*", (x, y) => x * y);
+            node.LeftNode = new ConstantNode(3);
+            node.RightNode = new ConstantNode(4);
             Assert.AreEqual(node.Evaluate(), 12);
         }
     }
