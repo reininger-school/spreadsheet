@@ -113,6 +113,7 @@ namespace Cpts321
                     // if variable
                     if (VariableNode.VariableName.IsMatch(s))
                     {
+                        // set default value to zero
                         if (!this.variables.ContainsKey(s))
                         {
                             this.SetVariable(s, 0); 
