@@ -39,9 +39,6 @@ namespace Cpts321
 
             this.RowIndex = rowIndex;
             this.ColumnIndex = columnIndex;
-
-            // subscribe cell to own PropertyChanged event
-            this.PropertyChanged += this.Cell_PropertyChanged;
         }
 
         /// <summary>
@@ -93,6 +90,10 @@ namespace Cpts321
                 }
 
                 this.text = value;
+                if (string.IsNullOrWhiteSpace(this.Text) || this.Text[0] != '=')
+                {
+                    this.Value = this.text;
+                }
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
             }
         }
@@ -102,9 +103,9 @@ namespace Cpts321
         /// </summary>
         /// <param name="sender">Cell with changed property.</param>
         /// <param name="e">Event args.</param>
-        private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.Value = null;
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
         }
     }
 }
