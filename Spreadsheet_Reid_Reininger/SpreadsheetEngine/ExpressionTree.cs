@@ -179,6 +179,7 @@ namespace Cpts321
         }
 
         // Create regex to parse user input.
+        // Only works for single character symbols.
         private Regex CreateOperatorRegex()
         {
             var expression = new StringBuilder(@"([");
