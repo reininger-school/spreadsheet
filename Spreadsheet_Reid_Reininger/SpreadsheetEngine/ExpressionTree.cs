@@ -45,6 +45,14 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Return array of variable names in tree.
+        /// </summary>
+        public string[] Variables
+        {
+            get => this.variables.Keys.ToArray<string>();
+        }
+
+        /// <summary>
         /// Sets the specified variable within the ExpressionTree variables dictionary.
         /// </summary>
         /// <param name="variableName">Variable's name.</param>
