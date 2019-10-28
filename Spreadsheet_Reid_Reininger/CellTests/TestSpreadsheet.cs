@@ -189,5 +189,15 @@ namespace CellTests
             this.sheet.CellPropertyChanged += Sheet_CellPropertyChanged;
             this.cells[0, 0].Text = "Test";
         }
+
+        [Test]
+        public void TestSetCellText()
+        {
+            const string testString = "TestString";
+            var cell = this.sheet.GetCell(0, 0);
+            this.sheet.SetCellText(cell, testString);
+            var textInfo = Utility.GetProperty<Cell>("Text");
+            Assert.AreEqual(testString, textInfo.GetValue(cell, null));
+        }
     }
 }

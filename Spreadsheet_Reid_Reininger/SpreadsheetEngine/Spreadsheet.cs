@@ -118,6 +118,16 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Set Cell's text.
+        /// </summary>
+        /// <param name="cell">Cell to change.</param>
+        /// <param name="text">New Text value.</param>
+        public void SetCellText(Cell cell, string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Convert string of letters to integer value.
         /// </summary>
         /// <param name="name">string of capital letters.</param>
