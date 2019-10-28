@@ -203,12 +203,18 @@ namespace CellTests
             Assert.AreEqual(testString, textInfo.GetValue(cell, null));
         }
 
+        /// <summary>
+        /// Test cell updates when a cell it is dependent on changes.
+        /// </summary>
         [Test]
         public void TestDependentCellsUpdate()
         {
-            this.cells[0, 1].Text = "=A1";
-            this.cells[0, 0].Text = "100";
-            Assert.AreEqual("100", this.cells[0, 1].Value);
+            var sheet = new Spreadsheet(2, 2);
+            var cellsInfo = Utility.GetField<Spreadsheet>("cells");
+            var cells = (Cell[,])cellsInfo.GetValue(sheet);
+            cells[0, 1].Text = "=A1";
+            cells[0, 0].Text = "1";
+            Assert.AreEqual("1", cells[0, 1].Value);
         }
     }
 }

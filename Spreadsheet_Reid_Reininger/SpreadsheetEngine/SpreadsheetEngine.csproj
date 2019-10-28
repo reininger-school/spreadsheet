@@ -54,6 +54,7 @@
     <Compile Include="ConstantNode.cs" />
     <Compile Include="DivisionNode.cs" />
     <Compile Include="ExpressionTree.cs" />
+    <Compile Include="FormulaCell.cs" />
     <Compile Include="LeftParenthesis.cs" />
     <Compile Include="MultiplicationNode.cs" />
     <Compile Include="Node.cs" />
