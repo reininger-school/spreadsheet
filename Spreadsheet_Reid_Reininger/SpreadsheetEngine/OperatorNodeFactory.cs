@@ -29,6 +29,14 @@ namespace Cpts321
         private delegate void OnOperator(string op, Type type);
 
         /// <summary>
+        /// Gets list of operator symbols.
+        /// </summary>
+        internal Dictionary<string, Type>.KeyCollection Operators
+        {
+            get => this.operators.Keys;
+        }
+
+        /// <summary>
         /// Create new instance of OperatorNode.
         /// </summary>
         /// <param name="op">Op string.</param>
