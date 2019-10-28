@@ -106,6 +106,9 @@ namespace Cpts321
             Assert.IsTrue(variables.Count() == 0);
         }
 
+        /// <summary>
+        /// Test variables are created when building tree.
+        /// </summary>
         [Test]
         public void TestVariableDefaultZero()
         {
