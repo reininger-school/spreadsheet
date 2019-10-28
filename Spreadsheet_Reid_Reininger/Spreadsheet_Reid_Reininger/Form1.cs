@@ -63,5 +63,22 @@ namespace Spreadsheet_Reid_Reininger
         {
             this.sheet.Demo();
         }
+
+        // Set visible cell to cell's text when editing
+        private void DataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            var cell = this.sheet.GetCell(e.RowIndex, e.ColumnIndex);
+            var visibleCell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            visibleCell.Value = cell.Text;
+        }
+
+        // set visble cell to cell value when finished editing text.
+        private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = this.sheet.GetCell(e.RowIndex, e.ColumnIndex);
+            var visibleCell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            this.sheet.SetCellText(cell, (string)visibleCell.Value);
+            visibleCell.Value = cell.Value;
+        }
     }
 }
