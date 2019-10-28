@@ -62,6 +62,7 @@
     <Compile Include="TestBinaryOperatorNode.cs" />
     <Compile Include="TestCell.cs" />
     <Compile Include="TestExpressionTree.cs" />
+    <Compile Include="TestOperatorNodeFactory.cs" />
     <Compile Include="TestSpreadsheet.cs" />
     <Compile Include="TestVariableNode.cs" />
     <Compile Include="Utility.cs" />

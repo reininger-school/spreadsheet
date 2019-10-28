@@ -39,7 +39,7 @@ namespace Cpts321
         [TestCase("(1+1)*2", 4)]
         [TestCase("((1))", 1)]
         [TestCase("(1*2)*(5+(2*4))", 26)]
-        public void BuildTreee(string infix, int expected)
+        public void BuildTree(string infix, int expected)
         {
             this.tree.Expression = infix;
             this.tree.SetVariable("alpha", 5);
