@@ -16,6 +16,7 @@ namespace Cpts321
         private string expression;
         private Regex operatorsRegex = new Regex(@"([)(*+/-])");
         private Node root;
+        private OperatorNodeFactory factory = new OperatorNodeFactory();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTree"/> class.
@@ -119,7 +120,7 @@ namespace Cpts321
                 else if (s == ")")
                 {
                     poppedOp = stack.Pop();
-                    while (poppedOp.Op != "(")
+                    while (poppedOp.Operator != "(")
                     {
                         binaryNode = (BinaryOperatorNode)poppedOp;
                         binaryNode.RightNode = postfix.Pop();
@@ -130,10 +131,10 @@ namespace Cpts321
                 }
                 else
                 {
-                    newOp = this.CreateOperatorNode(s);
+                    newOp = this.factory.CreateOperatorNode(s);
 
                     // if operator and stack is empty or left parenthesis on top
-                    if (stack.Count == 0 || stack.Peek().Op == "(")
+                    if (stack.Count == 0 || stack.Peek().Operator == "(")
                     {
                         stack.Push(newOp);
                     }
@@ -172,23 +173,6 @@ namespace Cpts321
             }
 
             this.root = postfix.Pop();
-        }
-
-        private OperatorNode CreateOperatorNode(string statement)
-        {
-            switch (statement)
-            {
-                case "+":
-                    return new AdditionNode();
-                case "-":
-                    return new SubtractionNode();
-                case "/":
-                    return new DivisionNode();
-                case "*":
-                    return new MultiplicationNode();
-                default:
-                    return null;
-            }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace Cpts321
         /// <summary>
         /// Gets string representing operator in expression.
         /// </summary>
-        internal string Op
+        internal string Operator
         {
             get => this.op;
         }

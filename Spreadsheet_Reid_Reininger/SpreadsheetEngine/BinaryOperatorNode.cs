@@ -47,7 +47,6 @@ namespace Cpts321
         internal BinaryOp Function
         {
             get => this.function;
-            private set => this.function = value;
         }
 
         /// <summary>
