@@ -5,6 +5,7 @@ namespace Cpts321
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -14,7 +15,7 @@ namespace Cpts321
     {
         private Dictionary<string, double> variables = new Dictionary<string, double>();
         private string expression;
-        private Regex operatorsRegex = new Regex(@"([\)\(\*\+\/\-])");
+        private Regex operatorsRegex;
         private Node root;
         private OperatorNodeFactory factory = new OperatorNodeFactory();
 
@@ -24,7 +25,9 @@ namespace Cpts321
         /// <param name="expression">Expression to construct tree.</param>
         public ExpressionTree(string expression)
         {
+            this.operatorsRegex = this.CreateOperatorRegex();
             this.Expression = expression;
+            this.factory = new OperatorNodeFactory();
         }
 
         /// <summary>
@@ -178,7 +181,15 @@ namespace Cpts321
         // Create regex to parse user input.
         private Regex CreateOperatorRegex()
         {
-            throw new NotImplementedException();
+            var expression = new StringBuilder(@"([");
+            foreach (var op in this.factory.Operators)
+            {
+                expression.Append(@"\");
+                expression.Append(op);
+            }
+
+            expression.Append(@"])");
+            return new Regex(@expression.ToString());
         }
     }
 }

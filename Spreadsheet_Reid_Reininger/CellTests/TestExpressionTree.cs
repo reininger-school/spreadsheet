@@ -104,12 +104,5 @@ namespace Cpts321
             this.tree.Expression = "1";
             Assert.IsTrue(variables.Count() == 0);
         }
-
-        [Test]
-        public void TestCreateOperatorRegex()
-        {
-            var factory = new OperatorNodeFactory();
-            var operatorsInfo = Utility.GetField<OperatorNodeFactory>("operators");
-        }
     }
 }
