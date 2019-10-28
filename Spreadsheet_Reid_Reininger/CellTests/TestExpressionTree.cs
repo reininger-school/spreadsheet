@@ -39,14 +39,15 @@ namespace Cpts321
         [TestCase("(1+1)*2", 4)]
         [TestCase("((1))", 1)]
         [TestCase("(1*2)*(5+(2*4))", 26)]
-        public void BuildTree(string infix, int expected)
+        [TestCase("alpha", 5)]
+        public void TestBuildTree(string infix, int expected)
         {
             this.tree.Expression = infix;
-            this.tree.SetVariable("alpha", 5);
-            this.tree.SetVariable("beta", 7);
             var fieldInfo = Utility.GetField<ExpressionTree>("root");
             Node root = (Node)fieldInfo.GetValue(this.tree);
             var methodInfo = Utility.GetMethod<ExpressionTree>("BuildTree");
+            this.tree.SetVariable("alpha", 5);
+            this.tree.SetVariable("beta", 7);
             methodInfo.Invoke(this.tree, null);
             Assert.AreEqual(expected, root.Evaluate());
         }
@@ -103,6 +104,13 @@ namespace Cpts321
             this.tree.SetVariable("x", 1);
             this.tree.Expression = "1";
             Assert.IsTrue(variables.Count() == 0);
+        }
+
+        [Test]
+        public void TestVariableDefaultZero()
+        {
+            var tree = new ExpressionTree("alpha+beta");
+            Assert.AreEqual(tree.Variables.Length, 2);
         }
     }
 }

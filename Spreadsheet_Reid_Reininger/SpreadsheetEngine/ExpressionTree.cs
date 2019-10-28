@@ -113,6 +113,11 @@ namespace Cpts321
                     // if variable
                     if (VariableNode.VariableName.IsMatch(s))
                     {
+                        if (!this.variables.ContainsKey(s))
+                        {
+                            this.SetVariable(s, 0); 
+                        }
+
                         postfix.Push(new VariableNode(s, this.GetVariableFunc(s)));
                     }
                     else
