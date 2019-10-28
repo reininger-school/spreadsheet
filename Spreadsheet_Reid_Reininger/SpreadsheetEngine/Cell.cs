@@ -94,6 +94,7 @@ namespace Cpts321
                 {
                     this.Value = this.text;
                 }
+
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
             }
         }
