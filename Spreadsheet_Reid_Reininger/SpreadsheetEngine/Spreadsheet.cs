@@ -124,7 +124,7 @@ namespace Cpts321
         /// <param name="text">New Text value.</param>
         public void SetCellText(Cell cell, string text)
         {
-            throw new NotImplementedException();
+            cell.Text = text;
         }
 
         /// <summary>
