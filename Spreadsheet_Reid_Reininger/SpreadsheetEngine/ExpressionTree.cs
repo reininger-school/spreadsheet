@@ -45,7 +45,7 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Return array of variable names in tree.
+        /// Gets array of variable names in tree.
         /// </summary>
         public string[] Variables
         {
@@ -116,7 +116,7 @@ namespace Cpts321
                         // set default value to zero
                         if (!this.variables.ContainsKey(s))
                         {
-                            this.SetVariable(s, 0); 
+                            this.SetVariable(s, 0);
                         }
 
                         postfix.Push(new VariableNode(s, this.GetVariableFunc(s)));
