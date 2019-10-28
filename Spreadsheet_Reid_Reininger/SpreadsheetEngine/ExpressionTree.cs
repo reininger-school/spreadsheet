@@ -14,7 +14,7 @@ namespace Cpts321
     {
         private Dictionary<string, double> variables = new Dictionary<string, double>();
         private string expression;
-        private Regex operatorsRegex = new Regex(@"([)(*+/-])");
+        private Regex operatorsRegex = new Regex(@"([\)\(\*\+\/\-])");
         private Node root;
         private OperatorNodeFactory factory = new OperatorNodeFactory();
 
@@ -173,6 +173,12 @@ namespace Cpts321
             }
 
             this.root = postfix.Pop();
+        }
+
+        // Create regex to parse user input.
+        private Regex CreateOperatorRegex()
+        {
+            throw new NotImplementedException();
         }
     }
 }
