@@ -202,5 +202,13 @@ namespace CellTests
             var textInfo = Utility.GetProperty<Cell>("Text");
             Assert.AreEqual(testString, textInfo.GetValue(cell, null));
         }
+
+        [Test]
+        public void TestDependentCellsUpdate()
+        {
+            this.cells[0, 1].Text = "=A1";
+            this.cells[0, 0].Text = "100";
+            Assert.AreEqual("100", this.cells[0, 1].Value);
+        }
     }
 }
