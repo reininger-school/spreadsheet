@@ -190,6 +190,9 @@ namespace CellTests
             this.cells[0, 0].Text = "Test";
         }
 
+        /// <summary>
+        /// Test cell is set to passed text.
+        /// </summary>
         [Test]
         public void TestSetCellText()
         {
