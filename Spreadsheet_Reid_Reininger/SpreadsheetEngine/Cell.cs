@@ -3,6 +3,7 @@
 namespace Cpts321
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
 
     /// <summary>
@@ -19,6 +20,11 @@ namespace Cpts321
         /// Evaluated text of cell.
         /// </summary>
         protected string value;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        internal List<string> Dependencies = new List<string>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Cell"/> class.
