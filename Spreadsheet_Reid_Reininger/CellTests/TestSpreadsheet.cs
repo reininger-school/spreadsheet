@@ -212,9 +212,10 @@ namespace CellTests
             var sheet = new Spreadsheet(2, 2);
             var cellsInfo = Utility.GetField<Spreadsheet>("cells");
             var cells = (Cell[,])cellsInfo.GetValue(sheet);
-            cells[0, 1].Text = "=A1";
             cells[0, 0].Text = "1";
-            Assert.AreEqual("1", cells[0, 1].Value);
+            cells[1, 1].Text = "=A1";
+            cells[0, 0].Text = "1";
+            Assert.AreEqual("1", cells[1, 1].Value);
         }
     }
 }
