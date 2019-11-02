@@ -4,6 +4,7 @@ namespace CellTests
 {
     using System;
     using System.ComponentModel;
+    using System.Linq;
     using System.Reflection;
     using Cpts321;
     using NUnit.Framework;
@@ -113,14 +114,16 @@ namespace CellTests
         /// <summary>
         /// Tests Cell implements INotifyPropertyChanged.
         /// </summary>
+        [Test]
         public void TestImplementsINotifyPropertyChanged()
         {
-            Assert.AreEqual(typeof(Cell).GetTypeInfo().BaseType, typeof(INotifyPropertyChanged));
+            Assert.IsTrue(typeof(Cell).GetInterfaces().Contains(typeof(INotifyPropertyChanged)));
         }
 
         /// <summary>
         /// Test Cell is abstract class.
         /// </summary>
+        [Test]
         public void TestIsAbstract()
         {
             Assert.IsTrue(typeof(Cell).IsAbstract);
@@ -129,6 +132,7 @@ namespace CellTests
         /// <summary>
         /// Test Cell is public class.
         /// </summary>
+        [Test]
         public void TestIsPublic()
         {
             Assert.IsTrue(typeof(Cell).IsPublic);
