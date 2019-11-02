@@ -16,6 +16,8 @@ namespace Cpts321
         // Reference to cells
         private Cell[,] cells;
 
+        private ExpressionTree tree = new ExpressionTree("1");
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Spreadsheet"/> class.
         /// </summary>
@@ -174,14 +176,68 @@ namespace Cpts321
         /// <param name="e">Event args from changed cell.</param>
         private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            // Set cell value.
             Cell cell = (Cell)sender;
-            if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
+            this.SetCellValue(cell);
+            this.CellPropertyChanged?.Invoke(sender, e);
+        }
+
+        private void SetCellValue(Cell cell)
+        {
+            // unsubscribe cell from all previous dependencies
+            foreach (var variable in cell.Dependencies)
             {
-                cell.Value = this.GetCell(cell.Text.Remove(0, 1)).Value;
+                this.GetCell(variable).PropertyChanged -= cell.Cell_PropertyChanged;
             }
 
-            this.CellPropertyChanged?.Invoke(sender, e);
+            cell.Dependencies.Clear();
+
+            // if formula
+            if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
+            {
+                // if simple assignment
+                if (Regex.IsMatch(cell.Text, @"^=[A-Z]+[0-9]+$"))
+                {
+                    cell.Value = this.GetCell(cell.Text.Substring(1)).Value;
+                    cell.Dependencies.Add(cell.Text.Substring(1));
+                    this.GetCell(cell.Text.Substring(1));
+                }
+
+                // if expression
+                else
+                {
+                    this.tree.Expression = cell.Text.Substring(1);
+
+                    // set variable values in tree
+                    bool allDoubles = true;
+                    foreach (var variable in this.tree.Variables)
+                    {
+                        double value = 0;
+
+                        // if tryparse fails
+                        if (!double.TryParse(this.GetCell(variable).Value, out value))
+                        {
+                            allDoubles = false;
+                            break;
+                        }
+
+                        this.tree.SetVariable(variable, value);
+
+                        // subscribe cell to dependencies
+                        cell.Dependencies.Add(variable);
+                        this.GetCell(variable).PropertyChanged += cell.Cell_PropertyChanged;
+                    }
+
+                    // check all cells in formula contain double values
+                    if (allDoubles)
+                    {
+                        cell.Value = this.tree.Evaluate().ToString();
+                    }
+                    else
+                    {
+                        cell.Value = "ERR";
+                    }
+                }
+            }
         }
     }
 }
