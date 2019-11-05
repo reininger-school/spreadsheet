@@ -116,7 +116,17 @@ namespace Cpts321
         public uint BGColor
         {
             get => this.bGColor;
-            internal set => this.bGColor = value;
+            internal set
+            {
+                // do nothing if same color
+                if (value == this.bGColor)
+                {
+                    return;
+                }
+
+                this.bGColor = value;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BGColor"));
+            }
         }
 
         /// <summary>
