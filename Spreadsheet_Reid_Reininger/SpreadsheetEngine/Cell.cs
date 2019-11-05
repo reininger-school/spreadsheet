@@ -111,9 +111,13 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Gets or sets Cell background color.
+        /// Gets Cell background color.
         /// </summary>
-        public uint BGColor { get; set; }
+        public uint BGColor
+        {
+            get => this.bGColor;
+            internal set => this.bGColor = value;
+        }
 
         /// <summary>
         /// Sets value when text changes.
