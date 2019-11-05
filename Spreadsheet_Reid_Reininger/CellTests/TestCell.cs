@@ -21,6 +21,11 @@ namespace Cpts321
         private const string DefaultString = "Default String";
 
         /// <summary>
+        /// Default uint for cell testing purposes.
+        /// </summary>
+        private const uint DefaultUint = 0xffffffff;
+
+        /// <summary>
         /// Cell for testing.
         /// </summary>
         private Cell cell;
@@ -33,6 +38,7 @@ namespace Cpts321
         {
             this.cell = new MockCell(0, 0); // Minimal concrete class for testing
             Utility.GetProperty<Cell>("Text").SetValue(this.cell, DefaultString);
+            Utility.GetProperty<Cell>("BGColor").SetValue(this.cell, DefaultUint);
         }
 
         /// <summary>
@@ -109,6 +115,27 @@ namespace Cpts321
             this.cell.PropertyChanged += Cell_PropertyChanged;
             var textInfo = Utility.GetProperty<Cell>("Text");
             textInfo.SetValue(this.cell, testString);
+            Assert.AreEqual(fire, fired);
+        }
+
+        /// <summary>
+        /// Test PropertyChanged event fires when BGColor property changes.
+        /// </summary>
+        /// <param name="testVal">String to change Text to.</param>
+        /// <param name="fire">Whether PropertyChanged event should fire or not.</param>
+        [TestCase(DefaultUint, false)]
+        [TestCase(0x0000ffffU, true)]
+        public void TestSetBGColorPropertyChanged(uint testVal, bool fire)
+        {
+            bool fired = false;
+            void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                fired = true;
+            }
+
+            this.cell.PropertyChanged += Cell_PropertyChanged;
+            var bGColorInfo = Utility.GetProperty<Cell>("BGColor");
+            bGColorInfo.SetValue(this.cell, testVal);
             Assert.AreEqual(fire, fired);
         }
 
