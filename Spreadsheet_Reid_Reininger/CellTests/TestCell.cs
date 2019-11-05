@@ -1,6 +1,6 @@
 ﻿// Reid Reininger
 // 11512839
-namespace CellTests
+namespace Cpts321
 {
     using System;
     using System.ComponentModel;
@@ -83,9 +83,10 @@ namespace CellTests
         /// <param name="property">Property to test.</param>
         [TestCase("Text")]
         [TestCase("Value")]
+        [TestCase("BGColor")]
         public void TestProtectedSetProperties(string property)
         {
-            var methodInfo = Utility.GetProperty<Cell>("Text");
+            var methodInfo = Utility.GetProperty<Cell>(property);
             Assert.IsTrue(methodInfo.GetGetMethod(true).IsPublic, $"{property} getter is not public");
             Assert.IsFalse(methodInfo.GetSetMethod(true).IsPublic, $"{property} setter is public");
         }
