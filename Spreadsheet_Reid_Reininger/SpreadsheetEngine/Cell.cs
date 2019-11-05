@@ -27,6 +27,11 @@ namespace Cpts321
         protected string value;
 
         /// <summary>
+        /// Cell's background color.
+        /// </summary>
+        protected uint bGColor;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Cell"/> class.
         /// </summary>
         /// <param name="rowIndex">Cell's row index.</param>
@@ -104,6 +109,11 @@ namespace Cpts321
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
             }
         }
+
+        /// <summary>
+        /// Gets or sets Cell background color.
+        /// </summary>
+        public uint BGColor { get; set; }
 
         /// <summary>
         /// Sets value when text changes.
