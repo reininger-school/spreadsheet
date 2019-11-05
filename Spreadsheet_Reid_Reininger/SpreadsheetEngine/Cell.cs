@@ -12,6 +12,11 @@ namespace Cpts321
     public abstract class Cell : INotifyPropertyChanged
     {
         /// <summary>
+        /// List of cells currently subscribed to PropertyChanged.
+        /// </summary>
+        internal List<string> Dependencies = new List<string>();
+
+        /// <summary>
         /// Actual text typed into cell.
         /// </summary>
         protected string text;
@@ -20,11 +25,6 @@ namespace Cpts321
         /// Evaluated text of cell.
         /// </summary>
         protected string value;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        internal List<string> Dependencies = new List<string>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Cell"/> class.
