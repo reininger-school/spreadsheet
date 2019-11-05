@@ -80,5 +80,10 @@ namespace Spreadsheet_Reid_Reininger
             this.sheet.SetCellText(cell, (string)visibleCell.Value);
             visibleCell.Value = cell.Value;
         }
+
+        private void ChangeBackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.colorDialog1.ShowDialog();
+        }
     }
 }
