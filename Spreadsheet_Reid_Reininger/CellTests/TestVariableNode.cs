@@ -1,6 +1,6 @@
 ﻿// Reid Reininger
 // 11512839
-namespace CellTests
+namespace Cpts321
 {
     using System;
     using System.Collections.Generic;
