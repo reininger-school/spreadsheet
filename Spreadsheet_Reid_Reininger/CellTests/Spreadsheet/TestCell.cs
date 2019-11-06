@@ -119,27 +119,6 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Test PropertyChanging event fires when Text property is about to change.
-        /// </summary>
-        /// <param name="testString">String to change Text to.</param>
-        /// <param name="fire">Whether PropertyChanged event should fire or not.</param>
-        [TestCase(DefaultString, false)]
-        [TestCase("a", true)]
-        public void TestSetTextPropertyChanging(string testString, bool fire)
-        {
-            bool fired = false;
-            void Cell_PropertyChanging(object sender, PropertyChangingEventArgs e)
-            {
-                fired = true;
-                Assert.AreNotEqual(this.cell.Text, testString, "Event fired after text changed");
-            }
-
-            this.cell.PropertyChanging += Cell_PropertyChanging;
-            this.cell.Text = testString;
-            Assert.AreEqual(fire, fired);
-        }
-
-        /// <summary>
         /// Test PropertyChanged event fires when BGColor property changes.
         /// </summary>
         /// <param name="testVal">String to change Text to.</param>
