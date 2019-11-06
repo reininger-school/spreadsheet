@@ -142,6 +142,14 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Undo most recent change on undos stack.
+        /// </summary>
+        public void Undo()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Set Cell's background color.
         /// </summary>
         /// <param name="cell">Cell to modify.</param>

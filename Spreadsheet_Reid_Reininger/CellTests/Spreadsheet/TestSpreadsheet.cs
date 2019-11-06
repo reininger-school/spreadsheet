@@ -276,5 +276,17 @@ namespace Cpts321
             Assert.AreEqual(originalString, oldText);
             Assert.AreEqual(newString, newText);
         }
+
+        /// <summary>
+        /// Test Undo function with non-empty stack.
+        /// </summary>
+        [Test]
+        public void TestUndoNonEmptyStack()
+        {
+            string originalText = this.cells[0, 0].Text;
+            this.sheet.SetCellText(this.cells[0, 0], "lol");
+            this.sheet.Undo();
+            Assert.AreEqual(originalText, this.cells[0, 0].Text);
+        }
     }
 }
