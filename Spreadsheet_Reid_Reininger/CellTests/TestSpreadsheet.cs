@@ -232,7 +232,7 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Test Cell is unsubscribed from all subscriptions.
+        /// Test Cell is unsubscribed from all subscriptions.
         /// </summary>
         [Test]
         public void TestUnsubscribeCellDependencies()
