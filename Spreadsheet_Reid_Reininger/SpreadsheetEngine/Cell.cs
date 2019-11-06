@@ -105,6 +105,7 @@ namespace Cpts321
                     return;
                 }
 
+                this.PropertyChanging?.Invoke(this, new PropertyChangingEventArgs("Text"));
                 this.text = value;
                 if (string.IsNullOrWhiteSpace(this.Text) || this.Text[0] != '=')
                 {
