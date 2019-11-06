@@ -3,6 +3,7 @@
 namespace Cpts321
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using Cpts321;
     using NUnit.Framework;
@@ -20,7 +21,7 @@ namespace Cpts321
         /// <summary>
         /// Setup sheet and cells.
         /// </summary>
-        [OneTimeSetUp]
+        [SetUp]
         public void Setup()
         {
             this.sheet = new Spreadsheet(2, 2);
@@ -251,6 +252,30 @@ namespace Cpts321
             var eventInfo = Utility.GetField<Cell>("PropertyChanged");
 
             Assert.AreEqual(0, subscriber.Dependencies.Count);
+        }
+
+        /// <summary>
+        /// Test ChangeTextCommand of correct format is added to undo stack.
+        /// </summary>
+        [Test]
+        public void TestAddTextChangeUndo()
+        {
+            // setup
+            const string newString = "test string";
+            const string originalString = "original string";
+            Cell cell = new MockCell(0, 0);
+
+            Stack<ICommand> undos = (Stack<ICommand>)Utility.GetField<Spreadsheet>("undos").GetValue(this.sheet);
+            var cell_PropertyChanging = Utility.GetMethod<Spreadsheet>("Cell_PropertyChanging");
+
+            // change text
+            cell_PropertyChanging.Invoke(this.sheet, new object[] { cell, newString });
+
+            // Check new command is on stack
+            string oldText = (string)Utility.GetField<ChangeTextCommand>("oldText").GetValue(undos.Peek());
+            string newText = (string)Utility.GetField<ChangeTextCommand>("newText").GetValue(undos.Peek());
+            Assert.AreEqual(originalString, oldText);
+            Assert.AreEqual(newString, newText);
         }
     }
 }

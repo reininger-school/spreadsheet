@@ -3,6 +3,7 @@
 namespace Cpts321
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -17,6 +18,8 @@ namespace Cpts321
         private Cell[,] cells;
 
         private ExpressionTree tree = new ExpressionTree("1");
+        private Stack<ICommand> undos = new Stack<ICommand>();
+        private Stack<ICommand> redos = new Stack<ICommand>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Spreadsheet"/> class.
@@ -189,6 +192,11 @@ namespace Cpts321
             Cell cell = (Cell)sender;
             this.SetCellValue(cell);
             this.CellPropertyChanged?.Invoke(sender, e);
+        }
+
+        private void Cell_PropertyChanging(object sender, PropertyChangingEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
