@@ -15,6 +15,7 @@ namespace Cpts321
     {
         private Cell cell;
         private string newText;
+        private string oldText;
         private string description = "cell text change";
 
         /// <summary>
@@ -42,6 +43,7 @@ namespace Cpts321
         /// </summary>
         public void Execute()
         {
+            this.oldText = this.cell.Text;
             this.cell.Text = this.newText;
         }
 
@@ -50,7 +52,7 @@ namespace Cpts321
         /// </summary>
         public void Undo()
         {
-            throw new NotImplementedException();
+            this.cell.Text = this.oldText;
         }
     }
 }
