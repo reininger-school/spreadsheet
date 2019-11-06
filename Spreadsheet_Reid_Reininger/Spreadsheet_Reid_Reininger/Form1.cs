@@ -57,6 +57,10 @@ namespace Spreadsheet_Reid_Reininger
             {
                 visibleCell.Value = cell.Value;
             }
+            else if (e.PropertyName == "BGColor")
+            {
+                visibleCell.Style.BackColor = System.Drawing.Color.FromArgb((int)cell.BGColor);
+            }
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -81,9 +85,16 @@ namespace Spreadsheet_Reid_Reininger
             visibleCell.Value = cell.Value;
         }
 
+        // Open color dialog box
         private void ChangeBackgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.colorDialog1.ShowDialog();
+            if (this.colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                foreach (DataGridViewCell it in this.dataGridView1.SelectedCells)
+                {
+                    this.sheet.SetCellBGColor(this.sheet.GetCell(it.RowIndex, it.ColumnIndex), (uint)this.colorDialog1.Color.ToArgb());
+                }
+            }
         }
     }
 }
