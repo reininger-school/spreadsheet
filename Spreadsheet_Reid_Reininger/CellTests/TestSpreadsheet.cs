@@ -204,6 +204,19 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Test cell is set to passed color.
+        /// </summary>
+        [Test]
+        public void TestSetCellBGColor()
+        {
+            const uint testColor = 0x11111111;
+            var cell = this.sheet.GetCell(0, 0);
+            this.sheet.SetCellBGColor(cell, testColor);
+            var textInfo = Utility.GetProperty<Cell>("BGColor");
+            Assert.AreEqual(testColor, textInfo.GetValue(cell, null));
+        }
+
+        /// <summary>
         /// Test cell updates when a cell it is dependent on changes.
         /// </summary>
         [Test]

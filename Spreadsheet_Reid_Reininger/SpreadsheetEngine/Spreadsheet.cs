@@ -130,6 +130,16 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Set Cell's background color.
+        /// </summary>
+        /// <param name="cell">Cell to modify.</param>
+        /// <param name="color">uint representation of color.</param>
+        public void SetCellBGColor(Cell cell, uint color)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Convert string of letters to integer value.
         /// </summary>
         /// <param name="name">string of capital letters.</param>
