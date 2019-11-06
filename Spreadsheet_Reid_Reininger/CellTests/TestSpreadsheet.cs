@@ -217,5 +217,27 @@ namespace Cpts321
             cells[0, 0].Text = "1";
             Assert.AreEqual("1", cells[1, 1].Value);
         }
+
+        /// <summary>
+        /// Test Cell is unsubscribed from all subscriptions.
+        /// </summary>
+        [Test]
+        public void TestUnsubscribeCellDependencies()
+        {
+            var sheet = new Spreadsheet(2, 2);
+            var subscriber = sheet.GetCell("A1");
+            Cell[] subscribees = { sheet.GetCell("A2"), sheet.GetCell("B1") };
+            subscriber.Dependencies.AddRange(new string[] { "A2", "B1" });
+            foreach (var subscribee in subscribees)
+            {
+                subscribee.PropertyChanged += subscriber.Cell_PropertyChanged;
+            }
+
+            var unsubscribeInfo = Utility.GetMethod<Spreadsheet>("UnsubscribeCellDependencies");
+            unsubscribeInfo.Invoke(sheet, new object[] { subscriber });
+            var eventInfo = Utility.GetField<Cell>("PropertyChanged");
+
+            Assert.AreEqual(0, subscriber.Dependencies.Count);
+        }
     }
 }

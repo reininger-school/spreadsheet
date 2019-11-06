@@ -181,15 +181,23 @@ namespace Cpts321
             this.CellPropertyChanged?.Invoke(sender, e);
         }
 
-        private void SetCellValue(Cell cell)
+        /// <summary>
+        /// Unsubscribe cell from all cells it depends on for formula, and remove from dependency list.
+        /// </summary>
+        /// <param name="cell">Cell to remove all subscriptions.</param>
+        private void UnsubscribeCellDependencies(Cell cell)
         {
-            // unsubscribe cell from all previous dependencies
             foreach (var variable in cell.Dependencies)
             {
                 this.GetCell(variable).PropertyChanged -= cell.Cell_PropertyChanged;
             }
 
             cell.Dependencies.Clear();
+        }
+
+        private void SetCellValue(Cell cell)
+        {
+            this.UnsubscribeCellDependencies(cell);
 
             // if formula
             if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
