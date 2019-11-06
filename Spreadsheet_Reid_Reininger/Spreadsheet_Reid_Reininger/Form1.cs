@@ -99,6 +99,7 @@ namespace Spreadsheet_Reid_Reininger
 
         private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.sheet.Undo();
         }
     }
 }

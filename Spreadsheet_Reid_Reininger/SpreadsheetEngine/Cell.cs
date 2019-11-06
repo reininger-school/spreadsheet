@@ -9,7 +9,7 @@ namespace Cpts321
     /// <summary>
     /// Represents a cell in the grid.
     /// </summary>
-    public abstract class Cell : INotifyPropertyChanged, INotifyPropertyChanging
+    public abstract class Cell : INotifyPropertyChanged
     {
         /// <summary>
         /// List of cells currently subscribed to PropertyChanged.
@@ -56,11 +56,6 @@ namespace Cpts321
         /// Fires everytime a property changes.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Fires when a property is about to change.
-        /// </summary>
-        public event PropertyChangingEventHandler PropertyChanging;
 
         /// <summary>
         /// Gets cell's row index.
@@ -142,7 +137,7 @@ namespace Cpts321
         /// <param name="e">Event args.</param>
         public void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
         }
     }
 }
