@@ -136,7 +136,7 @@ namespace Cpts321
         /// <param name="color">uint representation of color.</param>
         public void SetCellBGColor(Cell cell, uint color)
         {
-            throw new NotImplementedException();
+            cell.BGColor = color;
         }
 
         /// <summary>
