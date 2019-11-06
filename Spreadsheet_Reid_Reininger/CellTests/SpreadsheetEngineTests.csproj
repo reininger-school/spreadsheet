@@ -24,7 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>SpreadsheetEngineTests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\SpreadsheetEngine\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\CellTests.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>SpreadsheetEngineTests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\SpreadsheetEngine\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
@@ -43,8 +43,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="SpreadsheetEngineTests.ruleset" />
+    <None Include="Project\packages.config" />
+    <None Include="Project\SpreadsheetEngineTests.ruleset" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpreadsheetEngine\SpreadsheetEngine.csproj">
@@ -57,15 +57,15 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MockBinaryOperatorNode.cs" />
-    <Compile Include="MockCell.cs" />
-    <Compile Include="TestBinaryOperatorNode.cs" />
-    <Compile Include="TestCell.cs" />
-    <Compile Include="TestChangeTextCommand.cs" />
-    <Compile Include="TestExpressionTree.cs" />
-    <Compile Include="TestOperatorNodeFactory.cs" />
-    <Compile Include="TestSpreadsheet.cs" />
-    <Compile Include="TestVariableNode.cs" />
+    <Compile Include="ExpressionTree\MockBinaryOperatorNode.cs" />
+    <Compile Include="Spreadsheet\MockCell.cs" />
+    <Compile Include="ExpressionTree\TestBinaryOperatorNode.cs" />
+    <Compile Include="Spreadsheet\TestCell.cs" />
+    <Compile Include="Spreadsheet\TestChangeTextCommand.cs" />
+    <Compile Include="ExpressionTree\TestExpressionTree.cs" />
+    <Compile Include="ExpressionTree\TestOperatorNodeFactory.cs" />
+    <Compile Include="Spreadsheet\TestSpreadsheet.cs" />
+    <Compile Include="ExpressionTree\TestVariableNode.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

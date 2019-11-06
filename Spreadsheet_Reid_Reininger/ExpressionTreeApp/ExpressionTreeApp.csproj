@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>ExpressionTreeApp.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\SpreadsheetEngine\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\ExpressionTreeApp.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>ExpressionTreeApp.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\SpreadsheetEngine\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
