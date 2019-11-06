@@ -51,9 +51,11 @@
     <Compile Include="AdditionNode.cs" />
     <Compile Include="BinaryOperatorNode.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="ChangeTextCommand.cs" />
     <Compile Include="ConstantNode.cs" />
     <Compile Include="DivisionNode.cs" />
     <Compile Include="ExpressionTree.cs" />
+    <Compile Include="ICommand.cs" />
     <Compile Include="LeftParenthesis.cs" />
     <Compile Include="MultiplicationNode.cs" />
     <Compile Include="Node.cs" />

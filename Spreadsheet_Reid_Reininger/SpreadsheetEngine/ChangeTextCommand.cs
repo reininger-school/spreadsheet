@@ -13,8 +13,8 @@ namespace Cpts321
     /// </summary>
     internal class ChangeTextCommand : ICommand
     {
+        private Cell cell;
         private string newText;
-        private string oldText;
         private string description = "cell text change";
 
         /// <summary>
@@ -24,6 +24,7 @@ namespace Cpts321
         /// <param name="text">String to change text to.</param>
         public ChangeTextCommand(Cell cell, string text)
         {
+            this.cell = cell;
             this.newText = text;
         }
 
@@ -41,7 +42,7 @@ namespace Cpts321
         /// </summary>
         public void Execute()
         {
-            throw new NotImplementedException();
+            this.cell.Text = this.newText;
         }
 
         /// <summary>
