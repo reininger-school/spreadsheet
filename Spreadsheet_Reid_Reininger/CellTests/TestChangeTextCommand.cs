@@ -16,6 +16,7 @@ namespace Cpts321
     [TestFixture]
     public class TestChangeTextCommand
     {
+        private const string TestString = "test string";
         private Cell cell = new MockCell(0, 0);
 
         /// <summary>
@@ -24,12 +25,24 @@ namespace Cpts321
         [Test]
         public void TestValidExecute()
         {
-            const string testString = "test string";
-            var textInfo = Utility.GetProperty<Cell>("Text");
-            var command = new ChangeTextCommand(this.cell, testString);
+            var command = new ChangeTextCommand(this.cell, TestString);
             command.Execute();
 
-            Assert.AreEqual(testString, textInfo.GetValue(this.cell, null));
+            Assert.AreEqual(TestString, this.cell.Text);
+        }
+
+        /// <summary>
+        /// Test undo with valid parameters.
+        /// </summary>
+        [Test]
+        public void TestValidUndo()
+        {
+            const string originalText = "original string";
+            this.cell.Text = originalText;
+            var command = new ChangeTextCommand(this.cell, TestString);
+            command.Execute();
+            command.Undo();
+            Assert.AreEqual(originalText, this.cell.Text);
         }
     }
 }
