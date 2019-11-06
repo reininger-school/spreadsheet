@@ -263,13 +263,12 @@ namespace Cpts321
             // setup
             const string newString = "test string";
             const string originalString = "original string";
-            Cell cell = new MockCell(0, 0);
+            this.cells[0, 0].Text = originalString;
 
             Stack<ICommand> undos = (Stack<ICommand>)Utility.GetField<Spreadsheet>("undos").GetValue(this.sheet);
-            var cell_PropertyChanging = Utility.GetMethod<Spreadsheet>("Cell_PropertyChanging");
 
             // change text
-            cell_PropertyChanging.Invoke(this.sheet, new object[] { cell, newString });
+            this.sheet.SetCellText(this.cells[0, 0], newString);
 
             // Check new command is on stack
             string oldText = (string)Utility.GetField<ChangeTextCommand>("oldText").GetValue(undos.Peek());

@@ -129,7 +129,16 @@ namespace Cpts321
         /// <param name="text">New Text value.</param>
         public void SetCellText(Cell cell, string text)
         {
-            cell.Text = text;
+            // Do nothing if text the same
+            if (cell.Text == text)
+            {
+                return;
+            }
+
+            // create command
+            var changeText = new ChangeTextCommand(cell, text);
+            changeText.Execute();
+            this.undos.Push(changeText);
         }
 
         /// <summary>
@@ -192,11 +201,6 @@ namespace Cpts321
             Cell cell = (Cell)sender;
             this.SetCellValue(cell);
             this.CellPropertyChanged?.Invoke(sender, e);
-        }
-
-        private void Cell_PropertyChanging(object sender, PropertyChangingEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
