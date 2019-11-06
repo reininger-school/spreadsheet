@@ -146,7 +146,7 @@ namespace Cpts321
         /// </summary>
         public void Undo()
         {
-            throw new NotImplementedException();
+            this.undos.Pop().Undo();
         }
 
         /// <summary>
