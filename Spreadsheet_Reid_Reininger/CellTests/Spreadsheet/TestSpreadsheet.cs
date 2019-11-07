@@ -255,29 +255,6 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Test ChangeTextCommand of correct format is added to undo stack.
-        /// </summary>
-        [Test]
-        public void TestAddTextChangeUndo()
-        {
-            // setup
-            const string newString = "test string";
-            const string originalString = "original string";
-            this.cells[0, 0].Text = originalString;
-
-            Stack<ICommand> undos = (Stack<ICommand>)Utility.GetField<Spreadsheet>("undos").GetValue(this.sheet);
-
-            // change text
-            this.sheet.SetCellText(this.cells[0, 0], newString);
-
-            // Check new command is on stack
-            string oldText = (string)Utility.GetField<ChangeTextCommand>("oldText").GetValue(undos.Peek());
-            string newText = (string)Utility.GetField<ChangeTextCommand>("newText").GetValue(undos.Peek());
-            Assert.AreEqual(originalString, oldText);
-            Assert.AreEqual(newString, newText);
-        }
-
-        /// <summary>
         /// Test Undo function with non-empty stack.
         /// </summary>
         [Test]
@@ -299,29 +276,6 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Test Undo() moves command to Redos.
-        /// </summary>
-        [Test]
-        public void TestAddUndoToRedos()
-        {
-            // setup
-            const string newString = "test string";
-            const string originalString = "original string";
-            this.cells[0, 0].Text = originalString;
-
-            Stack<ICommand> redos = (Stack<ICommand>)Utility.GetField<Spreadsheet>("redos").GetValue(this.sheet);
-
-            this.sheet.SetCellText(this.cells[0, 0], newString);
-            this.sheet.Undo();
-
-            // Check new command is on stack
-            string oldText = (string)Utility.GetField<ChangeTextCommand>("oldText").GetValue(redos.Peek());
-            string newText = (string)Utility.GetField<ChangeTextCommand>("newText").GetValue(redos.Peek());
-            Assert.AreEqual(originalString, oldText);
-            Assert.AreEqual(newString, newText);
-        }
-
-        /// <summary>
         /// Test Redo with nonempty Redos stack.
         /// </summary>
         [Test]
@@ -336,27 +290,88 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Test Undo() moves command to Redos.
+        /// Tests property changes can be undone.
         /// </summary>
-        [Test]
-        public void TestAddRedoToUndos()
+        /// <param name="tProperty">Type of Property changing.</param>
+        /// <param name="originalObject">Original Cell property value.</param>
+        /// <param name="newObject">New Cell property value.</param>
+        /// <param name="setMethod">Method in Spreadsheet that sets Cell property.</param>
+        [TestCase(typeof(string), "original string", "new string", "SetCellText")]
+        public void TestAddUndo(Type tProperty, object originalObject, object newObject, string setMethod)
         {
             // setup
-            const string newString = "test string";
-            const string originalString = "original string";
-            this.cells[0, 0].Text = originalString;
+            var newValue = Convert.ChangeType(newObject, tProperty);
+            var originalValue = Convert.ChangeType(originalObject, tProperty);
+            var setMethodInfo = Utility.GetMethod<Spreadsheet>(setMethod);
+            setMethodInfo.Invoke(this.sheet, new object[] { this.cells[0, 0], originalValue });
 
             Stack<ICommand> undos = (Stack<ICommand>)Utility.GetField<Spreadsheet>("undos").GetValue(this.sheet);
 
-            this.sheet.SetCellText(this.cells[0, 0], newString);
+            // change text
+            setMethodInfo.Invoke(this.sheet, new object[] { this.cells[0, 0], newValue });
+
+            // Check new command is on stack
+            var oldValue = Convert.ChangeType(Utility.GetField<ChangeTextCommand>("oldText").GetValue(undos.Peek()), tProperty);
+            var cellNewValue = Convert.ChangeType(Utility.GetField<ChangeTextCommand>("newText").GetValue(undos.Peek()), tProperty);
+            Assert.AreEqual(originalValue, oldValue);
+            Assert.AreEqual(newValue, cellNewValue);
+        }
+
+        /// <summary>
+        /// Tests that Undos are added to redo stack.
+        /// </summary>
+        /// <param name="tProperty">Type of Property changing.</param>
+        /// <param name="originalObject">Original Cell property value.</param>
+        /// <param name="newObject">New Cell property value.</param>
+        /// <param name="setMethod">Method in Spreadsheet that sets Cell property.</param>
+        [TestCase(typeof(string), "Original string", "new string", "SetCellText")]
+        public void TestAddUndoToRedos(Type tProperty, object originalObject, object newObject, string setMethod)
+        {
+            // setup
+            var newValue = Convert.ChangeType(originalObject, tProperty);
+            var originalValue = Convert.ChangeType(newObject, tProperty);
+            var setMethodInfo = Utility.GetMethod<Spreadsheet>(setMethod);
+            setMethodInfo.Invoke(this.sheet, new object[] { this.cells[0, 0], originalValue });
+
+            Stack<ICommand> redos = (Stack<ICommand>)Utility.GetField<Spreadsheet>("redos").GetValue(this.sheet);
+
+            setMethodInfo.Invoke(this.sheet, new object[] { this.cells[0, 0], newValue });
+            this.sheet.Undo();
+
+            // Check new command is on stack
+            var oldValue = Convert.ChangeType(Utility.GetField<ChangeTextCommand>("oldText").GetValue(redos.Peek()), tProperty);
+            var cellNewValue = Convert.ChangeType(Utility.GetField<ChangeTextCommand>("newText").GetValue(redos.Peek()), tProperty);
+            Assert.AreEqual(originalValue, oldValue);
+            Assert.AreEqual(newValue, cellNewValue);
+        }
+
+        /// <summary>
+        /// Test Redo() moves command to undos.
+        /// </summary>
+        /// <param name="tProperty">Type of Property changing.</param>
+        /// <param name="originalObject">Original Cell property value.</param>
+        /// <param name="newObject">New Cell property value.</param>
+        /// <param name="setMethod">Method in Spreadsheet that sets Cell property.</param>
+        [TestCase(typeof(string), "Original string", "new string", "SetCellText")]
+        public void TestAddRedoToUndos(Type tProperty, object originalObject, object newObject, string setMethod)
+        {
+            // setup
+            var newValue = Convert.ChangeType(originalObject, tProperty);
+            var originalValue = Convert.ChangeType(newObject, tProperty);
+            var setMethodInfo = Utility.GetMethod<Spreadsheet>(setMethod);
+            setMethodInfo.Invoke(this.sheet, new object[] { this.cells[0, 0], originalValue });
+
+            Stack<ICommand> undos = (Stack<ICommand>)Utility.GetField<Spreadsheet>("undos").GetValue(this.sheet);
+
+            setMethodInfo.Invoke(this.sheet, new object[] { this.cells[0, 0], newValue });
             this.sheet.Undo();
             this.sheet.Redo();
 
             // Check new command is on stack
-            string oldText = (string)Utility.GetField<ChangeTextCommand>("oldText").GetValue(undos.Peek());
-            string newText = (string)Utility.GetField<ChangeTextCommand>("newText").GetValue(undos.Peek());
-            Assert.AreEqual(originalString, oldText);
-            Assert.AreEqual(newString, newText);
+            var oldValue = Convert.ChangeType(Utility.GetField<ChangeTextCommand>("oldText").GetValue(undos.Peek()), tProperty);
+            var cellNewValue = Convert.ChangeType(Utility.GetField<ChangeTextCommand>("newText").GetValue(undos.Peek()), tProperty);
+            Assert.AreEqual(originalValue, oldValue);
+            Assert.AreEqual(newValue, cellNewValue);
         }
     }
 }
