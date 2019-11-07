@@ -11,7 +11,7 @@ namespace Cpts321
     /// <summary>
     /// Command to change Cell's background color.
     /// </summary>
-    class ChangeBGColorCommand : ICommand
+    internal class ChangeBGColorCommand : ICommand
     {
         private string description = "change cell background color";
         private Cell cell;
@@ -26,7 +26,6 @@ namespace Cpts321
         public ChangeBGColorCommand(Cell cell, uint color)
         {
             this.cell = cell;
-            this.oldColor = cell.BGColor;
             this.newColor = color;
         }
 
@@ -44,7 +43,8 @@ namespace Cpts321
         /// </summary>
         public void Execute()
         {
-            throw new NotImplementedException();
+            this.oldColor = this.cell.BGColor;
+            this.cell.BGColor = this.newColor;
         }
 
         /// <summary>
