@@ -334,5 +334,29 @@ namespace Cpts321
             this.sheet.Redo();
             Assert.AreEqual(newText, this.cells[0, 0].Text);
         }
+
+        /// <summary>
+        /// Test Undo() moves command to Redos.
+        /// </summary>
+        [Test]
+        public void TestAddRedoToUndos()
+        {
+            // setup
+            const string newString = "test string";
+            const string originalString = "original string";
+            this.cells[0, 0].Text = originalString;
+
+            Stack<ICommand> undos = (Stack<ICommand>)Utility.GetField<Spreadsheet>("undos").GetValue(this.sheet);
+
+            this.sheet.SetCellText(this.cells[0, 0], newString);
+            this.sheet.Undo();
+            this.sheet.Redo();
+
+            // Check new command is on stack
+            string oldText = (string)Utility.GetField<ChangeTextCommand>("oldText").GetValue(undos.Peek());
+            string newText = (string)Utility.GetField<ChangeTextCommand>("newText").GetValue(undos.Peek());
+            Assert.AreEqual(originalString, oldText);
+            Assert.AreEqual(newString, newText);
+        }
     }
 }

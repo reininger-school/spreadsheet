@@ -101,5 +101,10 @@ namespace Spreadsheet_Reid_Reininger
         {
             this.sheet.Undo();
         }
+
+        private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.sheet.Redo();
+        }
     }
 }
