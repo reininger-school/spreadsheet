@@ -14,8 +14,8 @@ namespace Cpts321
     internal class ChangeBGColorCommand : ICommand
     {
         private string description = "change cell background color";
-        private Cell cell;
-        private uint oldColor;
+        private Cell[] cells;
+        private uint[] oldColors;
         private uint newColor;
 
         /// <summary>
@@ -25,7 +25,18 @@ namespace Cpts321
         /// <param name="color">New Cell color.</param>
         public ChangeBGColorCommand(Cell cell, uint color)
         {
-            this.cell = cell;
+            this.cells = new Cell[] { cell };
+            this.newColor = color;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChangeBGColorCommand"/> class.
+        /// </summary>
+        /// <param name="cells">Cells to change.</param>
+        /// <param name="color">New cell color.</param>
+        public ChangeBGColorCommand(Cell[] cells, uint color)
+        {
+            this.cells = cells;
             this.newColor = color;
         }
 
@@ -43,8 +54,11 @@ namespace Cpts321
         /// </summary>
         public void Execute()
         {
-            this.oldColor = this.cell.BGColor;
-            this.cell.BGColor = this.newColor;
+            this.oldColors = this.cells.Select((cell) => cell.BGColor).ToArray();
+            foreach (Cell cell in this.cells)
+            {
+                cell.BGColor = this.newColor;
+            }
         }
 
         /// <summary>
@@ -52,7 +66,10 @@ namespace Cpts321
         /// </summary>
         public void Undo()
         {
-            this.cell.BGColor = this.oldColor;
+            foreach (var tuple in this.cells.Zip(this.oldColors, (cell, color) => new { cell, color }))
+            {
+                tuple.cell.BGColor = tuple.color;
+            }
         }
     }
 }
