@@ -288,5 +288,14 @@ namespace Cpts321
             this.sheet.Undo();
             Assert.AreEqual(originalText, this.cells[0, 0].Text);
         }
+
+        /// <summary>
+        /// Test calling Undo() with empty stack.
+        /// </summary>
+        [Test]
+        public void TestUndoEmptyStack()
+        {
+            Assert.Throws<Exception>(() => this.sheet.Undo());
+        }
     }
 }
