@@ -320,5 +320,19 @@ namespace Cpts321
             Assert.AreEqual(originalString, oldText);
             Assert.AreEqual(newString, newText);
         }
+
+        /// <summary>
+        /// Test Redo with nonempty Redos stack.
+        /// </summary>
+        [Test]
+        public void TestRedoNonEmptyStack()
+        {
+            const string newText = "lol";
+            string originalText = this.cells[0, 0].Text;
+            this.sheet.SetCellText(this.cells[0, 0], newText);
+            this.sheet.Undo();
+            this.sheet.Redo();
+            Assert.AreEqual(newText, this.cells[0, 0].Text);
+        }
     }
 }

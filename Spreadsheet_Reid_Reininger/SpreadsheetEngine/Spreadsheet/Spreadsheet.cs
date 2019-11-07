@@ -152,6 +152,13 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Redo most recently undone command.
+        /// </summary>
+        public void Redo()
+        {
+        }
+
+        /// <summary>
         /// Set Cell's background color.
         /// </summary>
         /// <param name="cell">Cell to modify.</param>
