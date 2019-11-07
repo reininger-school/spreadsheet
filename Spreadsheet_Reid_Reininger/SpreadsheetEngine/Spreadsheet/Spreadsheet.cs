@@ -156,6 +156,7 @@ namespace Cpts321
         /// </summary>
         public void Redo()
         {
+            this.redos.Pop().Execute();
         }
 
         /// <summary>
