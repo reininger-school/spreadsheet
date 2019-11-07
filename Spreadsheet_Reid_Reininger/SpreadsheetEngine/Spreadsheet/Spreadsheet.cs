@@ -146,7 +146,9 @@ namespace Cpts321
         /// </summary>
         public void Undo()
         {
-            this.undos.Pop().Undo();
+            var command = this.undos.Pop();
+            command.Undo();
+            this.redos.Push(command);
         }
 
         /// <summary>
