@@ -51,6 +51,7 @@
     <Compile Include="ExpressionTree\AdditionNode.cs" />
     <Compile Include="ExpressionTree\BinaryOperatorNode.cs" />
     <Compile Include="Spreadsheet\Cell.cs" />
+    <Compile Include="Spreadsheet\ChangeBGColorCommand.cs" />
     <Compile Include="Spreadsheet\ChangeTextCommand.cs" />
     <Compile Include="ExpressionTree\ConstantNode.cs" />
     <Compile Include="ExpressionTree\DivisionNode.cs" />

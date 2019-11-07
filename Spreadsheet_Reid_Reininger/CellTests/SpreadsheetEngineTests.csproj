@@ -61,6 +61,7 @@
     <Compile Include="Spreadsheet\MockCell.cs" />
     <Compile Include="ExpressionTree\TestBinaryOperatorNode.cs" />
     <Compile Include="Spreadsheet\TestCell.cs" />
+    <Compile Include="Spreadsheet\TestChangeBGColorCommand.cs" />
     <Compile Include="Spreadsheet\TestChangeTextCommand.cs" />
     <Compile Include="ExpressionTree\TestExpressionTree.cs" />
     <Compile Include="ExpressionTree\TestOperatorNodeFactory.cs" />

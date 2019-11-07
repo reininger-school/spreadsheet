@@ -16,7 +16,7 @@ namespace Cpts321
         private Cell cell;
         private string newText;
         private string oldText;
-        private string description = "cell text change";
+        private string description = "change cell text";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChangeTextCommand"/> class.
