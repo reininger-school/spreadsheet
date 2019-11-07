@@ -297,6 +297,7 @@ namespace Cpts321
         /// <param name="newObject">New Cell property value.</param>
         /// <param name="setMethod">Method in Spreadsheet that sets Cell property.</param>
         [TestCase(typeof(string), "original string", "new string", "SetCellText")]
+        [TestCase(typeof(uint), 0xffffffffU, 0x0000ffffU, "SetCellBGColor")]
         public void TestAddUndo(Type tProperty, object originalObject, object newObject, string setMethod)
         {
             // setup
@@ -325,6 +326,7 @@ namespace Cpts321
         /// <param name="newObject">New Cell property value.</param>
         /// <param name="setMethod">Method in Spreadsheet that sets Cell property.</param>
         [TestCase(typeof(string), "Original string", "new string", "SetCellText")]
+        [TestCase(typeof(uint), 0xffffffffU, 0x0000ffffU, "SetCellBGColor")]
         public void TestAddUndoToRedos(Type tProperty, object originalObject, object newObject, string setMethod)
         {
             // setup
@@ -353,6 +355,7 @@ namespace Cpts321
         /// <param name="newObject">New Cell property value.</param>
         /// <param name="setMethod">Method in Spreadsheet that sets Cell property.</param>
         [TestCase(typeof(string), "Original string", "new string", "SetCellText")]
+        [TestCase(typeof(uint), 0xffffffffU, 0x0000ffffU, "SetCellBGColor")]
         public void TestAddRedoToUndos(Type tProperty, object originalObject, object newObject, string setMethod)
         {
             // setup
