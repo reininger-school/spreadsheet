@@ -295,7 +295,30 @@ namespace Cpts321
         [Test]
         public void TestUndoEmptyStack()
         {
-            Assert.Throws<Exception>(() => this.sheet.Undo());
+            Assert.Throws<InvalidOperationException>(() => this.sheet.Undo());
+        }
+
+        /// <summary>
+        /// Test Undo() moves command to Redos.
+        /// </summary>
+        [Test]
+        public void TestAddUndoToRedos()
+        {
+            // setup
+            const string newString = "test string";
+            const string originalString = "original string";
+            this.cells[0, 0].Text = originalString;
+
+            Stack<ICommand> redos = (Stack<ICommand>)Utility.GetField<Spreadsheet>("redos").GetValue(this.sheet);
+
+            this.sheet.SetCellText(this.cells[0, 0], newString);
+            this.sheet.Undo();
+
+            // Check new command is on stack
+            string oldText = (string)Utility.GetField<ChangeTextCommand>("oldText").GetValue(redos.Peek());
+            string newText = (string)Utility.GetField<ChangeTextCommand>("newText").GetValue(redos.Peek());
+            Assert.AreEqual(originalString, oldText);
+            Assert.AreEqual(newString, newText);
         }
     }
 }
