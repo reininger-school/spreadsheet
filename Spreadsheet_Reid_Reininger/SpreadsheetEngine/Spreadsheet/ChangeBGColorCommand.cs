@@ -52,7 +52,7 @@ namespace Cpts321
         /// </summary>
         public void Undo()
         {
-            throw new NotImplementedException();
+            this.cell.BGColor = this.oldColor;
         }
     }
 }
