@@ -13,9 +13,9 @@ namespace Cpts321
     /// </summary>
     internal class ChangeTextCommand : ICommand
     {
-        private Cell cell;
+        private Cell[] cells;
         private string newText;
-        private string oldText;
+        private string[] oldTexts;
         private string description = "change cell text";
 
         /// <summary>
@@ -25,7 +25,18 @@ namespace Cpts321
         /// <param name="text">String to change text to.</param>
         public ChangeTextCommand(Cell cell, string text)
         {
-            this.cell = cell;
+            this.cells = new Cell[] { cell };
+            this.newText = text;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChangeTextCommand"/> class.
+        /// </summary>
+        /// <param name="cells">Cells to change text.</param>
+        /// <param name="text">Text to change celss to.</param>
+        public ChangeTextCommand(Cell[] cells, string text)
+        {
+            this.cells = cells;
             this.newText = text;
         }
 
@@ -43,8 +54,11 @@ namespace Cpts321
         /// </summary>
         public void Execute()
         {
-            this.oldText = this.cell.Text;
-            this.cell.Text = this.newText;
+            this.oldTexts = this.cells.Select<Cell, string>((x) => x.Text).ToArray();
+            foreach (Cell cell in this.cells)
+            {
+                cell.Text = this.newText;
+            }
         }
 
         /// <summary>
@@ -52,7 +66,10 @@ namespace Cpts321
         /// </summary>
         public void Undo()
         {
-            this.cell.Text = this.oldText;
+            foreach (var tuple in this.cells.Zip(this.oldTexts, (cell, oldText) => new { cell, oldText }))
+            {
+                tuple.cell.Text = tuple.oldText;
+            }
         }
     }
 }
