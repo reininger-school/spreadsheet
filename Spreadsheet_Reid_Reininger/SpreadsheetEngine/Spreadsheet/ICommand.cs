@@ -11,17 +11,12 @@ namespace Cpts321
     /// <summary>
     /// Command pattern interface.
     /// </summary>
-    public interface ICommand
+    internal interface ICommand
     {
         /// <summary>
         /// Execute command.
         /// </summary>
         void Execute();
-
-        /// <summary>
-        /// Perform exact opposite of execute.
-        /// </summary>
-        void Undo();
 
         /// <summary>
         /// Get description of what execute does.

@@ -56,6 +56,7 @@
     <Compile Include="ExpressionTree\ConstantNode.cs" />
     <Compile Include="ExpressionTree\DivisionNode.cs" />
     <Compile Include="ExpressionTree\ExpressionTree.cs" />
+    <Compile Include="Spreadsheet\CommandManager.cs" />
     <Compile Include="Spreadsheet\ICommand.cs" />
     <Compile Include="ExpressionTree\LeftParenthesis.cs" />
     <Compile Include="ExpressionTree\MultiplicationNode.cs" />
@@ -64,6 +65,8 @@
     <Compile Include="ExpressionTree\OperatorNodeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExpressionTree\RightParenthesis.cs" />
+    <Compile Include="Spreadsheet\IUndoableCommand.cs" />
+    <Compile Include="Spreadsheet\NotifyEmptyStack.cs" />
     <Compile Include="Spreadsheet\Spreadsheet.cs" />
     <Compile Include="ExpressionTree\SubtractionNode.cs" />
     <Compile Include="Spreadsheet\TextCell.cs" />
@@ -72,6 +75,7 @@
   <ItemGroup>
     <None Include="Project\packages.config" />
     <None Include="SpreadsheetEngine.ruleset" />
+    <None Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />

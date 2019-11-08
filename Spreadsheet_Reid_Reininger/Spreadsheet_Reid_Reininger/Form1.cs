@@ -3,6 +3,7 @@
 namespace Spreadsheet_Reid_Reininger
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows.Forms;
     using Cpts321;
@@ -26,6 +27,7 @@ namespace Spreadsheet_Reid_Reininger
         {
             DataGridViewRow newRow; // ref for adding rows to grid
             this.sheet.CellPropertyChanged += this.Sheet_CellPropertyChanged;
+            this.sheet.PropertyChanged += this.Sheet_PropertyChanged;
 
             // add columns A-Z
             this.dataGridView1.Columns.Clear();
@@ -53,13 +55,29 @@ namespace Spreadsheet_Reid_Reininger
         {
             Cell cell = (Cell)sender;
             var visibleCell = this.dataGridView1.Rows[cell.RowIndex].Cells[cell.ColumnIndex];
-            if (e.PropertyName == "Text")
+            if (e.PropertyName == "Text" || e.PropertyName == "Value")
             {
                 visibleCell.Value = cell.Value;
             }
             else if (e.PropertyName == "BGColor")
             {
                 visibleCell.Style.BackColor = System.Drawing.Color.FromArgb((int)cell.BGColor);
+            }
+
+            // update undo/redo text
+            this.undoToolStripMenuItem.Text = "Undo " + this.sheet.UndoDescription;
+            this.redoToolStripMenuItem.Text = "Redo " + this.sheet.RedoDescription;
+        }
+
+        private void Sheet_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Undos")
+            {
+                this.undoToolStripMenuItem.Enabled = this.sheet.Undos;
+            }
+            else if (e.PropertyName == "Redos")
+            {
+                this.redoToolStripMenuItem.Enabled = this.sheet.Redos;
             }
         }
 
@@ -90,10 +108,13 @@ namespace Spreadsheet_Reid_Reininger
         {
             if (this.colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                foreach (DataGridViewCell it in this.dataGridView1.SelectedCells)
+                List<Cell> cells = new List<Cell>();
+                foreach (DataGridViewCell visibleCell in this.dataGridView1.SelectedCells)
                 {
-                    this.sheet.SetCellBGColor(this.sheet.GetCell(it.RowIndex, it.ColumnIndex), (uint)this.colorDialog1.Color.ToArgb());
+                    cells.Add(this.sheet.GetCell(visibleCell.RowIndex, visibleCell.ColumnIndex));
                 }
+
+                this.sheet.SetCellBGColor(cells.ToArray(), (uint)this.colorDialog1.Color.ToArgb());
             }
         }
 

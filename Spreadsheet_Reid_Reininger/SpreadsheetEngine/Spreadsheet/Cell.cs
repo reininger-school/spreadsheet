@@ -50,6 +50,8 @@ namespace Cpts321
 
             this.RowIndex = rowIndex;
             this.ColumnIndex = columnIndex;
+            this.BGColor = 0xffffffffU;
+            this.Text = null;
         }
 
         /// <summary>
@@ -83,6 +85,8 @@ namespace Cpts321
                 {
                     this.value = value;
                 }
+
+                this.PropertyChanged(this, new PropertyChangedEventArgs("Value"));
             }
         }
 
@@ -136,7 +140,11 @@ namespace Cpts321
         /// <param name="e">Event args.</param>
         public void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
+            if (e.PropertyName == "Value")
+            {
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DependencyValue"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
+            }
         }
     }
 }

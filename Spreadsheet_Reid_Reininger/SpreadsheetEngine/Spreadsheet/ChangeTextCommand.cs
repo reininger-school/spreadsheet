@@ -11,12 +11,12 @@ namespace Cpts321
     /// <summary>
     /// Command object to change Cell text.
     /// </summary>
-    internal class ChangeTextCommand : ICommand
+    internal class ChangeTextCommand : IUndoableCommand
     {
         private Cell[] cells;
         private string newText;
         private string[] oldTexts;
-        private string description = "change cell text";
+        private string description = "text change";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ChangeTextCommand"/> class.

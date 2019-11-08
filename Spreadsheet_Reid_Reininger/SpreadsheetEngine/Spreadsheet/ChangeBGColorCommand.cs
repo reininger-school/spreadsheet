@@ -11,9 +11,9 @@ namespace Cpts321
     /// <summary>
     /// Command to change Cell's background color.
     /// </summary>
-    internal class ChangeBGColorCommand : ICommand
+    internal class ChangeBGColorCommand : IUndoableCommand
     {
-        private string description = "change cell background color";
+        private string description = "background color change";
         private Cell[] cells;
         private uint[] oldColors;
         private uint newColor;

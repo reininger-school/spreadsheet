@@ -12,14 +12,11 @@ namespace Cpts321
     /// <summary>
     /// Contains all cells.
     /// </summary>
-    public class Spreadsheet
+    public class Spreadsheet : INotifyPropertyChanged
     {
-        // Reference to cells
         private Cell[,] cells;
-
         private ExpressionTree tree = new ExpressionTree("1");
-        private Stack<ICommand> undos = new Stack<ICommand>();
-        private Stack<ICommand> redos = new Stack<ICommand>();
+        private CommandManager commandManager = new CommandManager();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Spreadsheet"/> class.
@@ -28,6 +25,9 @@ namespace Cpts321
         /// <param name="columns">Number of columns.</param>
         public Spreadsheet(int rows, int columns)
         {
+            // subscribe to CommandManage PropertyChanged.
+            this.commandManager.PropertyChanged += this.CommandManager_PropertyChanged;
+
             this.cells = new Cell[rows, columns];
             for (int i = 0; i < rows; i++)
             {
@@ -47,6 +47,11 @@ namespace Cpts321
         public event PropertyChangedEventHandler CellPropertyChanged;
 
         /// <summary>
+        /// Fire when property changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
         /// Types of Cells.
         /// </summary>
         public enum CellType
@@ -55,6 +60,38 @@ namespace Cpts321
             /// Cell with text value.
             /// </summary>
             Text,
+        }
+
+        /// <summary>
+        /// Gets description of current redo operation.
+        /// </summary>
+        public string RedoDescription
+        {
+            get => this.commandManager.RedoDescription;
+        }
+
+        /// <summary>
+        /// Gets description of current undo operation.
+        /// </summary>
+        public string UndoDescription
+        {
+            get => this.commandManager.UndoDescription;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether undos are available.
+        /// </summary>
+        public bool Undos
+        {
+            get => this.commandManager.Undos;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether redos are available.
+        /// </summary>
+        public bool Redos
+        {
+            get => this.commandManager.Redos;
         }
 
         /// <summary>
@@ -136,9 +173,34 @@ namespace Cpts321
             }
 
             // create command
-            var changeText = new ChangeTextCommand(cell, text);
-            changeText.Execute();
-            this.undos.Push(changeText);
+            this.commandManager.Execute(new ChangeTextCommand(cell, text));
+        }
+
+        /// <summary>
+        /// Set Cells background color.
+        /// </summary>
+        /// <param name="cell">Cell to modify.</param>
+        /// <param name="color">uint representation of color.</param>
+        public void SetCellBGColor(Cell cell, uint color)
+        {
+            this.SetCellBGColor(new Cell[] { cell }, color);
+        }
+
+        /// <summary>
+        /// Set Cells' background color.
+        /// </summary>
+        /// <param name="cells">Cells to modify.</param>
+        /// <param name="color">uint representation of color.</param>
+        public void SetCellBGColor(Cell[] cells, uint color)
+        {
+            // do nothing if color the same
+            if (cells.All((cell) => cell.BGColor == color))
+            {
+                return;
+            }
+
+            // create command
+            this.commandManager.Execute(new ChangeBGColorCommand(cells, color));
         }
 
         /// <summary>
@@ -146,9 +208,7 @@ namespace Cpts321
         /// </summary>
         public void Undo()
         {
-            var command = this.undos.Pop();
-            command.Undo();
-            this.redos.Push(command);
+            this.commandManager.Undo();
         }
 
         /// <summary>
@@ -156,19 +216,7 @@ namespace Cpts321
         /// </summary>
         public void Redo()
         {
-            var command = this.redos.Pop();
-            command.Execute();
-            this.undos.Push(command);
-        }
-
-        /// <summary>
-        /// Set Cell's background color.
-        /// </summary>
-        /// <param name="cell">Cell to modify.</param>
-        /// <param name="color">uint representation of color.</param>
-        public void SetCellBGColor(Cell cell, uint color)
-        {
-            cell.BGColor = color;
+            this.commandManager.Redo();
         }
 
         /// <summary>
@@ -219,8 +267,24 @@ namespace Cpts321
         private void Cell_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Cell cell = (Cell)sender;
-            this.SetCellValue(cell);
+            if (e.PropertyName == "Text" || e.PropertyName == "DependencyValue")
+            {
+                this.SetCellValue(cell);
+            }
+
             this.CellPropertyChanged?.Invoke(sender, e);
+        }
+
+        private void CommandManager_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Redos")
+            {
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Redos"));
+            }
+            else if (e.PropertyName == "Undos")
+            {
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Undos"));
+            }
         }
 
         /// <summary>
@@ -249,7 +313,7 @@ namespace Cpts321
                 {
                     cell.Value = this.GetCell(cell.Text.Substring(1)).Value;
                     cell.Dependencies.Add(cell.Text.Substring(1));
-                    this.GetCell(cell.Text.Substring(1));
+                    this.GetCell(cell.Text.Substring(1)).PropertyChanged += cell.Cell_PropertyChanged;
                 }
 
                 // if expression
