@@ -2,14 +2,9 @@
 // 11512839
 namespace Cpts321
 {
-    using System;
-    using System.Collections;
+    using NUnit.Framework;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
-    using NUnit.Framework;
 
     /// <summary>
     /// ExpresiionTree test suite.

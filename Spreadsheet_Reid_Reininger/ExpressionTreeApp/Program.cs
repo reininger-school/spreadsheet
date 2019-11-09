@@ -2,13 +2,9 @@
 // 11512839
 namespace ExpressionTreeApp
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Cpts321;
+    using System;
+    using System.IO;
 
     /// <summary>
     /// Console application for ExpressionTree app.

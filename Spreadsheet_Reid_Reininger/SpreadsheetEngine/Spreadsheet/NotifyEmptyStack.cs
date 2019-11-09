@@ -5,8 +5,6 @@ namespace Cpts321
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// Stack with event notifying when stack becomes empty or non-empty.

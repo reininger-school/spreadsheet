@@ -2,8 +2,6 @@
 // 11512839
 namespace Cpts321
 {
-    using Cpts321;
-
     /// <summary>
     /// Mock concrete class to test abstract Cell class.
     /// </summary>

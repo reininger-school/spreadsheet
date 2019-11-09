@@ -2,13 +2,8 @@
 // 11512839
 namespace Cpts321
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Cpts321;
     using NUnit.Framework;
+    using System;
 
     /// <summary>
     /// VariableNode Test Suite.

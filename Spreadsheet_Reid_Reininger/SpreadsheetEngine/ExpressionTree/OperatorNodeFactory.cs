@@ -6,7 +6,6 @@ namespace Cpts321
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Cpts321;
 
     /// <summary>
     /// Creates OperatorNode instances.
