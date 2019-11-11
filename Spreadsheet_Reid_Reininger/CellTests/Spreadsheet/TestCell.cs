@@ -2,10 +2,10 @@
 // 11512839
 namespace Cpts321
 {
-    using NUnit.Framework;
     using System;
     using System.ComponentModel;
     using System.Linq;
+    using NUnit.Framework;
 
     /// <summary>
     /// Tests for cell class.
