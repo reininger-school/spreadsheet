@@ -5,11 +5,14 @@ namespace Cpts321
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// Represents a cell in the grid.
     /// </summary>
-    public abstract class Cell : INotifyPropertyChanged
+    public abstract class Cell : INotifyPropertyChanged, IXmlSerializable
     {
         /// <summary>
         /// List of cells currently subscribed to PropertyChanged.
@@ -145,6 +148,33 @@ namespace Cpts321
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DependencyValue"));
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
             }
+        }
+
+        /// <summary>
+        /// Reserved, should not be used.
+        /// </summary>
+        /// <returns>Null.</returns>
+        public XmlSchema GetSchema()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Reads Cell data from XML stream.
+        /// </summary>
+        /// <param name="reader">Reader with Cell data.</param>
+        public void ReadXml(XmlReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Writes Cell data to XML stream.
+        /// </summary>
+        /// <param name="writer">Stream to wrtie to.</param>
+        public void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
         }
     }
 }
