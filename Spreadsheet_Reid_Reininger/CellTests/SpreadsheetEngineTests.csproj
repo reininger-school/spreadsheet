@@ -67,6 +67,7 @@
     <Compile Include="ExpressionTree\TestOperatorNodeFactory.cs" />
     <Compile Include="Spreadsheet\TestSpreadsheet.cs" />
     <Compile Include="ExpressionTree\TestVariableNode.cs" />
+    <Compile Include="Spreadsheet\TestCommandManager.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
