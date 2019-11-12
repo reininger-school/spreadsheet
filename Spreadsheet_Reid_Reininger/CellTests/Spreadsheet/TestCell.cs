@@ -6,6 +6,8 @@ namespace Cpts321
     using System.ComponentModel;
     using System.Linq;
     using NUnit.Framework;
+    using System.Xml;
+    using System.IO;
 
     /// <summary>
     /// Tests for cell class.
@@ -189,6 +191,24 @@ namespace Cpts321
         public void TestGetSchemaReturnNull()
         {
             Assert.IsNull(this.cell.GetSchema());
+        }
+
+        /// <summary>
+        /// Test writing to non-null xml stream.
+        /// </summary>
+        [Test]
+        public void TestXmlWriteNonNullWriter()
+        {
+            // setup mock stream
+            const string mockFile = "temp.xml";
+            StreamWriter stream = new StreamWriter(mockFile);
+            XmlTextWriter writer = new XmlTextWriter(stream);
+
+            Assert.DoesNotThrow(() => this.cell.WriteXml(writer));
+
+            // cleanup
+            writer.Close();
+            File.Delete(mockFile);
         }
     }
 }
