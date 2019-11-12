@@ -89,7 +89,7 @@ namespace Cpts321
                     this.value = value;
                 }
 
-                this.PropertyChanged(this, new PropertyChangedEventArgs("Value"));
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
             }
         }
 
