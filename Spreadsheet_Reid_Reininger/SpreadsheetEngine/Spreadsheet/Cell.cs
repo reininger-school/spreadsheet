@@ -156,7 +156,7 @@ namespace Cpts321
         /// <returns>Null.</returns>
         public XmlSchema GetSchema()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <summary>
