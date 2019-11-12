@@ -181,5 +181,14 @@ namespace Cpts321
             bool same = textInfo.GetValue(this.cell) == valueInfo.GetValue(this.cell);
             Assert.IsTrue(same == result);
         }
+
+        /// <summary>
+        /// Test GetSchema always returns null.
+        /// </summary>
+        [Test]
+        public void TestGetSchemaReturnNull()
+        {
+            Assert.IsNull(this.cell.GetSchema());
+        }
     }
 }
