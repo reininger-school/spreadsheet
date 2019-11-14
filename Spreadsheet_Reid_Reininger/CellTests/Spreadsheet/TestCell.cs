@@ -210,5 +210,14 @@ namespace Cpts321
             writer.Close();
             File.Delete(mockFile);
         }
+
+        /// <summary>
+        /// Test writing to null XmlWriter.
+        /// </summary>
+        [Test]
+        public void TestXmlWriteNullWriter()
+        {
+            Assert.Throws<ArgumentNullException>(() => this.cell.WriteXml(null));
+        }
     }
 }
