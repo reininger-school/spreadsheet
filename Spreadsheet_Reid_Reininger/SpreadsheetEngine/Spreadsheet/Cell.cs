@@ -174,7 +174,8 @@ namespace Cpts321
         /// <param name="writer">Stream to wrtie to.</param>
         public void WriteXml(XmlWriter writer)
         {
-            throw new NotImplementedException();
+            writer.WriteElementString("text", this.text);
+            writer.WriteElementString("bGColor", this.bGColor.ToString());
         }
     }
 }
