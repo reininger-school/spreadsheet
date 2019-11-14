@@ -174,6 +174,11 @@ namespace Cpts321
         /// <param name="writer">Stream to wrtie to.</param>
         public void WriteXml(XmlWriter writer)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("XmlWriter cannot be null");
+            }
+
             writer.WriteElementString("text", this.text);
             writer.WriteElementString("bGColor", this.bGColor.ToString());
         }
