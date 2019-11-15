@@ -291,7 +291,7 @@ namespace Cpts321
         {
             XmlTextReader reader = new XmlTextReader(new StreamReader(stream));
             this.ClearCellData();
-            this.commandManager = new CommandManager();
+            this.commandManager.ClearUndoRedos();
 
             // move to first element
             try
