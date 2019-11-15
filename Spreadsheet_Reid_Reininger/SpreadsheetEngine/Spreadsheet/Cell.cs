@@ -165,7 +165,10 @@ namespace Cpts321
         /// <param name="reader">Reader with Cell data.</param>
         public void ReadXml(XmlReader reader)
         {
-            throw new NotImplementedException();
+            if (reader == null)
+            {
+                throw new ArgumentNullException("reader cannot be null");
+            }
         }
 
         /// <summary>
