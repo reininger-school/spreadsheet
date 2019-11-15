@@ -219,5 +219,32 @@ namespace Cpts321
         {
             Assert.Throws<ArgumentNullException>(() => this.cell.WriteXml(null));
         }
+
+        /// <summary>
+        /// Test no exceptions thrown for non-null reader.
+        /// </summary>
+        [Test]
+        public void TestXmlReadNonNull()
+        {
+            // setup mock stream
+            const string mockFile = "temp.xml";
+            StreamReader stream = new StreamReader(mockFile);
+            XmlTextReader reader = new XmlTextReader(stream);
+
+            Assert.DoesNotThrow(() => this.cell.ReadXml(reader));
+
+            // cleanup
+            reader.Close();
+            File.Delete(mockFile);
+        }
+
+        /// <summary>
+        /// Test null reader.
+        /// </summary>
+        [Test]
+        public void TestXmlReadNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => this.cell.ReadXml(null));
+        }
     }
 }
