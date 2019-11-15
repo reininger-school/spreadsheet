@@ -102,6 +102,15 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Clear undo/redo stacks.
+        /// </summary>
+        public void ClearUndoRedos()
+        {
+            this.redos.Clear();
+            this.undos.Clear();
+        }
+
+        /// <summary>
         /// Return description of top command on stack.
         /// </summary>
         /// <param name="commands">Stack of commands.</param>
