@@ -342,5 +342,27 @@ namespace Cpts321
 
             Assert.AreEqual(defaultCell.Text, this.cells[0, 0].Text);
         }
+
+        /// <summary>
+        /// Test Cell data is cleared
+        /// </summary>
+        [Test]
+        public void TestClearCellData()
+        {
+            Cell defaultCell = new MockCell(0, 0);
+            foreach (Cell cell in this.cells)
+            {
+                cell.Text = "Test string";
+                cell.BGColor = 0x0000ffffU;
+            }
+
+            Utility.GetMethod<Spreadsheet>("ClearCellData").Invoke(this.sheet, new object[] { });
+
+            foreach (Cell cell in this.cells)
+            {
+                Assert.AreEqual(defaultCell.Text, cell.Text);
+                Assert.AreEqual(defaultCell.Text, cell.Text);
+            }
+        }
     }
 }
