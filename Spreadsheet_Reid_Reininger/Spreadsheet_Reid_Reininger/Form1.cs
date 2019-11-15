@@ -5,6 +5,7 @@ namespace Spreadsheet_Reid_Reininger
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.IO;
     using System.Windows.Forms;
     using Cpts321;
 
@@ -126,6 +127,20 @@ namespace Spreadsheet_Reid_Reininger
         private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.sheet.Redo();
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Stream savefile;
+            this.saveFileDialog1.Filter = "Spreadsheet Reid Reininger files  (*.srr_xml)|*.srr_xml";
+            if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((savefile = this.saveFileDialog1.OpenFile()) != null)
+                {
+                    this.sheet.SaveXml(savefile);
+                    savefile.Close();
+                }
+            }
         }
     }
 }
