@@ -291,7 +291,7 @@ namespace Cpts321
         public void LoadXml(Stream stream)
         {
             XmlTextReader reader = new XmlTextReader(new StreamReader(stream));
-
+            this.ClearCellData();
             // move to first element
             try
             {
