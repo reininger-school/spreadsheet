@@ -325,5 +325,22 @@ namespace Cpts321
         {
             Assert.Throws<ArgumentNullException>(() => this.sheet.LoadXml(null));
         }
+
+        /// <summary>
+        /// Test old cells are reset to defualt when a new sheet is loaded.
+        /// </summary>
+        [Test]
+        public void TestLoadXmlClearOldCells()
+        {
+            Cell defaultCell = new MockCell(0, 0);
+            const string mockFile = "temp.xml";
+            Stream writer = File.Create(mockFile);
+            this.cells[0, 0].Text = "test string";
+
+            this.sheet.LoadXml(writer);
+            writer.Close();
+
+            Assert.AreEqual(defaultCell.Text, this.cells[0, 0].Text);
+        }
     }
 }
