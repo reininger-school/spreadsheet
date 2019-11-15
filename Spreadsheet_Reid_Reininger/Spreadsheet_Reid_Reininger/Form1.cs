@@ -142,5 +142,19 @@ namespace Spreadsheet_Reid_Reininger
                 }
             }
         }
+
+        private void LoadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Stream loadFile;
+            this.openFileDialog1.Filter = "Spreadsheet Reid Reininger files  (*.srr_xml)|*.srr_xml";
+            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((loadFile = this.openFileDialog1.OpenFile()) != null)
+                {
+                    this.sheet.LoadXml(loadFile);
+                    loadFile.Close();
+                }
+            }
+        }
     }
 }
