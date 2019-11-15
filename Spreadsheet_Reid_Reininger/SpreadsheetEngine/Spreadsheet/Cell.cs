@@ -169,6 +169,21 @@ namespace Cpts321
             {
                 throw new ArgumentNullException("reader cannot be null");
             }
+
+            while (reader.Read() && reader.NodeType != XmlNodeType.EndElement)
+            {
+                if (reader.NodeType == XmlNodeType.Element)
+                {
+                    if (reader.Name == "text")
+                    {
+                        this.Text = reader.ReadElementContentAsString();
+                    }
+                    else if (reader.Name == "bGColor")
+                    {
+                        this.BGColor = uint.Parse(reader.ReadElementContentAsString());
+                    }
+                }
+            }
         }
 
         /// <summary>
