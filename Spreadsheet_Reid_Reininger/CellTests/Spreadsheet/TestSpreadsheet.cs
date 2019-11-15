@@ -289,5 +289,32 @@ namespace Cpts321
         {
             Assert.IsNull(this.sheet.GetSchema());
         }
+
+        /// <summary>
+        /// Test writing to non-null xml stream.
+        /// </summary>
+        [Test]
+        public void TestXmlWriteNonNullWriter()
+        {
+            // setup mock stream
+            const string mockFile = "temp.xml";
+            StreamWriter stream = new StreamWriter(mockFile);
+            XmlTextWriter writer = new XmlTextWriter(stream);
+
+            Assert.DoesNotThrow(() => this.sheet.WriteXml(writer));
+
+            // cleanup
+            writer.Close();
+            File.Delete(mockFile);
+        }
+
+        /// <summary>
+        /// Test writing to null XmlWriter.
+        /// </summary>
+        [Test]
+        public void TestXmlWriteNullWriter()
+        {
+            Assert.Throws<ArgumentNullException>(() => this.sheet.WriteXml(null));
+        }
     }
 }
