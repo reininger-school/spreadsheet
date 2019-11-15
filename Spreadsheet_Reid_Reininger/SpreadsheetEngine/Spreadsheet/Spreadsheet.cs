@@ -275,6 +275,33 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Do not use. Should always return null.
+        /// </summary>
+        /// <returns>Null.</returns>
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Read in spreadsheet data from xml file.
+        /// </summary>
+        /// <param name="reader">Reader for xml data.</param>
+        public void ReadXml(XmlReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Write spreadsheet data to xml file.
+        /// </summary>
+        /// <param name="writer">Stream to writer xml data to.</param>
+        public void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Sets cell's value when a property changes, and fires CellPropertyChanged event.
         /// </summary>
         /// <param name="sender">Changed cell.</param>
@@ -367,33 +394,6 @@ namespace Cpts321
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// Do not use. Should always return null.
-        /// </summary>
-        /// <returns>Null.</returns>
-        public XmlSchema GetSchema()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Read in spreadsheet data from xml file.
-        /// </summary>
-        /// <param name="reader">Reader for xml data.</param>
-        public void ReadXml(XmlReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Write spreadsheet data to xml file.
-        /// </summary>
-        /// <param name="writer">Stream to writer xml data to.</param>
-        public void WriteXml(XmlWriter writer)
-        {
-            throw new NotImplementedException();
         }
     }
 }
