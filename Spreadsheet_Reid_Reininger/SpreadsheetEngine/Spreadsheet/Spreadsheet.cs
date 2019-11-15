@@ -265,7 +265,10 @@ namespace Cpts321
         /// <param name="stream">Stream to write spreadsheet data to.</param>
         public void SaveXml(Stream stream)
         {
-            throw new NotImplementedException();
+            if (stream == null)
+            {
+                throw new ArgumentNullException("Stream cannot be null");
+            }
         }
 
         /// <summary>
