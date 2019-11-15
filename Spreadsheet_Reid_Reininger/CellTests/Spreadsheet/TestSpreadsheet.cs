@@ -345,7 +345,7 @@ namespace Cpts321
         }
 
         /// <summary>
-        /// Test Cell data is cleared
+        /// Test Cell data is cleared.
         /// </summary>
         [Test]
         public void TestClearCellData()

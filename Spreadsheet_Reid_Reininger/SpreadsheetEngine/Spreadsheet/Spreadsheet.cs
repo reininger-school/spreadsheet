@@ -11,7 +11,6 @@ namespace Cpts321
     using System.Xml.Schema;
     using System.Xml.Serialization;
     using SpreadsheetEngine;
-    using System.Linq;
 
     /// <summary>
     /// Contains all cells.
@@ -292,6 +291,8 @@ namespace Cpts321
         {
             XmlTextReader reader = new XmlTextReader(new StreamReader(stream));
             this.ClearCellData();
+            this.commandManager = new CommandManager();
+
             // move to first element
             try
             {
