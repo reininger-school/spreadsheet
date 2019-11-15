@@ -2,8 +2,8 @@
 // 11512839
 namespace Cpts321
 {
-    using NUnit.Framework;
     using System;
+    using NUnit.Framework;
 
     /// <summary>
     /// OperatorNodeFactory test suite.

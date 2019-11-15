@@ -2,11 +2,11 @@
 // 11512839
 namespace Cpts321
 {
-    using NUnit.Framework;
-    using SpreadsheetEngine;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using NUnit.Framework;
+    using SpreadsheetEngine;
 
     /// <summary>
     /// Spreadsheet test suite.

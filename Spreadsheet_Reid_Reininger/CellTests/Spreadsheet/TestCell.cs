@@ -4,10 +4,10 @@ namespace Cpts321
 {
     using System;
     using System.ComponentModel;
-    using System.Linq;
-    using NUnit.Framework;
-    using System.Xml;
     using System.IO;
+    using System.Linq;
+    using System.Xml;
+    using NUnit.Framework;
 
     /// <summary>
     /// Tests for cell class.
