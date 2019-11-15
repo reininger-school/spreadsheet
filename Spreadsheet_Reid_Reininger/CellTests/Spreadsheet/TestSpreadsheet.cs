@@ -252,5 +252,14 @@ namespace Cpts321
 
             Assert.AreEqual(0, subscriber.Dependencies.Count);
         }
+
+        /// <summary>
+        /// Test exception is thrown when null stream is passed.
+        /// </summary>
+        [Test]
+        public void TestSaveXmlNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => this.sheet.SaveXml(null));
+        }
     }
 }

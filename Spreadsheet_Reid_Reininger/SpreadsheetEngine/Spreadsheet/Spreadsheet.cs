@@ -4,6 +4,7 @@ namespace Cpts321
 {
     using System;
     using System.ComponentModel;
+    using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
     using SpreadsheetEngine;
@@ -256,6 +257,15 @@ namespace Cpts321
                 this.GetCell(i - 1, 1).Text = $"This is cell B{i}";
                 this.GetCell(i - 1, 0).Text = $"=B{i}";
             }
+        }
+
+        /// <summary>
+        /// Save spreadsheet in xml format to stream.
+        /// </summary>
+        /// <param name="stream">Stream to write spreadsheet data to.</param>
+        public void SaveXml(Stream stream)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
