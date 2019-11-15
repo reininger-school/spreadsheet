@@ -339,6 +339,7 @@ namespace Cpts321
 
             this.sheet.LoadXml(writer);
             writer.Close();
+            File.Delete(mockFile);
 
             Assert.AreEqual(defaultCell.Text, this.cells[0, 0].Text);
         }
@@ -363,6 +364,26 @@ namespace Cpts321
                 Assert.AreEqual(defaultCell.Text, cell.Text);
                 Assert.AreEqual(defaultCell.Text, cell.Text);
             }
+        }
+
+        /// <summary>
+        /// Test undo/redo stack is cleared on load.
+        /// </summary>
+        [Test]
+        public void TestLoadXmlClearCommands()
+        {
+            this.sheet.SetCellBGColor(this.cells[0, 0], 0x0000ffffU);
+            Cell defaultCell = new MockCell(0, 0);
+            const string mockFile = "temp.xml";
+            Stream writer = File.Create(mockFile);
+            this.cells[0, 0].Text = "test string";
+
+            this.sheet.LoadXml(writer);
+            writer.Close();
+            File.Delete(mockFile);
+
+            Assert.IsFalse(this.sheet.Redos);
+            Assert.IsFalse(this.sheet.Undos);
         }
     }
 }
