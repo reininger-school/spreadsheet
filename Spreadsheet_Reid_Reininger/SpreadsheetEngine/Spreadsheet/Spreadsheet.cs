@@ -298,7 +298,21 @@ namespace Cpts321
         /// <param name="writer">Stream to writer xml data to.</param>
         public void WriteXml(XmlWriter writer)
         {
-            throw new NotImplementedException();
+            Cell defaultCell = new TextCell(0, 0);
+            foreach (Cell cell in this.cells)
+            {
+                bool dirtyText = cell.Text != defaultCell.Text;
+                bool dirtyBGColor = cell.BGColor != defaultCell.BGColor;
+
+                if (dirtyText || dirtyBGColor)
+                {
+                    writer.WriteStartElement("Cell");
+                    writer.WriteAttributeString("RowIndex", cell.RowIndex.ToString());
+                    writer.WriteAttributeString("ColumnIndex", cell.ColumnIndex.ToString());
+                    cell.WriteXml(writer);
+                    writer.WriteEndElement();
+                }
+            }
         }
 
         /// <summary>
