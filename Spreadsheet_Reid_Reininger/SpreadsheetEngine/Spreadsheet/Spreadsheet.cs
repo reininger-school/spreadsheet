@@ -284,6 +284,35 @@ namespace Cpts321
         }
 
         /// <summary>
+        /// Load spreadsheet data from .srr_xml file.
+        /// </summary>
+        /// <param name="stream">Stream to load data from.</param>
+        public void LoadXml(Stream stream)
+        {
+            XmlTextReader reader = new XmlTextReader(new StreamReader(stream));
+            reader.MoveToContent();
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Element)
+                {
+                    if (reader.Name == "Cell")
+                    {
+                        if (reader.HasAttributes)
+                        {
+                            int row, column;
+
+                            row = int.Parse(reader.GetAttribute("RowIndex"));
+                            column = int.Parse(reader.GetAttribute("ColumnIndex"));
+                            this.cells[row, column].ReadXml(reader);
+                        }
+                    }
+                }
+            }
+
+            reader.Close();
+        }
+
+        /// <summary>
         /// Do not use. Should always return null.
         /// </summary>
         /// <returns>Null.</returns>

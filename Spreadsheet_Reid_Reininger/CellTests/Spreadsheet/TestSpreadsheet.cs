@@ -316,5 +316,14 @@ namespace Cpts321
         {
             Assert.Throws<ArgumentNullException>(() => this.sheet.WriteXml(null));
         }
+
+        /// <summary>
+        /// Test save xml with null writer.
+        /// </summary>
+        [Test]
+        public void TestLoadXmlNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => this.sheet.LoadXml(null));
+        }
     }
 }
