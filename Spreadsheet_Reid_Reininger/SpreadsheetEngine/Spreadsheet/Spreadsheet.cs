@@ -11,6 +11,7 @@ namespace Cpts321
     using System.Xml.Schema;
     using System.Xml.Serialization;
     using SpreadsheetEngine;
+    using System.Linq;
 
     /// <summary>
     /// Contains all cells.
@@ -290,7 +291,19 @@ namespace Cpts321
         public void LoadXml(Stream stream)
         {
             XmlTextReader reader = new XmlTextReader(new StreamReader(stream));
-            reader.MoveToContent();
+
+            // move to first element
+            try
+            {
+                reader.MoveToContent();
+            }
+
+            // abort load if invalid xml
+            catch
+            {
+                return;
+            }
+
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element)
@@ -398,6 +411,19 @@ namespace Cpts321
             }
 
             cell.Dependencies.Clear();
+        }
+
+        /// <summary>
+        /// Sets all cell data to default.
+        /// </summary>
+        private void ClearCellData()
+        {
+            Cell defaultCell = Spreadsheet.CreateCell(CellType.Text, 0, 0);
+            foreach (Cell cell in this.cells)
+            {
+                cell.Text = defaultCell.Text;
+                cell.BGColor = defaultCell.BGColor;
+            }
         }
 
         private void SetCellValue(Cell cell)
