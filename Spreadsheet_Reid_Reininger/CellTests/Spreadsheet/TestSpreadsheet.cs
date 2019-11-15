@@ -5,6 +5,8 @@ namespace Cpts321
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.IO;
+    using System.Xml;
     using NUnit.Framework;
     using SpreadsheetEngine;
 
@@ -260,6 +262,23 @@ namespace Cpts321
         public void TestSaveXmlNull()
         {
             Assert.Throws<ArgumentNullException>(() => this.sheet.SaveXml(null));
+        }
+
+        /// <summary>
+        /// Test exception is not thrown for non-null stream.
+        /// </summary>
+        [Test]
+        public void TestSaveXmlNonNull()
+        {
+            // setup mock stream
+            const string mockFile = "temp.xml";
+            FileStream stream = new FileStream(mockFile, FileMode.OpenOrCreate);
+
+            Assert.DoesNotThrow(() => this.sheet.SaveXml(stream));
+
+            // cleanup
+            stream.Close();
+            File.Delete(mockFile);
         }
     }
 }
