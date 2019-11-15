@@ -280,5 +280,14 @@ namespace Cpts321
             stream.Close();
             File.Delete(mockFile);
         }
+
+        /// <summary>
+        /// Test null is always returned.
+        /// </summary>
+        [Test]
+        public void TestGetSchemaNull()
+        {
+            Assert.IsNull(this.sheet.GetSchema());
+        }
     }
 }
