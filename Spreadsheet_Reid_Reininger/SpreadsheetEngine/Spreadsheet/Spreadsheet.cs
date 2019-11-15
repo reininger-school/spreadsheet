@@ -272,6 +272,15 @@ namespace Cpts321
             {
                 throw new ArgumentNullException("Stream cannot be null");
             }
+
+            XmlTextWriter writer = new XmlTextWriter(new StreamWriter(stream));
+            writer.Formatting = Formatting.Indented;
+            writer.WriteStartDocument();
+            writer.WriteStartElement("Spreadsheet");
+            this.WriteXml(writer);
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
         }
 
         /// <summary>
@@ -298,6 +307,11 @@ namespace Cpts321
         /// <param name="writer">Stream to writer xml data to.</param>
         public void WriteXml(XmlWriter writer)
         {
+            if (writer == null)
+            {
+                throw new ArgumentNullException("Writer cannot be null");
+            }
+
             Cell defaultCell = new TextCell(0, 0);
             foreach (Cell cell in this.cells)
             {
