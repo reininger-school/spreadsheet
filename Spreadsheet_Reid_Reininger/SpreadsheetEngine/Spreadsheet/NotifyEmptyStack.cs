@@ -50,5 +50,18 @@ namespace Cpts321
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Any"));
             }
         }
+
+        /// <summary>
+        /// Same as Stack Clear() but fires PropertyChanged for "Any" if stack was non-empty.
+        /// </summary>
+        public new void Clear()
+        {
+            int count = this.Count;
+            base.Clear();
+            if (count > 0)
+            {
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Any"));
+            }
+        }
     }
 }
