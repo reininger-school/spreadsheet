@@ -385,5 +385,22 @@ namespace Cpts321
             Assert.IsFalse(this.sheet.Redos);
             Assert.IsFalse(this.sheet.Undos);
         }
+
+        /// <summary>
+        /// Test expression with invalid reference.
+        /// </summary>
+        /// <param name="text">Cell.Text.</param>
+        /// <param name="expectedValue">Expected Cell.Value.</param>
+        [TestCase("=C1", "!(invalid ref)")]
+        [TestCase("=B1+C1", "!(invalid ref)")]
+        [TestCase("=C1+B1", "!(invalid ref)")]
+        [TestCase("=foo", "!(invalid ref)")]
+        [TestCase("=B1+foo", "!(invalid ref)")]
+        public void TestSetCellValueInvalidRef(string text, string expectedValue)
+        {
+            this.sheet.SetCellText(this.cells[0, 0], text);
+            Utility.GetMethod<Spreadsheet>("SetCellValue").Invoke(this.sheet, new object[] { this.cells[0, 0] });
+            Assert.AreEqual(expectedValue, this.cells[0, 0].Value);
+        }
     }
 }
