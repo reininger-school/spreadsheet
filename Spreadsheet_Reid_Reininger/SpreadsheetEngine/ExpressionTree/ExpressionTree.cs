@@ -39,7 +39,7 @@ namespace Cpts321
             set
             {
                 this.variables.Clear();
-                this.expression = value;
+                this.expression = Regex.Replace(value, @"\s", string.Empty);
                 this.BuildTree();
             }
         }
@@ -95,7 +95,7 @@ namespace Cpts321
         {
             var postfix = new Stack<Node>();
             var stack = new Stack<OperatorNode>();
-            var tokens = this.operatorsRegex.Split(this.expression);
+            string[] tokens = this.operatorsRegex.Split(this.expression);
             OperatorNode newOp;
             OperatorNode poppedOp;
             BinaryOperatorNode binaryNode;

@@ -435,9 +435,9 @@ namespace Cpts321
             if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
             {
                 // if simple assignment
-                if (Regex.IsMatch(cell.Text, @"^=[A-Z]+[0-9]+$"))
+                if (Regex.IsMatch(cell.Text, @"^=\s*[A-Z]+[0-9]+\s*$"))
                 {
-                    cell.Value = this.GetCell(cell.Text.Substring(1)).Value;
+                    cell.Value = this.GetCell(Regex.Replace(cell.Text.Substring(1), @"\s", string.Empty)).Value;
                     cell.Dependencies.Add(cell.Text.Substring(1));
                     this.GetCell(cell.Text.Substring(1)).PropertyChanged += cell.Cell_PropertyChanged;
                 }
