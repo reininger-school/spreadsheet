@@ -462,6 +462,12 @@ namespace Cpts321
                         return;
                     }
 
+                    if (this.GetCell(formula.Substring(1)) == cell)
+                    {
+                        cell.Value = "!(self ref)";
+                        return;
+                    }
+
                     cell.Value = this.GetCell(Regex.Replace(formula.Substring(1), @"\s", string.Empty)).Value;
                     cell.Dependencies.Add(formula.Substring(1));
                     this.GetCell(formula.Substring(1)).PropertyChanged += cell.Cell_PropertyChanged;
@@ -478,6 +484,12 @@ namespace Cpts321
                         if (!this.CheckReferenceName(variable))
                         {
                             cell.Value = "!(invalid ref)";
+                            return;
+                        }
+
+                        if (this.GetCell(variable) == cell)
+                        {
+                            cell.Value = "!(self ref)";
                             return;
                         }
 
