@@ -479,71 +479,83 @@ namespace Cpts321
         {
             this.UnsubscribeCellDependencies(cell);
 
-            // if formula
-            if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
+            // if not formula do nothing
+            if (string.IsNullOrWhiteSpace(cell.Text) || cell.Text[0] != '=')
             {
-                string formula = Regex.Replace(cell.Text, @"\s", string.Empty);
+                return;
+            }
 
-                // if simple assignment
-                if (Regex.IsMatch(formula, @"^=[A-Z]+[0-9]+$"))
+            string formula = Regex.Replace(cell.Text, @"\s", string.Empty);
+
+            // if simple assignment
+            if (Regex.IsMatch(formula, @"^=[A-Z]+[0-9]+$"))
+            {
+                if (!this.CheckReferenceName(formula.Substring(1)))
                 {
-                    if (!this.CheckReferenceName(formula.Substring(1)))
+                    cell.Value = "!(invalid ref)";
+                    return;
+                }
+
+                if (this.GetCell(formula.Substring(1)) == cell)
+                {
+                    cell.Value = "!(self ref)";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(this.GetCell(formula.Substring(1)).Value))
+                {
+                    cell.Value = "0";
+                }
+                else
+                {
+                    cell.Value = this.GetCell(formula.Substring(1)).Value;
+                }
+
+                cell.Dependencies.Add(formula.Substring(1));
+                if (this.CheckCycle(cell))
+                {
+                    cell.Value = "!(circular ref)";
+                }
+
+                this.GetCell(formula.Substring(1)).PropertyChanged += cell.Cell_PropertyChanged;
+            }
+
+            // if expression
+            else
+            {
+                this.tree.Expression = formula.Substring(1);
+
+                // set variable values in tree
+                foreach (string variable in this.tree.Variables)
+                {
+                    if (!this.CheckReferenceName(variable))
                     {
                         cell.Value = "!(invalid ref)";
                         return;
                     }
 
-                    if (this.GetCell(formula.Substring(1)) == cell)
+                    if (this.GetCell(variable) == cell)
                     {
                         cell.Value = "!(self ref)";
                         return;
                     }
 
-                    if (string.IsNullOrEmpty(this.GetCell(formula.Substring(1)).Value))
+                    double value = 0;
+                    double.TryParse(this.GetCell(variable).Value, out value);
+                    this.tree.SetVariable(variable, value);
+
+                    // subscribe cell to dependencies
+                    cell.Dependencies.Add(variable);
+                    if (this.CheckCycle(this.GetCell(variable)))
                     {
-                        cell.Value = "0";
-                    }
-                    else
-                    {
-                        cell.Value = this.GetCell(formula.Substring(1)).Value;
+                        cell.Value = "!(circular ref)";
                     }
 
-                    cell.Dependencies.Add(formula.Substring(1));
-                    this.GetCell(formula.Substring(1)).PropertyChanged += cell.Cell_PropertyChanged;
+                    this.GetCell(variable).PropertyChanged += cell.Cell_PropertyChanged;
                 }
 
-                // if expression
-                else
-                {
-                    this.tree.Expression = formula.Substring(1);
-
-                    // set variable values in tree
-                    foreach (string variable in this.tree.Variables)
-                    {
-                        if (!this.CheckReferenceName(variable))
-                        {
-                            cell.Value = "!(invalid ref)";
-                            return;
-                        }
-
-                        if (this.GetCell(variable) == cell)
-                        {
-                            cell.Value = "!(self ref)";
-                            return;
-                        }
-
-                        double value = 0;
-                        double.TryParse(this.GetCell(variable).Value, out value);
-                        this.tree.SetVariable(variable, value);
-
-                        // subscribe cell to dependencies
-                        cell.Dependencies.Add(variable);
-                        this.GetCell(variable).PropertyChanged += cell.Cell_PropertyChanged;
-                    }
-
-                    cell.Value = this.tree.Evaluate().ToString();
-                }
+                cell.Value = this.tree.Evaluate().ToString();
             }
-        }
     }
+}
 }
