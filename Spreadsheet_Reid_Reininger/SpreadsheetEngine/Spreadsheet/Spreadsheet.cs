@@ -427,6 +427,23 @@ namespace Cpts321
             }
         }
 
+        private bool CheckReferenceName(string name)
+        {
+            // check format
+            if (Regex.IsMatch(name, @"^[A-Z][0-9]+$"))
+            {
+                int column = this.ConvertLetters(Regex.Match(name, @"[A-Z]+").Value);
+                int row = int.Parse(Regex.Match(name, @"[0-9]+").Value);
+
+                if (column < this.ColumnCount && row < this.RowCount)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void SetCellValue(Cell cell)
         {
             this.UnsubscribeCellDependencies(cell);
@@ -434,32 +451,38 @@ namespace Cpts321
             // if formula
             if (!string.IsNullOrWhiteSpace(cell.Text) && cell.Text[0] == '=')
             {
+                string formula = Regex.Replace(cell.Text, @"\s", string.Empty);
+
                 // if simple assignment
-                if (Regex.IsMatch(cell.Text, @"^=\s*[A-Z]+[0-9]+\s*$"))
+                if (Regex.IsMatch(formula, @"^=[A-Z]+[0-9]+$"))
                 {
-                    cell.Value = this.GetCell(Regex.Replace(cell.Text.Substring(1), @"\s", string.Empty)).Value;
-                    cell.Dependencies.Add(cell.Text.Substring(1));
-                    this.GetCell(cell.Text.Substring(1)).PropertyChanged += cell.Cell_PropertyChanged;
+                    if (!this.CheckReferenceName(formula.Substring(1)))
+                    {
+                        cell.Value = "!(invalid ref)";
+                        return;
+                    }
+
+                    cell.Value = this.GetCell(Regex.Replace(formula.Substring(1), @"\s", string.Empty)).Value;
+                    cell.Dependencies.Add(formula.Substring(1));
+                    this.GetCell(formula.Substring(1)).PropertyChanged += cell.Cell_PropertyChanged;
                 }
 
                 // if expression
                 else
                 {
-                    this.tree.Expression = cell.Text.Substring(1);
+                    this.tree.Expression = formula.Substring(1);
 
                     // set variable values in tree
-                    bool allDoubles = true;
-                    foreach (var variable in this.tree.Variables)
+                    foreach (string variable in this.tree.Variables)
                     {
-                        double value = 0;
-
-                        // if tryparse fails
-                        if (!double.TryParse(this.GetCell(variable).Value, out value))
+                        if (!this.CheckReferenceName(variable))
                         {
-                            allDoubles = false;
-                            break;
+                            cell.Value = "!(invalid ref)";
+                            return;
                         }
 
+                        double value = 0;
+                        double.TryParse(this.GetCell(variable).Value, out value);
                         this.tree.SetVariable(variable, value);
 
                         // subscribe cell to dependencies
@@ -467,15 +490,7 @@ namespace Cpts321
                         this.GetCell(variable).PropertyChanged += cell.Cell_PropertyChanged;
                     }
 
-                    // check all cells in formula contain double values
-                    if (allDoubles)
-                    {
-                        cell.Value = this.tree.Evaluate().ToString();
-                    }
-                    else
-                    {
-                        cell.Value = "ERR";
-                    }
+                    cell.Value = this.tree.Evaluate().ToString();
                 }
             }
         }
