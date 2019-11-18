@@ -410,11 +410,27 @@ namespace Cpts321
         /// <summary>
         /// Test expression with circular reference.
         /// </summary>
+        [Test]
         public void TestSetCellValue2Cycle()
         {
-            this.cells[0, 0].Text = "=B1";
-            this.cells[0, 1].Text = "=A1";
-            Assert.AreEqual("!(circular ref)", this.cells[0, 1].Value);
+            this.sheet.SetCellText(this.sheet.GetCell("A1"), "=B1");
+            this.sheet.SetCellText(this.sheet.GetCell("B1"), "=A1");
+            //Assert.AreEqual("!(circular ref)", this.sheet.GetCell("A1").Value);
+            Assert.IsTrue((bool)Utility.GetMethod<Spreadsheet>("CheckCycle").Invoke(this.sheet, new object[] { this.cells[0, 0]}));
+        }
+
+        /// <summary>
+        /// Test expression with multi-node circular reference.
+        /// </summary>
+        [Test]
+        public void TestSetCellValueMultiCycle()
+        {
+            Spreadsheet sheet = new Spreadsheet(3, 3);
+            sheet.SetCellText(sheet.GetCell("A1"), "=B1");
+            sheet.SetCellText(sheet.GetCell("B1"), "=B2");
+            sheet.SetCellText(sheet.GetCell("B2"), "=A1");
+            Assert.IsTrue((bool)Utility.GetMethod<Spreadsheet>("CheckCycle").Invoke(sheet, new object[] {sheet.GetCell("A1")}));
+            //Assert.AreEqual("!(circular ref)", this.cells[1, 1].Value);
         }
     }
 }
