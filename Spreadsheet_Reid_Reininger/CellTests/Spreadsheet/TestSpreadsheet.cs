@@ -396,6 +396,10 @@ namespace Cpts321
         [TestCase("=C1+B1", "!(invalid ref)")]
         [TestCase("=foo", "!(invalid ref)")]
         [TestCase("=B1+foo", "!(invalid ref)")]
+        [Timeout(30)]
+        [TestCase("=A1", "!(self ref)")]
+        [TestCase("=B1+A1", "!(self ref)")]
+        [TestCase("=B1+A1+B2", "!(self ref)")]
         public void TestSetCellValueInvalidRef(string text, string expectedValue)
         {
             this.sheet.SetCellText(this.cells[0, 0], text);
