@@ -485,23 +485,27 @@ namespace Cpts321
                 return;
             }
 
+            // get formula without whitespace
             string formula = Regex.Replace(cell.Text, @"\s", string.Empty);
 
             // if simple assignment
             if (Regex.IsMatch(formula, @"^=[A-Z]+[0-9]+$"))
             {
+                // check reference to valid cell
                 if (!this.CheckReferenceName(formula.Substring(1)))
                 {
                     cell.Value = "!(invalid ref)";
                     return;
                 }
 
+                // check reference to self
                 if (this.GetCell(formula.Substring(1)) == cell)
                 {
                     cell.Value = "!(self ref)";
                     return;
                 }
 
+                // if ref to blank cell, set value to zero, otherwise cell value
                 if (string.IsNullOrEmpty(this.GetCell(formula.Substring(1)).Value))
                 {
                     cell.Value = "0";
@@ -511,6 +515,7 @@ namespace Cpts321
                     cell.Value = this.GetCell(formula.Substring(1)).Value;
                 }
 
+                // add reference to dependcies and check for cycle
                 cell.Dependencies.Add(formula.Substring(1));
                 if (this.CheckCycle(cell))
                 {
@@ -544,7 +549,7 @@ namespace Cpts321
                     double.TryParse(this.GetCell(variable).Value, out value);
                     this.tree.SetVariable(variable, value);
 
-                    // subscribe cell to dependencies
+                    // subscribe cell to dependencies and check for cycle
                     cell.Dependencies.Add(variable);
                     if (this.CheckCycle(this.GetCell(variable)))
                     {
@@ -556,6 +561,6 @@ namespace Cpts321
 
                 cell.Value = this.tree.Evaluate().ToString();
             }
+        }
     }
-}
 }
