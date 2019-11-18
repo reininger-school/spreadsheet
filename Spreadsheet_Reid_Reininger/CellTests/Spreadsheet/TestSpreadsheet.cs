@@ -406,5 +406,15 @@ namespace Cpts321
             Utility.GetMethod<Spreadsheet>("SetCellValue").Invoke(this.sheet, new object[] { this.cells[0, 0] });
             Assert.AreEqual(expectedValue, this.cells[0, 0].Value);
         }
+
+        /// <summary>
+        /// Test expression with circular reference.
+        /// </summary>
+        public void TestSetCellValue2Cycle()
+        {
+            this.cells[0, 0].Text = "=B1";
+            this.cells[0, 1].Text = "=A1";
+            Assert.AreEqual("!(circular ref)", this.cells[0, 1].Value);
+        }
     }
 }
