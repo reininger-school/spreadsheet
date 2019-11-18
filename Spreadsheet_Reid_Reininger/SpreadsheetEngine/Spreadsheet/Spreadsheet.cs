@@ -3,6 +3,7 @@
 namespace Cpts321
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
@@ -435,13 +436,43 @@ namespace Cpts321
                 int column = this.ConvertLetters(Regex.Match(name, @"[A-Z]+").Value);
                 int row = int.Parse(Regex.Match(name, @"[0-9]+").Value);
 
-                if (column < this.ColumnCount && row < this.RowCount)
+                if (column < this.ColumnCount && row <= this.RowCount)
                 {
                     return true;
                 }
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Check if cell is part of a cycle of dependencies.
+        /// </summary>
+        /// <param name="cell">Cell to check.</param>
+        /// <returns>True if cell belongs to a cycle.</returns>
+        private bool CheckCycle(Cell cell)
+        {
+            List<Cell> discovered = new List<Cell>();
+            bool CheckCycleHelper(Cell node)
+            {
+                discovered.Add(node);
+                foreach (string dependency in node.Dependencies)
+                {
+                    if (discovered.Contains(this.GetCell(dependency)))
+                    {
+                        return true;
+                    }
+
+                    if (CheckCycleHelper(this.GetCell(dependency)))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            return CheckCycleHelper(cell);
         }
 
         private void SetCellValue(Cell cell)
@@ -468,7 +499,15 @@ namespace Cpts321
                         return;
                     }
 
-                    cell.Value = this.GetCell(Regex.Replace(formula.Substring(1), @"\s", string.Empty)).Value;
+                    if (string.IsNullOrEmpty(this.GetCell(formula.Substring(1)).Value))
+                    {
+                        cell.Value = "0";
+                    }
+                    else
+                    {
+                        cell.Value = this.GetCell(formula.Substring(1)).Value;
+                    }
+
                     cell.Dependencies.Add(formula.Substring(1));
                     this.GetCell(formula.Substring(1)).PropertyChanged += cell.Cell_PropertyChanged;
                 }
