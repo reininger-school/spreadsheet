@@ -146,7 +146,6 @@ namespace Cpts321
             if (e.PropertyName == "Value")
             {
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DependencyValue"));
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value"));
             }
         }
 
