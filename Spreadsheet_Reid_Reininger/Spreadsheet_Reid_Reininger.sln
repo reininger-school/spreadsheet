@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadsheetEngineTests", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionTreeApp", "ExpressionTreeApp\ExpressionTreeApp.csproj", "{7047F5F6-3BC9-4D38-89E1-F4B44A053946}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{636C904C-B750-4F2D-A52F-31764BFC55AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7047F5F6-3BC9-4D38-89E1-F4B44A053946}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7047F5F6-3BC9-4D38-89E1-F4B44A053946}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7047F5F6-3BC9-4D38-89E1-F4B44A053946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{636C904C-B750-4F2D-A52F-31764BFC55AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{636C904C-B750-4F2D-A52F-31764BFC55AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{636C904C-B750-4F2D-A52F-31764BFC55AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{636C904C-B750-4F2D-A52F-31764BFC55AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
