@@ -44,7 +44,7 @@ namespace TestAsynchronous
         [TestCase(-1)]
         public void TestRandomInvalidSize(int size)
         {
-            Assert.Throws<ArgumentException>(() => RandomList.Random(size));
+            Assert.Throws<ArgumentOutOfRangeException>(() => RandomList.Random(size));
         }
 
         /// <summary>
