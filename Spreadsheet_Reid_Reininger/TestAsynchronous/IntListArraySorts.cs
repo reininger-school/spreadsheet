@@ -14,7 +14,7 @@ namespace TestAsynchronous
     /// IntListSorter test suite.
     /// </summary>
     [TestFixture]
-    public class TestIntListSorter
+    public class IntListArraySorts
     {
         /// <summary>
         /// Test SingleThreadSort sorts all lists.
@@ -23,7 +23,7 @@ namespace TestAsynchronous
         public void TestSortSingleThread()
         {
             List<int>[] lists = new List<int>[] { new List<int>(new int[] { 3, 2, 1 }), new List<int>(new int[] { 6, 5, 4 }) };
-            IntListSorter.SortSingleThread(lists);
+            Asynchronous.IntListArraySorts.SortSingleThread(lists);
             foreach (var list in lists)
             {
                 Assert.IsTrue(this.IsSorted(list));
@@ -37,7 +37,7 @@ namespace TestAsynchronous
         public void TestSortMultipleThreadsIsSorted()
         {
             List<int>[] lists = new List<int>[] { new List<int>(new int[] { 3, 2, 1 }), new List<int>(new int[] { 6, 5, 4 }) };
-            IntListSorter.SortMultipleThreads(lists);
+            Asynchronous.IntListArraySorts.SortMultipleThreads(lists);
             foreach (var list in lists)
             {
                 Assert.IsTrue(this.IsSorted(list));

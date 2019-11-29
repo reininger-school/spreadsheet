@@ -12,7 +12,7 @@ namespace Asynchronous
     /// <summary>
     /// Sorts lists.
     /// </summary>
-    public static class IntListSorter
+    public static class IntListArraySorts
     {
         /// <summary>
         /// Sort list of ints on a single thread.
