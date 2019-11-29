@@ -6,7 +6,7 @@ namespace TestAsynchronous
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
-    using Cpts321;
+    using Asynchronous;
     using NUnit.Framework;
 
     /// <summary>

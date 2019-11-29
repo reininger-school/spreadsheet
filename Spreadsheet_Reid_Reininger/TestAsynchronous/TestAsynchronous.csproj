@@ -25,6 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>..\SpreadsheetEngine\Project\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\TestAsynchronous.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +43,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestIntListSorter.cs" />
     <Compile Include="TestRandomList.cs" />
   </ItemGroup>
   <ItemGroup>
