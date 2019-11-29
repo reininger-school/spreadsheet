@@ -23,7 +23,13 @@ namespace Cpts321
         /// <returns>List of random elements.</returns>
         public static List<int> Random(int size = 1_000_000)
         {
-            throw new NotImplementedException();
+            List<int> randomList = new List<int>(size);
+            for (int i = 0; i < size; i++)
+            {
+                randomList.Add(generator.Next());
+            }
+
+            return randomList;
         }
     }
 }
