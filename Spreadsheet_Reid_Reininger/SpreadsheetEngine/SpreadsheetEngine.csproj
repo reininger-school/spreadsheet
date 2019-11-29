@@ -22,7 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\SpreadsheetEngine.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Project\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Project\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
@@ -74,8 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Project\packages.config" />
-    <None Include="SpreadsheetEngine.ruleset" />
-    <None Include="stylecop.json" />
+    <None Include="Project\SpreadsheetEngine.ruleset" />
+    <None Include="Project\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />

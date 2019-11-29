@@ -34,7 +34,7 @@ namespace TestAsynchronous
         [TestCase(1)]
         public void TestRandomValidSize(int size)
         {
-            Assert.DoesNotThrow(() => RandomList.Random());
+            Assert.DoesNotThrow(() => RandomList.Random(size));
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace TestAsynchronous
         [TestCase(-1)]
         public void TestRandomInvalidSize(int size)
         {
-            Assert.Throws<ArgumentException>(() => RandomList.Random());
+            Assert.Throws<ArgumentException>(() => RandomList.Random(size));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace TestAsynchronous
         [TestCase(2)]
         public void TestRandomSize(int size)
         {
-            this.list = RandomList.Random();
+            this.list = RandomList.Random(size);
             Assert.AreEqual(size, this.list.Count);
         }
     }

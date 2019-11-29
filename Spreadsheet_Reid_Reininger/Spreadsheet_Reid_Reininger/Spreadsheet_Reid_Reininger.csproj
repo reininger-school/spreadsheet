@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\SpreadsheetEngine\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\SpreadsheetEngine\Project\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\Spreadsheet_Reid_Reininger.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,7 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\SpreadsheetEngine\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\SpreadsheetEngine\Project\SpreadsheetEngine.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
