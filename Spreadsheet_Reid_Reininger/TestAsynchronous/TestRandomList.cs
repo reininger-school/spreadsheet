@@ -59,5 +59,15 @@ namespace TestAsynchronous
             this.list = RandomList.Random(size);
             Assert.AreEqual(size, this.list.Count);
         }
+
+        /// <summary>
+        /// Test 1,000,000 size list can be generated in less than 1 second.
+        /// </summary>
+        [Test]
+        [Timeout(1000)]
+        public void TestRandomTime()
+        {
+            RandomList.Random(1_000_000);
+        }
     }
 }
