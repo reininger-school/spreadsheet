@@ -39,9 +39,10 @@ namespace Asynchronous
         }
 
         /// <summary>
-        /// Randomize lists in lists.
+        /// Randomize lists in array.
         /// </summary>
-        private static void RandomizeLists(this List<int>[] lists)
+        /// <param name="lists">Array of lists to randomize.</param>
+        public static void RandomizeLists(this List<int>[] lists)
         {
             lists = lists.Select<List<int>, List<int>>((x) => RandomList.Random(x.Count)).ToArray();
         }
