@@ -37,12 +37,14 @@ namespace Asynchronous
         /// </summary>
         public bool Sorting
         {
-            get => this.sorting;
-            private set
-            {
-                this.sorting = false;
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Sorting"));
-            }
+            get; set;
+        }
+
+        /// <summary>
+        /// Sort lists using one and multiple threads.
+        /// </summary>
+        public void Sort()
+        {
         }
     }
 }

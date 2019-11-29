@@ -43,8 +43,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntListArraySorts.cs" />
     <Compile Include="TestIntListSorter.cs" />
     <Compile Include="TestRandomList.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
