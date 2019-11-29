@@ -18,7 +18,7 @@ namespace Asynchronous
         /// Sort list of ints on a single thread.
         /// </summary>
         /// <param name="lists">Array of lists to sort.</param>
-        public static void SortSingleThread(List<int>[] lists)
+        public static void SortSingleThread(this List<int>[] lists)
         {
             foreach (var list in lists)
             {
@@ -30,7 +30,7 @@ namespace Asynchronous
         /// Sort list of ints on separate threads.
         /// </summary>
         /// <param name="lists">Array of lists to sort.</param>
-        public static void SortMultipleThreads(List<int>[] lists)
+        public static void SortMultipleThreads(this List<int>[] lists)
         {
             foreach (var list in lists)
             {
@@ -41,7 +41,7 @@ namespace Asynchronous
         /// <summary>
         /// Randomize lists in lists.
         /// </summary>
-        private static void RandomizeLists(List<int>[] lists)
+        private static void RandomizeLists(this List<int>[] lists)
         {
             lists = lists.Select<List<int>, List<int>>((x) => RandomList.Random(x.Count)).ToArray();
         }
