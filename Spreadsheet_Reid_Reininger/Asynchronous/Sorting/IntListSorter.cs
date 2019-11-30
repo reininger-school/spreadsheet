@@ -16,14 +16,16 @@ namespace Asynchronous
     {
         private List<int>[] lists;
         private bool sorting;
+        private int numberOfElements;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IntListSorter"/> class.
         /// </summary>
         /// <param name="numberOfLists">Number of lists to sort.</param>
-        public IntListSorter(int numberOfLists)
+        public IntListSorter(int numberOfLists, int numberOfElements)
         {
             this.lists = new List<int>[numberOfLists];
+            this.numberOfElements = numberOfElements;
             this.sorting = false;
         }
 
@@ -37,7 +39,12 @@ namespace Asynchronous
         /// </summary>
         public bool Sorting
         {
-            get; set;
+            get => this.sorting;
+            private set
+            {
+                this.sorting = false;
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Sorting"));
+            }
         }
 
         /// <summary>
@@ -45,6 +52,17 @@ namespace Asynchronous
         /// </summary>
         public void Sort()
         {
+            this.Sorting = true;
+
+            // sort on single thread
+            this.lists.RandomizeLists(this.numberOfElements);
+            this.lists.SortSingleThread();
+
+            // sort on multiple threads
+            this.lists.RandomizeLists(this.numberOfElements);
+            this.lists.SortMultipleThreads();
+
+            this.Sorting = false;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace TestAsynchronous
         public void TestSortingSetTrue()
         {
             bool sorting = false;
-            var sorter = new IntListSorter(1);
+            var sorter = new IntListSorter(1, 5);
             void IntListSorter_PropertyChanged(object sender, PropertyChangedEventArgs e)
             {
                 if (sorter.Sorting)
@@ -45,7 +45,7 @@ namespace TestAsynchronous
         [Test]
         public void TestSortingSetFalse()
         {
-            var sorter = new IntListSorter(1);
+            var sorter = new IntListSorter(1, 5);
             sorter.Sort();
             Assert.IsFalse(sorter.Sorting);
         }

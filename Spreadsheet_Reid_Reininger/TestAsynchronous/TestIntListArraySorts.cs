@@ -14,7 +14,7 @@ namespace TestAsynchronous
     /// IntListSorter test suite.
     /// </summary>
     [TestFixture]
-    public class IntListArraySorts
+    public class TestIntListArraySorts
     {
         /// <summary>
         /// Test SingleThreadSort sorts all lists.

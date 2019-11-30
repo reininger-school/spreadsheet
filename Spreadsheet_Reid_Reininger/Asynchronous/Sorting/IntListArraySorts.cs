@@ -42,9 +42,12 @@ namespace Asynchronous
         /// Randomize lists in array.
         /// </summary>
         /// <param name="lists">Array of lists to randomize.</param>
-        public static void RandomizeLists(this List<int>[] lists)
+        public static void RandomizeLists(this List<int>[] lists, int numberOfElements)
         {
-            lists = lists.Select<List<int>, List<int>>((x) => RandomList.Random(x.Count)).ToArray();
+            for (int i = 0; i < lists.Length; i++)
+            {
+                lists[i] = RandomList.Random(numberOfElements);
+            }
         }
     }
 }
