@@ -9,20 +9,52 @@ namespace Asynchronous
     using System.Drawing;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Forms;
+    using Asynchronous;
 
     /// <summary>
     /// Application GUI.
     /// </summary>
     public partial class AsynchronousForm : Form
     {
+        private IntListSorter sorter = new IntListSorter(8, 1_000_000);
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AsynchronousForm"/> class.
         /// </summary>
         public AsynchronousForm()
         {
             this.InitializeComponent();
+        }
+
+        private void SortButton_Click(object sender, EventArgs e)
+        {
+            new Thread(() => this.sorter.Sort()).Start();
+        }
+
+        private void IntListSorter_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            IntListSorter sorter = (IntListSorter)sender;
+            if (e.PropertyName == "Sorting")
+            {
+                if (sorter.Sorting)
+                {
+                    this.SortButton.Enabled = false;
+                }
+                else if (!sorter.Sorting)
+                {
+                    this.SortButton.Enabled = true;
+                    this.SortResults.Text = $"Single-threaded time: {this.sorter.SingleThreadTime}\r\n";
+                    this.SortResults.AppendText($"Multi-threaded time: {this.sorter.MultiThreadTime}\r\n");
+                }
+            }
+        }
+
+        private void AsynchronousForm_Load(object sender, EventArgs e)
+        {
+            this.sorter.PropertyChanged += this.IntListSorter_PropertyChanged;
         }
     }
 }
