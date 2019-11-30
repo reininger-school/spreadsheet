@@ -42,7 +42,7 @@ namespace Asynchronous
             get => this.sorting;
             private set
             {
-                this.sorting = false;
+                this.sorting = value;
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Sorting"));
             }
         }
