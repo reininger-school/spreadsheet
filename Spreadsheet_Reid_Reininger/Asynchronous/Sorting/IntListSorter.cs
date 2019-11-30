@@ -5,6 +5,7 @@ namespace Asynchronous
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -17,11 +18,14 @@ namespace Asynchronous
         private List<int>[] lists;
         private bool sorting;
         private int numberOfElements;
+        private Stopwatch singleThreadTime = new Stopwatch();
+        private Stopwatch multiThreadTime = new Stopwatch();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="IntListSorter"/> class.
         /// </summary>
         /// <param name="numberOfLists">Number of lists to sort.</param>
+        /// <param name="numberOfElements">Number of elements to put in lists.</param>
         public IntListSorter(int numberOfLists, int numberOfElements)
         {
             this.lists = new List<int>[numberOfLists];
@@ -48,6 +52,22 @@ namespace Asynchronous
         }
 
         /// <summary>
+        /// Gets time to complete last sort with single thread.
+        /// </summary>
+        public double SingleThreadTime
+        {
+            get => this.singleThreadTime.Elapsed.TotalMilliseconds;
+        }
+
+        /// <summary>
+        /// Gets time to complete last sort with multiple threads.
+        /// </summary>
+        public double MultiThreadTime
+        {
+            get => this.multiThreadTime.Elapsed.TotalMilliseconds;
+        }
+
+        /// <summary>
         /// Sort lists using one and multiple threads.
         /// </summary>
         public void Sort()
@@ -56,11 +76,15 @@ namespace Asynchronous
 
             // sort on single thread
             this.lists.RandomizeLists(this.numberOfElements);
+            this.singleThreadTime.Restart();
             this.lists.SortSingleThread();
+            this.singleThreadTime.Stop();
 
             // sort on multiple threads
             this.lists.RandomizeLists(this.numberOfElements);
+            this.multiThreadTime.Restart();
             this.lists.SortMultipleThreads();
+            this.multiThreadTime.Stop();
 
             this.Sorting = false;
         }

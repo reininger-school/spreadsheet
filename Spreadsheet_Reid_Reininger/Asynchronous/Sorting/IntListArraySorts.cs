@@ -42,6 +42,7 @@ namespace Asynchronous
         /// Randomize lists in array.
         /// </summary>
         /// <param name="lists">Array of lists to randomize.</param>
+        /// <param name="numberOfElements">Number of elements to put in lists.</param>
         public static void RandomizeLists(this List<int>[] lists, int numberOfElements)
         {
             for (int i = 0; i < lists.Length; i++)
