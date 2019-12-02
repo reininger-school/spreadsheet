@@ -13,6 +13,7 @@ namespace Asynchronous
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using Asynchronous;
+    using System.Net;
 
     /// <summary>
     /// Application GUI.
@@ -38,6 +39,21 @@ namespace Asynchronous
                 this.SortButton.Enabled = true;
                 this.SortResults.Text = $"Single-threaded time: {this.sorter.SingleThreadTime}\r\n";
                 this.SortResults.AppendText($"Multi-threaded time: {this.sorter.MultiThreadTime}\r\n");
+            });
+            t.Start();
+        }
+
+        private void UrlButton_Click(object sender, EventArgs e)
+        {
+            this.UrlTextBox.Enabled = false;
+            this.DownloadResultTextBox.Enabled = false;
+            this.UrlButton.Enabled = false;
+            Thread t = new Thread(() =>
+            {
+                this.DownloadResultTextBox.Text = new WebClient().DownloadString(this.UrlTextBox.Text.Trim());
+                this.UrlTextBox.Enabled = true;
+                this.DownloadResultTextBox.Enabled = true;
+                this.UrlButton.Enabled = true;
             });
             t.Start();
         }

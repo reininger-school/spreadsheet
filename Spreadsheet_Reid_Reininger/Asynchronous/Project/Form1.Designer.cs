@@ -121,6 +121,7 @@
             this.UrlButton.TabIndex = 1;
             this.UrlButton.Text = "Go(download string from URL)";
             this.UrlButton.UseVisualStyleBackColor = true;
+            this.UrlButton.Click += new System.EventHandler(this.UrlButton_Click);
             // 
             // UrlBox
             // 
@@ -140,6 +141,7 @@
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.Size = new System.Drawing.Size(377, 22);
             this.UrlTextBox.TabIndex = 0;
+            this.UrlTextBox.Text = "http://www.wsu.edu";
             // 
             // AsynchronousForm
             // 
