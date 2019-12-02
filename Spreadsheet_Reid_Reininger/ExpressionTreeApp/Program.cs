@@ -2,9 +2,9 @@
 // 11512839
 namespace ExpressionTreeApp
 {
+    using Cpts321;
     using System;
     using System.IO;
-    using Cpts321;
 
     /// <summary>
     /// Console application for ExpressionTree app.

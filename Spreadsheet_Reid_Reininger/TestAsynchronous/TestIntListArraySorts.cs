@@ -2,12 +2,7 @@
 // 11512839
 namespace TestAsynchronous
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Asynchronous;
     using NUnit.Framework;
 
     /// <summary>

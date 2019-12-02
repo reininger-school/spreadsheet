@@ -2,8 +2,8 @@
 // 11512839
 namespace Cpts321
 {
-    using System.Reflection;
     using NUnit.Framework;
+    using System.Reflection;
 
     /// <summary>
     /// Functions used across testing suites.

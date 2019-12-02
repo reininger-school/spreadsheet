@@ -2,8 +2,8 @@
 // 11512839
 namespace Cpts321
 {
-    using System;
     using NUnit.Framework;
+    using System;
 
     /// <summary>
     /// VariableNode Test Suite.

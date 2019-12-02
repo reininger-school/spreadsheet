@@ -2,6 +2,7 @@
 // 11512839
 namespace Cpts321
 {
+    using SpreadsheetEngine;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -11,7 +12,6 @@ namespace Cpts321
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using SpreadsheetEngine;
 
     /// <summary>
     /// Contains all cells.

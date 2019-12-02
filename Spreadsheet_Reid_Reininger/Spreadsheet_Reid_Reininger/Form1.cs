@@ -2,12 +2,12 @@
 // 11512839
 namespace Spreadsheet_Reid_Reininger
 {
+    using Cpts321;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
     using System.Windows.Forms;
-    using Cpts321;
 
     /// <summary>
     /// UI for spreadsheet application.
