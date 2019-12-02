@@ -150,7 +150,6 @@
             this.Name = "AsynchronousForm";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Asynchronous Methods";
-            this.Load += new System.EventHandler(this.AsynchronousForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
