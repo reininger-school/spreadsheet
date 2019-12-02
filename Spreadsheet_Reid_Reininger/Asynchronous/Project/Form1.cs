@@ -36,9 +36,13 @@ namespace Asynchronous
             Thread t = new Thread(() =>
             {
                 this.sorter.Sort();
-                this.SortButton.Enabled = true;
-                this.SortResults.Text = $"Single-threaded time: {this.sorter.SingleThreadTime}\r\n";
-                this.SortResults.AppendText($"Multi-threaded time: {this.sorter.MultiThreadTime}\r\n");
+                Action action = () =>
+                {
+                    this.SortButton.Enabled = true;
+                    this.SortResults.Text = $"Single-threaded time: {this.sorter.SingleThreadTime}\r\n";
+                    this.SortResults.AppendText($"Multi-threaded time: {this.sorter.MultiThreadTime}\r\n");
+                };
+                this.BeginInvoke(action);
             });
             t.Start();
         }
@@ -50,10 +54,15 @@ namespace Asynchronous
             this.UrlButton.Enabled = false;
             Thread t = new Thread(() =>
             {
-                this.DownloadResultTextBox.Text = new WebClient().DownloadString(this.UrlTextBox.Text.Trim());
-                this.UrlTextBox.Enabled = true;
-                this.DownloadResultTextBox.Enabled = true;
-                this.UrlButton.Enabled = true;
+                string result = new WebClient().DownloadString(this.UrlTextBox.Text.Trim());
+                Action action = () =>
+                {
+                    this.DownloadResultTextBox.Text = result;
+                    this.UrlTextBox.Enabled = true;
+                    this.DownloadResultTextBox.Enabled = true;
+                    this.UrlButton.Enabled = true;
+                };
+                this.BeginInvoke(action);
             });
             t.Start();
         }
